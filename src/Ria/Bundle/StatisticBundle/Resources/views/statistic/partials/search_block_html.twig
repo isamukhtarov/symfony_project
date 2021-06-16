@@ -1,0 +1,27 @@
+<form action="{{ path }}" method="get">
+    <div class="row">
+        <div class="col-lg-3">
+            <select class="outer-select form-control filter" name="filter" id="authorsstatistics-filter">
+                {% for value, label in dates %}
+                    <option value="{{ value }}" {{ selectedFilter(value, app.request.get('filter')) }}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-lg-5">
+            <div class="input-group input-daterange">
+                <input type="text" name="from_date" placeholder="{{ 'statistic.From' | trans }}"
+                       class="outer-select date-filter mr-10 form-control" date-plugin="datepicker"
+                       required autocomplete="off"
+                        {% if app.request.get('from_date')  %}value="{{ app.request.get('from_date') }}"{% endif %}
+                        {% if app.request.get('filter') != 'spec_date' %}disabled{% endif %}>
+                <input type="text" name="to_date" class="outer-select date-filter form-control" date-plugin="datepicker"
+                       placeholder="{{ 'statistic.To' | trans }}" required autocomplete="off"
+                       {% if app.request.get('to_date')  %}value="{{ app.request.get('to_date') }}"{% endif %}
+                       {% if app.request.get('filter') != 'spec_date' %}disabled{% endif %}>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <button type="submit" class="btn btn-success">{{ 'statistic.Search' | trans }}</button>
+        </div>
+    </div>
+</form>

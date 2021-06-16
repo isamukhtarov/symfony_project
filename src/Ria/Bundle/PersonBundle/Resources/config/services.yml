@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  Ria\Bundle\PersonBundle\:
+    resource: '../../'
+    exclude:
+      - '../../DependencyInjection/'
+      - '../../Entity/'
+      - '../../Command/'
+      - '../../Tests/'
+
+  Ria\Bundle\PersonBundle\Controller\:
+    resource: "../../Controller"
+    tags: [ 'controller.service_arguments' ]
+
+  Ria\Bundle\PersonBundle\Handler\:
+    resource: "../../Handler"
+    tags:
+      - { name: tactician.handler, typehints: true }

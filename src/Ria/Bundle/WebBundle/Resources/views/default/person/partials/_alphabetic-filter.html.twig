@@ -1,0 +1,7 @@
+<ul>
+    {% for char in chars %}
+        <li>
+            <a href="{{ path('persons_with_filter', {'filter': char}) }}">{{ char }}</a>
+        </li>
+    {% endfor %}
+</ul>

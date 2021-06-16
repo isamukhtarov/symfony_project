@@ -1,0 +1,51 @@
+
+{%
+ set widgets = [
+        {
+            'label': 'posts_by_same_category'|trans({}, 'common'),
+            'filters': [
+                {'exclude': post.id},
+                {'category': post.category_id},
+                'latest'
+            ]
+        },
+        {
+            'label': 'exclusive_news'|trans({}, 'common'),
+            'filters': [
+                'isExclusive',
+                'latest'
+            ]
+        },
+        {
+            'label': 'most_important'|trans({}, 'common'),
+            'filters': [
+                'isImportant',
+                'lastWeek',
+                'latest'
+            ]
+        },
+        {
+            'label': 'most_read'|trans({}, 'common'),
+            'filters': [
+                {'mostRead': app.environment == 'dev' ? 200 : 7}
+            ]
+        }
+    ]
+ %}
+
+{% set randomWidget = widgets[random(0, widgets|length - 1)] %}
+
+{{
+    widget('widget.post', {
+        'template': 'under_post.html.twig',
+        'label': randomWidget['label'],
+        'filters': [
+            {'select': ['id', 'type.type', 'title', 'slug', 'publishedAt']},
+            'published',
+            'withCategory',
+            'withPhoto',
+            {'lang': app.request.getLocale()},
+            {'limit': 10}
+        ]|merge(randomWidget['filters'])
+    })
+}}

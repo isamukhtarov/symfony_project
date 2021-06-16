@@ -1,0 +1,69 @@
+{% set first = posts|first %}
+
+{% if first is not empty %}
+
+{% set titleWithoutQuotes = first.getTitleWithoutQuotes() %}
+
+<div class="main-news-container">
+    <div class="news-backgrounded">
+        <div class="image">
+            <img src="{{ image(first.image, {'thumb': 825}) }}"
+                 alt="{{ titleWithoutQuotes }}"
+                 title="{{ titleWithoutQuotes }}"
+            >
+        </div>
+
+        <div class="info flex">
+            <a class="news-category"
+               href="{{ path('category_view', {'slug': first.category_slug}) }}">{{ first.category_title }}</a>
+            <a class="title" href="{{ path('post_view', {
+                'categorySlug': first.category_slug,
+                'slug': first.slug,
+            }) }}"
+               title="{{ titleWithoutQuotes }}"
+            >{{ first.getPreparedTitle()|raw }}</a>
+            <p class="description">{{ first.description|raw }}</p>
+            <div class="news-date">
+                <span>{{ first.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                <span>{{ first.publishedAt.format('H:i') }}</span>
+            </div>
+        </div>
+    </div>
+    <!-- News backgrounded-->
+    <div class="rest-news flex">
+
+        {% for post in posts|slice(1, 12) %}
+
+            {% set titleWithoutQuotes = post.getTitleWithoutQuotes() %}
+
+            <div class="news-block small">
+                <div class="image">
+                    <a href="{{ path('post_view', {
+                        'categorySlug': post.category_slug,
+                        'slug': post.slug,
+                    }) }}">
+                        <img src="{{ image(post.image, {'thumb': 180}) }}"
+                             alt="{{ titleWithoutQuotes }}"
+                             title="{{ titleWithoutQuotes }}"
+                        >
+                    </a>
+                </div>
+                <div class="info">
+                    <a class="title ga-event-link" href="{{ post.slug }}" title="{{ titleWithoutQuotes }}">
+                        {{ post.getPreparedTitle()|raw }}
+                    </a>
+                    <div class="news-date">
+                        <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                        <span>{{ post.publishedAt.format('H:i') }}</span>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+    <!-- Rest news-->
+</div>
+<!-- Main news container-->
+
+{% endif %}

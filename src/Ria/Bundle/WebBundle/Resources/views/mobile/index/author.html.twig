@@ -1,0 +1,76 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ author.getFullName() }} | Report.az{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="{{ 'author_page_description'|trans({'{author}': author.getFullName()}, 'common') }}">
+    {% if author.thumb is not empty %}
+        <meta property="og:image" content="{{ image(author.thumb) }}">
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <section class="author-inner-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="author-block flex">
+                        <div class="name-position">
+                            <h1 class="name">{{ author.getFullName() }}</h1>
+                            <p class="position">{{ author.position }}</p>
+                        </div>
+
+                        <div class="thumb">
+                            <img src="{{ image(author.thumb, {'thumb': 85}) }}"
+                                 alt="{{ author.getFullName() }}">
+                        </div>
+                    </div>
+                    <!-- Author block-->
+
+                    <div class="author-news">
+                        <h2 class="section-title">{{ 'author_news'|trans({}, 'common') }}</h2>
+
+                        <div class="news-list">
+                            <div class="row load-container"
+                                 data-url="{{ path('author_ajax', {'authorId': author.id}) }}">
+                                {% include '@RiaWeb/index/partials/_category-post-item.html.twig' with {'posts': posts} %}
+                                <!-- Col-->
+                            </div>
+                        </div>
+                        <!-- News list-->
+                    </div>
+                    <!-- Author news-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('index') }}",
+                        "name": "{{ 'main_page'|trans({}, 'common') }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "name": "{{ author.getFullName() }}"
+                    }
+                }
+            ]
+        }
+
+    </script>
+
+    {{ registerScripts('site/js/load-posts.js') }}
+
+{% endblock %}

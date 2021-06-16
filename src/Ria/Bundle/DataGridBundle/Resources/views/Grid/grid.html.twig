@@ -1,0 +1,86 @@
+{% block kit_grid_css %}<link rel="stylesheet" href="{{ asset('bundles/kitpagesdatagrid/css/base.css') }}"/>{%endblock%}
+
+{% block kit_grid_main %}
+<div class="kit-grid {{ grid.getGridCssName }}">
+    {% block kit_grid_selector %}
+        {% if grid.gridConfig.selectorList != null %}
+        <div class="kit-grid-selector">
+            {% for selector in grid.gridConfig.selectorList %}
+                <a href="{{ grid.getSelectorUrl(selector.field, selector.value) }}" class="kit-grid-selector {{ grid.getSelectorCssSelected(selector.field, selector.value) }}" >{{ selector.label }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endblock %}
+    {% block kit_grid_filter %}
+    <div class="kit-grid-filter">
+        <form action="{{ grid.requestUri }}" id="{{grid.filterFormName}}_form" method="GET">
+            <label for="{{grid.filterFormName}}">{{ "kitpages_data_grid.Filter" | trans }}</label>
+            <input type="text" name="{{grid.filterFormName}}" id="{{grid.filterFormName}}" size="10" value="{{ grid.filterValue }}"/>
+            <input type="submit" value="{{ "kitpages_data_grid.Apply" | trans }}" name="submit"/>
+            <a href="{{ path( grid.requestCurrentRoute, grid.requestCurrentRouteParams ) }}" id="{{grid.filterFormName}}_reset_button">{{ "kitpages_data_grid.Reset" | trans }}</a>
+        </form>
+    </div>
+    {% endblock %}
+    {% block kit_grid_debug %}
+        {% if grid.debugMode %}
+            {{ grid.dump() | raw }}
+        {% endif %}
+    {% endblock %}
+    {% block kit_grid_before_table %}{% endblock %}
+    <table>
+        {% block kit_grid_thead %}
+        <thead>
+        <tr>
+            {% block kit_grid_thead_before_column %}{% endblock %}
+            {% for field in grid.gridConfig.fieldList %}
+                {% if field.visible %}
+                    <th class="{{ grid.getSortCssClass(field.fieldName) }}">
+                        {% if field.sortable %}
+                            <a href="{{ grid.getSortUrl(field.fieldName) }}">{{ field.label | trans }}</a>
+                        {% else %}
+                            {{ field.label | trans }}
+                        {% endif %}
+                    </th>
+                {% endif %}
+            {% endfor %}
+            {% block kit_grid_thead_column %}{% endblock %}
+        </tr>
+        </thead>
+        {% endblock %}
+        {% block kit_grid_tbody %}
+        <tbody>
+        {% for item in grid.itemList %}
+            <tr class="{% if loop.index % 2 == 0 %}kit-grid-even {% else %}kit-grid-odd {% endif %} {% block kit_grid_row_class %}{% endblock %}">
+                {% block kit_grid_tbody_before_column %}{%endblock%}
+                {% for field in grid.gridConfig.fieldList %}
+                    {% if field.visible %}
+                        <td class="kit-grid-cell-{{ field.fieldName | replace({'.': '-'}) }}">
+                            {% if field.translatable %}
+                                {{ grid.displayGridValue ( item, field) | raw | trans }}
+                            {% else %}
+                                {{ grid.displayGridValue ( item, field) | raw }}
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                {% endfor %}
+                {% block kit_grid_tbody_column %}{% endblock %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="{{ grid.gridConfig.fieldList | length }}" class="kit-grid-no-data">{% block kit_grid_no_data %}{{ "kitpages_data_grid.No_Data_Found" | trans }}{% endblock %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        {% endblock %}
+    </table>
+    {% block kit_grid_after_table %}{% endblock %}
+    {% block kit_grid_paginator %}
+        {% embed data_grid.paginator.default_twig with {'paginator':grid.paginator} %}
+        {% endembed %}
+    {% endblock %}
+    {{ block(' kit_grid_after_paginator') }}
+</div>
+{% block kit_grid_javascript %}
+    {% include "KitpagesDataGridBundle:Grid:javascript.html.twig" %}
+{% endblock kit_grid_javascript %}
+{% endblock kit_grid_main %}

@@ -1,0 +1,16 @@
+{% if weather is not empty %}
+    <div class="weather">
+        <ul>
+            <li>
+                <a href="{{ path('weather') }}">
+                    <img src="{{ asset('site/images/icons/weather.png') }}">
+                    {{ 'tbilisi'|trans({}, 'weather') }}
+                    {{ weather['temperature'] }}° C
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('weather') }}">{{ weather['windSpeed'] }} {{ 'wind_speed_short'|trans({}, 'weather') }}</a>
+            </li>
+        </ul>
+    </div>
+{% endif %}

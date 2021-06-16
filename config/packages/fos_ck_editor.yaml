@@ -1,0 +1,17 @@
+fos_ck_editor:
+  default_config: admin
+  configs:
+    admin:
+      allowedContent: true
+      toolbar: standard
+      height: 500
+      language: en
+    quote:
+      allowedContent: true
+      height: 300
+      toolbar: standard
+      language: en
+
+  toolbars:
+    items:
+      standard.insert: ["addMedia", "addExpertQuote", "addTimeline", "addVote", "wordcount"]

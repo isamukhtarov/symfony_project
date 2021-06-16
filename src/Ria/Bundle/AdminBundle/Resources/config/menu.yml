@@ -1,0 +1,106 @@
+menu:
+    link_attr: ''
+    label: 'menu.Menu'
+main:
+    link_attr: '/'
+    routes_id: ['admin']
+    icon: 'md-view-dashboard'
+    label: 'menu.Main'
+youtube:
+    link_attr: '/youtube'
+    routes_id: ['youtube']
+    routes: ['youtube.index', 'youtube.create', 'youtube.update']
+    icon: 'md-youtube'
+    label: 'menu.Youtube'
+news:
+    routes_id : ['posts', 'categories', 'stories', 'cities', 'regions']
+    icon: 'md-view-list-alt'
+    label: 'menu.News'
+    sub_items:
+      news:
+        link_attr: '/posts'
+        routes: ['posts.index', 'posts.create', 'posts.update']
+        permissions: ['postsList']
+        label: 'menu.News'
+      categories:
+         link_attr: '/posts/categories'
+         routes: ['categories.index', 'categories.create', 'categories.update']
+         permissions: ['manageCategories']
+         label: 'menu.Categories'
+      stories:
+         link_attr: '/posts/stories'
+         routes: ['stories.index', 'stories.create', 'stories.update']
+         permissions: ['manageStories']
+         label: 'menu.Stories'
+      cities:
+         link_attr: '/posts/cities'
+         routes: ['cities.index', 'cities.create', 'cities.update']
+         label: 'menu.Cities'
+      regions:
+         link_attr: '/posts/regions'
+         routes: ['regions.index', 'regions.create', 'regions.update']
+         label: 'menu.Regions'
+users:
+    routes_id : ['users']
+    icon: 'md-accounts-alt'
+    permissions: ['manageUsers']
+    label: 'menu.Users'
+    sub_items:
+        users:
+          link_attr: '/users'
+          routes: ['users.index', 'users.create', 'users.update']
+          label: 'menu.Users'
+        roles:
+          link_attr: '/users/roles'
+          routes: ['users.roles.index', 'users.roles.create', 'users.roles.update']
+          label: 'menu.Roles'
+        permissions:
+            link_attr: '/users/permissions'
+            routes: ['users.permissions.index', 'users.permissions.create', 'users.permissions.update']
+            label: 'menu.Permissions'
+statistic:
+    routes_id : ['authors', 'translators']
+    icon: 'md-trending-up'
+    label: 'menu.Statistics'
+    sub_items:
+        authors_statistics:
+            link_attr: '/statistic/authors'
+            routes: ['authors.index']
+            label: 'menu.Author Statistics'
+        translators_statistics:
+            link_attr: '/statistic/translators'
+            routes: ['translators.index']
+            label: 'menu.Translators statistics'
+persons:
+    routes_id : ['persons', 'experts']
+    icon: 'md-accounts-list-alt'
+    permissions: ['managePersons', 'manageExperts']
+    label: 'menu.Persons'
+    sub_items:
+         persons:
+             link_attr: '/persons'
+             routes: ['persons.index', 'persons.create', 'persons.update']
+             permissions: ['managePersons']
+             label: 'menu.Persons'
+         experts:
+             link_attr: '/experts'
+             routes: ['experts.index', 'experts.create', 'experts.update']
+             permissions: ['manageExperts']
+             label: 'menu.Experts'
+votes:
+    routes_id : ['votes']
+    icon: 'md-accounts-list-alt'
+    permissions: ['manageVotes']
+    label: 'menu.Votes'
+    sub_items:
+        votes:
+          link_attr: '/votes'
+          routes: ['votes.index', 'votes.create', 'votes.update']
+          permissions: ['manageVotes']
+          label: 'menu.Votes'
+configuration:
+    link_attr: '/configs'
+    routes_id : ['configs']
+    icon: 'md-settings'
+    label: 'menu.Configuration'
+

@@ -1,0 +1,7 @@
+vote:         'Poll'
+start_date:   'Start date:'
+end_time:     'End date:'
+users_count:  'Number of voters: <b class="voted_count">%count%</b>'
+do vote:      'Vote'
+go_to_vote:   'GO TO VOTE'
+votes_archive: 'Archive of votes'

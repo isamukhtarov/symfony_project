@@ -1,0 +1,19 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block content %}
+    <div class="panel">
+        <div class="panel-body">
+            {% include '@RiaStatistic/statistic/partials/search_block_html.twig' %}
+            {% include '@RiaStatistic/statistic/partials/export.html.twig' %}
+            {% embed data_grid.grid.default_twig with {'grid': grid} %}
+                {% block kit_grid_cell_id_views %}
+                    {% if not item['post_views'] %}
+                        0
+                    {% else %}
+                        {{ item['post_views'] }}
+                    {% endif %}
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}

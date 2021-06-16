@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <language>{{ app.request.getLocale() }}</language>
+        <title>{{ 'report_information_agency'|trans({}, 'common') }}</title>
+        <description>{{ 'report_information_agency'|trans({}, 'common') }}</description>
+        <link>{{ app.request.getSchemeAndHttpHost() }}</link>
+        <image>
+            <url>{{ app.request.getSchemeAndHttpHost() }}/site/images/logo-desktop-{{ app.request.getLocale() }}.png</url>
+            <title>Report.ge</title>
+            <link>{{ app.request.getSchemeAndHttpHost() }}</link>
+            <width>280</width>
+            <height>65</height>
+        </image>
+        {% for post in posts %}
+            <item>
+                <guid isPermaLink="false">{{ post['absoluteUrl'] }}</guid>
+                <title><![CDATA[{{ post['title'] }}]]></title>
+                <link>{{ post['absoluteUrl'] }}</link>
+                <description><![CDATA[{{ post['description'] }}]]></description>
+                <content><![CDATA[{{ post['content'] }}]]></content>
+                <pubDate>{{ post['rssDate'] }}</pubDate>
+                {% if post['image'] is not empty %}
+                    <enclosure url='{{ post['image'] }}' type="image/jpeg"/>
+                {% endif %}
+                <category>{{ post['category_title'] }}</category>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

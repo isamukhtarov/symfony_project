@@ -1,0 +1,96 @@
+Order: Order
+Title: Title
+Region: Region
+City: City
+Busy: Busy
+Translations: Translations
+Audio: Audio
+Datetime: Date & Time
+Choose translator: Choose translator
+
+form:
+  sort: sort
+  template: Template
+  parent: Parent
+  tags: Tags
+  persons: Persons
+  photos: Photos
+  content: Content
+  icon: Icon
+  source: Source
+  relatedPosts: Related Posts
+  note: Note
+  description: Description
+  attachCurrentTime: Set current time
+  option: Option
+  youtube: YouTube Video
+  story: Story
+  author: Author
+  expert: Expert
+  type: Type
+  translator: Translator
+  city: City
+  category: Category
+  isMain: Main
+  isActual: Actual
+  isImportant: Important
+  isExclusive: Exclusive
+  isBreaking: Breaking
+  linksNoIndex: Noindex for links
+  submitAndExit: Submit and exit
+  preview: Preview
+  markedWords: Marked words
+
+  type_post: Новость
+  type_article: Статья
+  type_photo: Фото
+  type_video: Видео
+  type_opinion: Мнение
+  type_infographic: Инфографика
+  type_partners: Партнеры
+
+  selectCategory: Select category
+
+  enterMarkedWords: Enter marked words
+  enterPersons: Enter persons
+  enterTags: Enter tags
+  enterRelatedPost: Enter related post
+
+  exports: Exports
+
+story:
+  form:
+    showOnSite: Show on site
+
+id: Id
+translations.title: Title
+status: Status
+show_on_site: Show on site
+slug: 'Slug'
+
+
+city:
+  form:
+    region_title: 'Region'
+    city_title: 'City'
+region:
+  translations:
+    title: 'Region'
+
+created: Created
+on_moderation: On Moderation
+waiting_for_correction: Correction
+read: Active
+archived: Archived
+private: Private
+deleted: Deleted
+
+speech:
+  Upload: Upload
+  Delete: Delete
+  Speech: Post speech file
+  Uploading: Uploading...
+
+without photo: without photo
+for future: for future
+and: and

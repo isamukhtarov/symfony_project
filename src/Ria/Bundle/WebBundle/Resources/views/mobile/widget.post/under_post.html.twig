@@ -1,0 +1,37 @@
+<noindex>
+    <div class="related-news">
+        <h3 class="section-title">{{ label }}</h3>
+        <div class="row">
+
+            {% for post in posts %}
+
+                {% set postUrl = path('post_view', {'categorySlug': post.category_slug, 'slug': post.slug}) %}
+
+            <div class="col-md-3 col-6">
+                <div class="news-block">
+                    <div class="image">
+                        <a href="{{ postUrl }}" class="ga-event-link">
+                            <img src="https://static.report.az/photo/{{ post.image }}_321.jpg"
+                                 alt="{{ post.getTitleWithoutQuotes() }}"
+                                 title="{{ post.getTitleWithoutQuotes() }}">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <a class="title" href="{{ postUrl }}">
+                            {{ post.getPreparedTitle()|raw }}
+                        </a>
+                        <div class="news-date">
+                            <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                            <span>{{ post.publishedAt.format('H:i') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Col-->
+
+            {% endfor %}
+
+        </div>
+    </div>
+    <!-- Related news-->
+</noindex>

@@ -1,0 +1,16 @@
+services:
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: false
+
+  Ria\Bundle\StatisticBundle\:
+    resource: '../../'
+    exclude:
+      - '../../DependencyInjection/'
+      - '../../Entity/'
+      - '../../Tests/'
+
+  Ria\Bundle\StatisticBundle\Controller\:
+    resource: "../../Controller"
+    tags: [ 'controller.service_arguments' ]

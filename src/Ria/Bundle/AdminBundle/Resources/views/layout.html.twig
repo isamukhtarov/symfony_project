@@ -1,0 +1,112 @@
+{% set locale = app.request.getLocale() %}
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="{{ locale }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>Report.ge | {% block title %} Admin Panel {% endblock %}</title>
+    {% include '@RiaAdmin/partials/styles.html.twig' %}
+
+    {% block styles %}{% endblock %}
+
+    <script src="{{ asset('admin/remark/global/vendor/jquery/jquery.js') }}"></script>
+</head>
+<body class="animsition">
+
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
+        href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler hamburger hamburger-close navbar-toggler-left hided"
+                data-toggle="menubar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="hamburger-bar"></span>
+        </button>
+        <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-collapse"
+                data-toggle="collapse">
+            <i class="icon md-more" aria-hidden="true"></i>
+        </button>
+        <div class="navbar-brand navbar-brand-center site-gridmenu-toggle">
+            <a href="{{ path('admin.index') }}">
+                <img alt="" class="navbar-brand-logo" src="{{ asset('admin/remark/assets/images/logo.png') }}" title="Remark">
+                <span class="navbar-brand-text hidden-xs-down"> Report.ge </span>
+            </a>
+        </div>
+        <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-search"
+                data-toggle="collapse">
+            <span class="sr-only">Toggle Search</span>
+            <i class="icon md-search" aria-hidden="true"></i>
+        </button>
+    </div>
+</nav>
+
+   <div class="site-menubar">
+       {% include '@RiaAdmin/partials/menu_body.html.twig' %}
+    <div class="site-menubar-footer">
+        <ul class="footer-actions">
+            <li>
+                <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false"
+                   role="button">
+                    <span class="flag-icon flag-icon-{{ locale=='en' ? 'us' : locale }}"></span>
+                </a>
+                <div class="dropdown-menu language-list" role="menu">
+                    {% for lang in supported_locales %}
+                        <a class="dropdown-item change-lang" href="javascript:void(0);" role="menuitem" data-lang="{{ lang }}">
+                            <span class="flag-icon flag-icon-{{ lang == 'en' ? 'us' : lang }}"></span> {{ lang }} </a>
+                    {% endfor %}
+                </div>
+            </li>
+            <li>
+                <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
+                   role="button">
+            <span class="avatar avatar-online">
+              <img src="{{ image(app.user.getImage(), {'thumb': 50}) }}" alt="{{ app.user.getUsername() }}">
+              <i></i>
+            </span>
+                </a>
+            </li>
+            <li>
+                <div class="dropdown-menu" role="menu">
+                    <a class="dropdown-item" href="#" role="menuitem"><i class="icon md-account" aria-hidden="true"></i>Profile</a>
+                    <div class="dropdown-divider" role="presentation"></div>
+                </div>
+
+                <a href="{{ path('auth.logout') }}" onclick="return confirm('Are you sure you want to logout?');">
+                    <i class="icon md-power" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Page -->
+<div class="page">
+    <div class="page-header">
+        <div class="page-header-actions">
+            {% block header_actions %} {% endblock %}
+        </div>
+    </div>
+
+    <div class="page-content">
+        {% block content %} {% endblock %}
+    </div>
+</div>
+<!-- End Page -->
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="site-footer-legal">© 2020 <a href="#">RiaCMS</a></div>
+</footer>
+
+{{ importStyles() }}
+{% include '@RiaAdmin/partials/scripts.html.twig' %}
+{{ importScripts() }}
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

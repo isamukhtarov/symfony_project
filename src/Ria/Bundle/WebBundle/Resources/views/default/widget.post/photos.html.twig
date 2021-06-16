@@ -1,0 +1,69 @@
+<section class="photo-news ptb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header flex">
+                    <h2 class="section-title">{{ 'photo_news'|trans({}, 'common') }}</h2>
+                    <div class="actions hidden-575">
+                        <div class="slider-controls flex">
+                            <div class="prev-slide flex-center">
+                                <i class="icon-angle-left"></i>
+                            </div>
+                            <div class="next-slide flex-center">
+                                <i class="icon-angle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section header-->
+
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+
+                        {% for post in posts %}
+
+                            {% set titleWithoutQuotes = post.getTitleWithoutQuotes() %}
+
+                            <div class="swiper-slide">
+                                <div class="news-block">
+                                    <div class="image">
+                                        <a href="{{ path('post_view', {
+                                            'categorySlug': post.category_slug,
+                                            'slug': post.slug,
+                                        }) }}" class="ga-event-link"
+                                           data-event="{{ 'photo_news'|trans({}, 'common') }} | {{ 'main_page'|trans({}, 'common') }}">
+                                            <img class="swiper-lazy"
+                                                 alt="{{ titleWithoutQuotes }}"
+                                                 title="{{ titleWithoutQuotes }}"
+                                                 data-src="{{ image(post.image, {'thumb': 400}) }}"
+                                                 src="https://static.report.az/photo/thunk_400.jpg"
+                                            >
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <a class="news-category"
+                                           href="{{ path('category_view', {'slug': post.category_slug}) }}">{{ post.category_title }}</a>
+                                        <a class="title ga-event-link" href="{{ path('post_view', {
+                                            'categorySlug': post.category_slug,
+                                            'slug': post.slug,
+                                        }) }}"
+                                           data-event="{{ 'photo_news'|trans({}, 'common') }} | {{ 'main_page'|trans({}, 'common') }}">
+                                            {{ post.getPreparedTitle()|raw }}
+                                        </a>
+                                        <div class="news-date">
+                                            <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                            <span>{{ post.publishedAt.format('H:i') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <!-- Slider container-->
+            </div>
+        </div>
+    </div>
+</section><!-- Photo news-->

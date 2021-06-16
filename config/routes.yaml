@@ -1,0 +1,7 @@
+frontend:
+  host: '%domain%'
+  resource: '@RiaWebBundle/Resources/config/routing.yml'
+
+admin:
+  host: '%domain.admin%'
+  resource: '@RiaAdminBundle/Resources/config/routing.yml'

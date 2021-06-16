@@ -1,0 +1,9 @@
+tbilisi:      'თბილისი'
+
+wind_speed_short:             'მ/წ'
+weather:                      'ამინდის პროგნოზი'
+atmosphere_events:            'ატმოსფერული მოვლენები'
+temperature:                  'ტემპერატურა'
+wind:                         'ქარი'
+humidity:                     'ტენიანოა'
+weather_for_region_no_found:  'ამინდის ამინდი არ იქნა ნაპოვნი.'

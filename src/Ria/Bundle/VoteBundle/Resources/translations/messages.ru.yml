@@ -1,0 +1,14 @@
+form:
+  first_name: 'Имя'
+  type: 'Тип'
+  startDate: 'Дата начала'
+  endDate: 'Дата конца'
+  showRecaptcha: 'Показывать капчу'
+  showOnMainPage: 'Показывать на главной'
+  options:
+    Options: 'Ответы'
+    title: 'Заголовок'
+    addOptions: 'Новый ответ'
+  errors:
+    photo_required: 'В призовых опросах, фото обязательно'
+title: 'Заголовок'

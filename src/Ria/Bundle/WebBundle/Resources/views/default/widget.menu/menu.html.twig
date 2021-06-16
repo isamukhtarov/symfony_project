@@ -1,0 +1,29 @@
+<nav class="main-menu flex" itemscope="" itemtype="http://schema.org/SiteNavigationElement">
+    <ul>
+        <li><a href="{{ path('index') }}" itemprop="url"><span itemprop="name">{{ 'main_news'|trans({}, 'common') }}</span></a></li>
+        <li><a href="{{ path('feed') }}" itemprop="url"><span itemprop="name">{{ 'feed_page'|trans({}, 'common') }}</span></a></li>
+
+        {% for item in items %}
+            <li><a href="{{ path('category_view', {slug: item.slug}) }}" itemprop="url"><span itemprop="name">{{ item.title }}</span></a></li>
+        {% endfor %}
+    </ul>
+
+    <div class="trigger-search">
+        <i class="icon-search"></i>
+    </div>
+
+    <div class="search-block">
+        <form action="{{ path('search') }}" method="GET">
+            <div class="form-group">
+                <input class="form-control" name="query" type="text"
+                       placeholder="{{ 'enter_search_keyword'|trans({}, 'common') }}"
+                       required="">
+            </div>
+        </form>
+
+        <div class="close-search flex-center">
+            <i class="icon-times"></i>
+        </div>
+    </div>
+    <!-- Search block-->
+</nav>

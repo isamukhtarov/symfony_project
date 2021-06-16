@@ -1,0 +1,169 @@
+<div class="modal fade modal-photo-manager" id="photo-manager" role="dialog" data-url="{{ path('photos.index') }}">
+    <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="title-search">
+                    <h4 class="modal-title">{{ 'Photo manager'|trans }}</h4>
+                    <div class="toggle-search"><i class="icon md-search"></i></div>
+                </div>
+
+                <button type="button" class="close" data-dismiss="modal"><i class="icon md-close"></i></button>
+            </div>
+            <!-- Modal header -->
+
+            <div class="modal-body">
+                <div class="files-search">
+                        <div class="form-group">
+                            <div class="input-group" id="photos-search">
+                                <input title="search" type="text" class="form-control" placeholder="{{ 'Photos search'|trans }}"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" data-url="{{ path('photos.index') }}" id="search-button">
+                                        {{ 'Search'|trans }}
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                </div>
+                <!-- Files search -->
+
+                <div class="files-list pt-10"></div>
+            </div>
+            <!-- Modal body -->
+
+            <div class="modal-footer">
+                <div class="upload-images">
+                    <input
+                            type="file"
+                            id="upload-images-field"
+                            multiple="multiple"
+                            accept=".jpg,.jpeg,.png,.gif"
+                            hidden
+                            data-url="{{ path('photos.create') }}"
+                            data-with-logo="0"
+                    />
+
+                    <button
+                            type="button"
+                            class="btn btn-primary btnUploadWithoutWatermark"
+                            data-upload="{{ 'Upload photo'|trans }}"
+                            data-uploading="{{ 'Uploading...'|trans }}">
+                        <i class="md-icon md-image-o"></i> {{ 'Upload photo'|trans }}
+                    </button>
+
+                    <button
+                            type="button"
+                            class="btn btn-primary btnUploadWithWatermark"
+                            data-upload="{{ 'Upload photo + Logo'|trans }}"
+                            data-uploading="{{ 'Uploading...'|trans }}">
+                        <i class="md-icon md-collection-image-o"></i> {{ 'Upload photo + Logo'|trans }}
+                    </button>
+                </div>
+
+                <div class="manage-images">
+                    <button type="button"
+                            {% if type == 'single' %}
+                                class="btn btn-info btn-attach-image"
+                            {% elseif type == 'multiple' %}
+                                class="btn btn-info btn-add-image" data-url="{{ path('photos.form_blocks') }}"
+                            {% endif %}
+                    >
+                        {{ 'Add'|trans }}
+                    </button>
+
+                    <button type="button" class="btn btn-danger btn-delete-image" data-url="{{ path('photos.delete') }}">
+                        {{ 'Delete'|trans }}
+                    </button>
+                </div>
+            </div>
+            <!-- Modal footer -->
+        </div>
+    </div>
+</div>
+<!-- End photomanager -->
+
+<!-- Modal Cropper -->
+<div class="modal fade" id="photo-crop" role="dialog">
+    <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'Crop photo'|trans }}</h4>
+
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="icon md-close"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <img alt="photo" class="img-fluid img-to-crop" src=""/>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-save-crop">
+                    {{ 'Save'|trans }}
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'Cancel'|trans }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Cropper -->
+
+<!-- Modal Update -->
+<div class="modal fade" id="photo-update" role="dialog">
+    <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<!-- End Update -->
+
+{#<!-- Modal Update -->#}
+{#<div class="modal fade modal-slide-in-right" id="photo-insert" role="dialog">#}
+{#    <div class="modal-dialog modal-simple modal-center">#}
+{#        <div class="modal-content">#}
+{#            <form class="photo-insert-form">#}
+{#                <div class="modal-header">#}
+{#                    <h4 class="modal-title">{{ 'Insert photo' | trans({}, 'messages') }}</h4>#}
+
+{#                    <button type="button" class="close" data-dismiss="modal">#}
+{#                        <i class="icon md-close"></i>#}
+{#                    </button>#}
+{#                </div>#}
+
+{#                <div class="modal-body">#}
+{#                    <input name="id" id="insert-photo-id" type="hidden" value="" required>#}
+{#                    <div class="form-group">#}
+{#                        <select name="size" title="Choose size" class="form-control" required>#}
+{#                            <option value="" selected disabled>{{ 'Choose size' | trans({}, 'messages') }}</option>#}
+{#                            <option value="big"><?= Yii::t('photos', 'Big') ?></option>#}
+{#                            <option value="small-left"><?= Yii::t('photos', 'Small left') ?></option>#}
+{#                            <option value="small-right"><?= Yii::t('photos', 'Small right') ?></option>#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+
+{#                <div class="modal-footer">#}
+{#                    <button class="btn btn-success" type="submit"><?= Yii::t('photos', 'Insert') ?></button>#}
+{#                    <button class="btn btn-secondary"#}
+{#                            data-dismiss="modal"><?= Yii::t('photos', 'Cancel') ?></button>#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#<!-- End Update -->#}
+
+{{ registerStyles(
+    'admin/photo_manager/css/cropper.min.css',
+    'admin/photo_manager/css/jquery-ui.min.css',
+    'admin/photo_manager/css/main.css',
+) }}
+
+{{ registerScripts(
+    'https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js',
+    'admin/photo_manager/js/cropper.min.js',
+    'admin/photo_manager/js/jquery-ui.min.js',
+    'admin/photo_manager/js/index.js',
+) }}

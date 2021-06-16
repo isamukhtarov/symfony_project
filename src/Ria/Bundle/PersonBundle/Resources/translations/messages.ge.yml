@@ -1,0 +1,10 @@
+form:
+  first_name: 'Ad'
+  last_name:  'Soyad'
+  slug: 'Link'
+  position: 'Vəzifə'
+  text: 'Təsvir'
+
+first_name: 'Ad'
+last_name: 'Soyad'
+position: 'Vəzifə'

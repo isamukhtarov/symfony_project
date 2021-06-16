@@ -1,0 +1,74 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 flex">
+                <div class="menu-toggler">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="logo">
+                    <a href="/">
+                        <img class="logo-dark"
+                             src="{{ asset('site/images/mobile/logo-dark-' ~ app.request.locale ~ '.svg') }}">
+                        <img class="logo-light"
+                             src="{{ asset('site/images/mobile/logo-light-' ~ app.request.locale ~ '.svg') }}">
+                    </a>
+                </div>
+
+                <div class="right">
+                    <div class="toggle-theme">
+                        <button class="theme-dark"><i class="icon-moon"></i></button>
+                        <button class="theme-light"><i class="icon-sun"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="side-menu">
+        <div class="side-menu-body">
+            <div class="currencies-weather flex">
+
+                {{
+                    widget('widget.currency', {
+                        'type': 'header'
+                    })
+                }}
+
+                {{
+                    widget('widget.weather', {
+                        'template': 'weather-today.html.twig'
+                    })
+                }}
+            </div>
+
+            <div class="search-langs flex">
+                <div class="search-field">
+                    <form action="/search/" method="GET">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="query"
+                                   placeholder="Açar sözü daxil edin"
+                                   required>
+                        </div>
+                    </form>
+                </div>
+
+                <ul class="langs">
+                    {% for lang,url in urlTranslations %}
+                        {% if (lang != app.request.locale) %}
+                            <li>
+                                <a href="{{ url }}" data-lang="{{ lang }}">{{ lang|upper }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+
+            {{ widget('widget.menu', {'template': 'menu.html.twig'}) }}
+        </div>
+    </div>
+    <!-- Side menu-->
+</header>
+<!-- Header-->

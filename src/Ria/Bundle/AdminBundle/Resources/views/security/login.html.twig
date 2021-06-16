@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>Report.ge | Login page</title>
+    {% include '@RiaAdmin/partials/styles.html.twig' %}
+    <script src="{{ asset('admin/remark/global/vendor/jquery/jquery.js') }}"></script>
+</head>
+<body class="animsition page-login-v2 layout-full page-dark">
+<div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
+    <div class="page-content">
+        <div class="page-brand-info">
+            <div class="brand">
+                <h2 class="brand-text font-size-40">Report.ge</h2>
+            </div>
+        </div>
+        <div class="page-login-main">
+            <div class="brand hidden-md-up">
+                <h3 class="brand-text font-size-40">Report.ge</h3>
+
+            </div>
+            <h3 class="font-size-24">Sign In</h3>
+            {% if error %}
+                <div style="color: red;">
+                    <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                </div>
+            {% endif %}
+
+            <form method="POST" action="{{ path('auth.login')  }}" autocomplete="off">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+                    <input type="email" class="form-control empty form-input" id="email" name="email" value="{{ lastUsername }}" required>
+                    <label class="floating-label" for="email">Email</label>
+                </div>
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+                    <input type="password" class="form-control empty form-input" id="password" name="password" required>
+                    <label class="floating-label" for="password">Password</label>
+                </div>
+
+                <div class="form-group clearfix">
+                    <div class="checkbox-custom checkbox-inline checkbox-primary float-left">
+                        <input type="checkbox" id="remember" name="_remember_me">
+                        <label for="remember">Remember me</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+            </form>
+
+            <footer class="page-copyright">
+                <p>© . All RIGHT RESERVED.</p>
+            </footer>
+        </div>
+    </div>
+</div>
+    {% include '@RiaAdmin/partials/scripts.html.twig' %}
+</body>
+</html>
+

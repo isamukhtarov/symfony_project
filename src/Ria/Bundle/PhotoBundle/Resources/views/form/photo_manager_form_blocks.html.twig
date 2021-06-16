@@ -1,0 +1,38 @@
+{% block photo_manager_single_row %}
+    <div class="form-group form-file-upload form-file-multiple">
+        <input type="hidden" id="photo-input" name="{{ full_name }}" {% if value is not empty %}value="{{ value.id }}" {% endif %}>
+
+        <div class="btn-group" role="group">
+            <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#photo-manager" type="button">
+                <i class="md-file"></i>
+                {{ 'Open Photo-manager'|trans }}
+            </button>
+        </div>
+    </div>
+
+    <div class="post-images">
+        <img class="img-fluid" alt="photo" id="photo-img"
+             src="{{ value ? image(value.filename) : 'https://dummyimage.com/600x400/cccccc/ffffff&text=no+image' }}">
+    </div>
+
+    {% include '@RiaPhoto/form/photo_manager.html.twig' with {'type': 'single'} %}
+{% endblock %}
+
+{% block photo_manager_multiple_row %}
+    <div class="form-group form-file-upload form-file-multiple">
+        <span class="d-none" id="form_name" data-form-name="{{ full_name }}"></span>
+
+        <div class="btn-group" role="group">
+            <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#photo-manager" type="button">
+                <i class="md-file"></i>
+                {{ 'Open Photo-manager'|trans }}
+            </button>
+        </div>
+    </div>
+
+    <div class="post-images" data-url="<?= Url::to(['/photos/photos/sort']) ?>">
+        {% include '@RiaPhoto/form/form_cards.html.twig' %}
+    </div>
+
+    {% include '@RiaPhoto/form/photo_manager.html.twig' with {'type': 'multiple'} %}
+{% endblock %}

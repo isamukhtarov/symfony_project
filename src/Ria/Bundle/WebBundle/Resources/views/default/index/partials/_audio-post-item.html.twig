@@ -1,0 +1,60 @@
+{% for post in posts %}
+
+    {% set postUrl = path('post_view', {
+        'categorySlug': post.category_slug,
+        'slug': post.slug,
+    }) %}
+
+    <div class="col-md-4 col-sm-6 infinity-item" data-timestamp="{{ post.publishedAt.format('Y-m-d H:i:s') }}">
+        <div class="audio-news">
+            <div class="image">
+                <a href="{{ postUrl }}">
+                    <img src="{{ image(post.image, {'thumb': 290}) }}"
+                         alt="{{ post.getTitleWithoutQuotes() }}"
+                         title="{{ post.getTitleWithoutQuotes() }}">
+                </a>
+            </div>
+
+            <div class="news-player">
+                <audio preload="metadata">
+                    <source src="{{ speech(post.speech_filename) }}" type="audio/mpeg">
+                </audio>
+
+                <div class="player">
+                    <div class="player-controls">
+                        <div class="toggle-play">
+                            <i class="icon-play"></i>
+                        </div>
+                    </div>
+
+                    <div class="player-progress">
+                        <div class="player-timing">
+                            <div class="current-time">0 : 00</div>
+                            <div class="total-time">0 : 00</div>
+                        </div>
+                        <div class="progress">
+                            <div class="tracker"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info">
+                <a class="title ga-event-link" href="{{ postUrl }}"
+                   data-event="{{ 'audio_news'|trans({}, 'news') }}"
+                >
+                    {{ post.getPreparedTitle()|raw }}
+                </a>
+                <div class="category-date flex">
+                    <a class="category" href="{{ path('category_view', {'slug': post.category_slug}) }}">{{ post.category_title }}</a>
+                    <div class="news-date">
+                        <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                        <span>{{ post.publishedAt.format('H:i') }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Col-->
+
+{% endfor %}

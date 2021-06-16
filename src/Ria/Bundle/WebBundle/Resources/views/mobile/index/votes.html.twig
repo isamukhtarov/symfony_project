@@ -1,0 +1,52 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ 'votes_archive'|trans({}, 'votes') ~ ' | Report.ge' }}{% endblock %}
+
+{% block content %}
+    <section class="quiz-page pt-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="page-title">{{ 'votes_archive'|trans({}, 'votes') }}</h2>
+
+                    <div class="quiz-list">
+                        <div class="row load-container" data-url="{{ path('vote.archive') }}">
+                            {% include '@RiaWeb/index/partials/vote_items.html.twig' %}
+                        </div>
+                    </div>
+                    <!-- Quiz list-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "{{ url('index') }}" ,
+                        "name": "{{ 'main_page'|trans({}, 'common') }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "name":"{{ 'votes_archive'|trans({}, 'votes') }}"
+                    }
+                }
+            ]
+        }
+    </script>
+
+{{ registerScripts('site/js/load-votes.js') }}
+
+{% endblock %}

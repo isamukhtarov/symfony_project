@@ -1,0 +1,10 @@
+ria_theme:
+  theme_detector: Ria\Bundle\WebBundle\Service\ThemeDetector
+  themes: ['default', 'mobile']
+  cookie:
+    name: theme_flag
+    lifetime: 604800 # 1 week in seconds
+    path: /
+    domain: ~
+    secure: false
+    http_only: false

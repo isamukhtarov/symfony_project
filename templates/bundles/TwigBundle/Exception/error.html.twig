@@ -1,0 +1,33 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}Page not found | Report.az{% endblock %}
+
+{% block content %}
+
+<div class="breadcrumb-container"></div>
+
+<div class="static-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <section class="site-error">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="error-content flex-center">
+                                    <div class="text-center">
+                                        <h1 class="error-code">{{ status_code }}</h1>
+                                        <h3 class="error-description">{{ status_text }}</h3>
+                                    </div>
+                                </div>
+                                <!-- Error content-->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

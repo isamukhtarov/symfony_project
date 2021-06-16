@@ -1,0 +1,15 @@
+form:
+  permissions: 'İcazələr'
+  email: 'E-mail'
+  emailAdditional: 'Əlavə E-mail'
+  gender: 'Cins'
+  phone: 'Mobil nömrə'
+  roles: 'Rollar'
+  password: 'Şifrə'
+  passwordConfirmation: 'Şifrənin təstiqi'
+  birthDate: 'Doğum tarixi'
+  year: 'İl'
+  month: 'Ay'
+  day: 'Gün'
+
+role: 'Rolu'

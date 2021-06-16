@@ -1,0 +1,32 @@
+{% for post in posts %}
+
+    <div class="col-md-3 col-6 infinity-item" data-timestamp="{{ post.publishedAt.format('Y-m-d H:i:s') }}">
+        <div class="news-block">
+            <div class="image">
+                <a href="{{ path('post_view', {
+                    'categorySlug': post.category_slug,
+                    'slug': post.slug,
+                }) }}">
+                    <img src="{{ image(post.image, {'thumb': 290}) }}"
+                         alt="{{ post.getTitleWithoutQuotes() }}"
+                         title="{{ post.getTitleWithoutQuotes() }}">
+                </a>
+            </div>
+            <div class="info">
+                <a class="title"
+                   href="{{ path('post_view', {
+                       'categorySlug': post.category_slug,
+                       'slug': post.slug,
+                   }) }}">
+                    {{ post.getPreparedTitle()|raw }}
+                </a>
+                <div class="news-date">
+                    <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                    <span>{{ post.publishedAt.format('H:i') }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Col-->
+
+{% endfor %}

@@ -1,0 +1,7 @@
+vote:         'Sorğu'
+start_date:   'Başlama tarixi:'
+end_time:     'Bitmə tarixi:'
+users_count:  'Səs verən sayı: <b class="voted_count">%count%</b> nəfər'
+do vote:      'Səs ver'
+go_to_vote:   'SORĞUYA KEÇİD'
+votes_archive: 'Sorğu arxivi'

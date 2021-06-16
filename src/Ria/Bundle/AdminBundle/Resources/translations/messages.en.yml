@@ -1,0 +1,65 @@
+form:
+  title: Title
+  slug: Slug
+  description: Description
+  status: Status
+  submit: Save
+  meta:
+    title: Meta title
+    description: Meta description
+    keywords: Meta keywords
+
+Meta tags: Мета tags
+
+menu:
+  Menu:    'Menu'
+  Main:    'Main'
+  Youtube: 'Youtube videos'
+  News:    'News'
+  Categories: 'Categories'
+  Stories: 'Stories'
+  Cities:  'Cities'
+  Regions: 'Regions'
+  Users:   'Users'
+  Roles:   'Roles'
+  Permissions: 'Permissions'
+  Statistics: 'Statistics'
+  Author Statistics: 'Authors statistics'
+  Translators statistics: 'Translators statistics'
+  Persons:  'Persons'
+  Experts:  'Experts'
+  Votes:    'Votes'
+  Configuration: 'Configuration'
+
+Save: 'Save'
+Cancel: 'Cancel'
+Create: 'Create'
+Status: 'Status'
+Name: 'Name'
+
+quote:
+  Add Expert quote: 'Add Expert quote'
+  Expert: 'Expert'
+  Select expert: 'Select expert'
+  text: 'Text'
+
+person-timeline:
+  Insert timeline: 'Insert timeline'
+  Insert timeline year: 'Insert timeline year'
+  Insert timeline description: 'Insert timeline description'
+
+kitpages_data_grid:
+  No-data-found: 'Data not found'
+  Total-items-count: 'Items count:'
+  сharacters_сount: 'Characters count'
+  delete_item: 'Are you sure you want to delete this item?'
+
+az: Azərbaycan
+ru: Русский
+en: English
+ge: ქართველი
+
+Inactive: Inactive
+Active: Active
+
+show_on_site: 'Show on site'

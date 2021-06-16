@@ -1,0 +1,168 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block content %}
+
+    {{ form_start(form, {'attr': {'id': 'post-form'}}) }}
+    {{ form_row(form._token) }}
+    {{ form_row(form.language) }}
+
+    {# Helper hidden inputs for javascript #}
+    <input id="postId" type="hidden" value="{{ form.vars.postId }}">
+    <input id="postWasPublished" type="hidden" value="{{ form.vars.postWasPublished }}">
+    <input id="isCreationOfTranslation" type="hidden" value="{{ form.vars.isCreationOfTranslation }}">
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel">
+                <div class="panel-body">
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.markedWords) }}
+                    {{ form_row(form.slug, {'id': 'post-slug'}) }}
+                    {{ form_row(form.description) }}
+                    {% if post is defined %}
+                        {% include '@RiaPost/posts/partials/speech.form.html.twig' %}
+                    {% endif %}
+                    {{ form_row(form.tags) }}
+                    {{ form_row(form.persons) }}
+                    {{ form_row(form.photos) }}
+                    {{ form_row(form.content) }}
+                    {% include '@RiaPost/posts/partials/charCounter.html.twig' %}
+                    {{ form_row(form.icon) }}
+                    {{ form_row(form.source) }}
+                    {{ form_row(form.note) }}
+                    {{ form_row(form.relatedPosts) }}
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading with-border">
+                    <h4 class="panel-title">{{ 'form.exports' | trans }}</h4>
+                </div>
+                <div class="panel-body">
+                    {{ form_row(form.exports) }}
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-body">
+                    <fieldset>
+                        <legend>{% trans %}Meta tags{% endtrans %}</legend>
+                        <br>
+                        {{ form_row(form.meta.title) }}
+                        {{ form_row(form.meta.keywords) }}
+                        {{ form_row(form.meta.description) }}
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% trans %}Settings{% endtrans %}</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_row(form.categoryId) }}
+                    {{ form_row(form.cityId) }}
+                    {{ form_row(form.type) }}
+                    {{ form_row(form.authorId) }}
+                    {{ form_row(form.expertId) }}
+
+                    {% if form.vars.isCreationOfTranslation %}
+                        {{ form_row(form.translatorId) }}
+                    {% endif %}
+                    {{ form_row(form.storyId) }}
+
+                   <div class="form-group" id="youtube_id">
+                       {{ form_label(form.youtubeId) }}
+                       {{ form_widget(form.youtubeId) }} <br>
+                       <div class="video-preview col-md-12">
+                           <div class="row">
+                               <iframe src width="100%" height="252" style="border: 0"></iframe>
+                           </div>
+                       </div>
+                   </div>
+
+                    {{ form_row(form.optionType) }}
+
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="form-group has-default bmd-form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="icon md-calendar" aria-hidden="true"></i>
+                                    </span>
+                                    {{ form_widget(form.publishedAt) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <div class="checkbox-custom checkbox-primary">
+                                    {{ form_widget(form.attachCurrentTime) }}
+                                    {{ form_label(form.attachCurrentTime) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ form_row(form.status, {'id': 'post-status' }) }}
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="checkbox-custom checkbox-primary">
+                                {{ form_widget(form.isMain)  }}
+                                {{ form_label(form.isMain)  }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="checkbox-custom checkbox-primary">
+                                {{ form_widget(form.isExclusive)  }}
+                                {{ form_label(form.isExclusive)  }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="checkbox-custom checkbox-primary">
+                                {{ form_widget(form.isActual)  }}
+                                {{ form_label(form.isActual)  }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="checkbox-custom checkbox-primary">
+                                {{ form_widget(form.isBreaking)  }}
+                                {{ form_label(form.isBreaking)  }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="checkbox-custom checkbox-primary">
+                                {{ form_widget(form.isImportant)  }}
+                                {{ form_label(form.isImportant)  }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="checkbox-custom checkbox-primary">
+                                {{ form_widget(form.linksNoIndex)  }}
+                                {{ form_label(form.linksNoIndex)  }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group float-right">
+                {{ form_widget(form.submit) }}
+                {{ form_widget(form.submitAndExit) }}
+                <button type="button" href="{{ path('posts.preview.create', {'lang': form.language.vars.value, 'form_type': form.vars.name}) }}" id="show-preview" class="btn btn-info">{{ 'form.preview' | trans }}</button>
+                <a class="btn btn-danger cancel-btn" href="{{ cancelRoute }}">{{ 'Cancel' | trans }}</a>
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form, {'render_rest': false}) }}
+
+    {% include '@RiaAdmin/ckeditor/addMediaPost.html.twig' %}
+    {% include '@RiaAdmin/ckeditor/addExpertQuote.html.twig' %}
+    {% include '@RiaAdmin/ckeditor/addTimeLine.html.twig' %}
+    {% include '@RiaAdmin/ckeditor/addVote.html.twig' %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+{% block content %}
+    <div class="panel">
+        <div class="panel-body">
+            {% embed data_grid.grid.default_twig with {'grid': grid} %}
+                {% block kit_grid_cell_id_value %}
+                    {% if not item['c.value'] %}
+                        <span class="not-set">(not set)</span>
+                    {% else %}
+                        {{ item['c.value'] }}
+                    {% endif %}
+                {% endblock %}
+                {% block kit_grid_tbody_column %}
+                    <td class="d-flex">
+                        <a class="table_action" href="{{ path('configs.update', {id: item['c.id']}) }}">
+                            <span class="md-edit"></span>
+                        </a>
+                    </td>
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}

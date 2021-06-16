@@ -1,0 +1,6 @@
+tactician:
+    commandbus:
+        default:
+            middleware:
+                - tactician.middleware.command_handler
+            method_inflector: tactician.handler.method_name_inflector.handle

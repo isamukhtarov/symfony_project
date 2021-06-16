@@ -1,0 +1,15 @@
+form:
+  permissions: 'Разрешения'
+  email: 'E-mail'
+  emailAdditional: 'Дололнительный E-mail'
+  gender: 'Пол'
+  phone: 'Мобильный номер'
+  roles: 'Роль'
+  password: 'Пароль'
+  passwordConfirmation: 'Подтверждение пароля'
+  birthDate: 'Дата рождения'
+  year: 'Год'
+  month: 'Месяц'
+  day: 'День'
+
+role: 'Роль'

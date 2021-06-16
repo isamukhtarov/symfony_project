@@ -1,0 +1,25 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_row(form._token) }}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel">
+                <div class="panel-body">
+                  {{ form_row(form.permissions) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="panel">
+                <div class="panel-body">
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.submit) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

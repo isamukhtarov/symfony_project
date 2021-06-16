@@ -1,0 +1,26 @@
+<div class="news-gallery">
+    <div class="thumbs-list flex">
+
+        {% for photo in photos %}
+
+        <div class="thumb">
+            <img src="{{ image(photo['filename'], {'thumb': 290}) }}"
+                 alt="{{ photo['information']|replace(['"'], '') }}"
+                 title="{{ photo['information']|replace(['"'], '') }}"
+            >
+
+            <div class="overlay flex-center">
+                <div class="actions">
+                    <a class="zoom" href="{{ image(photo['filename']) }}"
+                       data-thumb="{{ image(photo['filename'], {'thumb': 290}) }}"
+                       data-sub-html="{{ photo['information']|replace(['"'], '') }}"><i class="icon-zoom"></i></a>
+<!--                    <a href="#"><i class="icon-download"></i></a>-->
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+<!-- News gallery-->

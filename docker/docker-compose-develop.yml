@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  php-fpm:
+    container_name: php-fpm
+    build: ./php-fpm
+    volumes:
+      - /var/www/report/public_html:/app:delegated
+    network_mode: host
+    depends_on:
+      - elasticsearch
+
+  php-cli:
+    container_name: php-cli
+    build: ./php-cli
+    volumes:
+      - /var/www/report/public_html:/app:delegated
+      - composer_cache:/home/appuser/.composer/cache:delegated
+    network_mode: host
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms750m -Xmx750m
+    ports:
+      - 9201:9200
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+    - 1025:1025
+    - 8025:8025
+
+volumes:
+  composer_cache:
+  elastic_data:

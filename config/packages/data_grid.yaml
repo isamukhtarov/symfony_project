@@ -1,0 +1,8 @@
+data_grid:
+  grid:
+    default_twig: '@DataGrid/Grid/bootstrap-4-grid.html.twig'
+    hydrator_class: Ria\Bundle\DataGridBundle\Hydrators\DataGridHydrator
+  paginator:
+    default_twig: '@DataGrid/Paginator/bootstrap-4-paginator.html.twig'
+    item_count_in_page: 15
+    visible_page_count_in_paginator: 10

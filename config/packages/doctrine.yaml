@@ -1,0 +1,47 @@
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                url: '%env(resolve:DATABASE_URL)%'
+                mapping_types:
+                    enum: string
+            old:
+                url: '%env(resolve:OLD_DATABASE_URL)%'
+                mapping_types:
+                    enum: string
+
+        # IMPORTANT: You MUST configure your server version,
+        # either here or in the DATABASE_URL env var (see .env file)
+        #server_version: '5.7'
+    orm:
+        auto_generate_proxy_classes: true
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+                auto_mapping: true
+                dql:
+                    string_functions:
+                            regexp: DoctrineExtensions\Query\Mysql\Regexp
+                mappings:
+                #            App:
+                #                is_bundle: false
+                #                type: annotation
+                #                dir: '%kernel.project_dir%/src/Entity'
+                #                prefix: 'App\Entity'
+                #                alias: App
+                hydrators:
+                    category_hydrator: Ria\Bundle\PostBundle\Query\Hydrator\CategoryHydrator
+                    story_hydrator: Ria\Bundle\PostBundle\Query\Hydrator\StoryHydrator
+                    person_hydrator: Ria\Bundle\PersonBundle\Query\Hydrator\PersonHydrator
+                    post_hydrator: Ria\Bundle\PostBundle\Query\Hydrator\PostHydrator
+                    region_hydrator: Ria\Bundle\PostBundle\Query\Hydrator\RegionHydrator
+                    photo_hydrator: Ria\Bundle\PhotoBundle\Query\Hydrator\PhotoHydrator
+                    user_hydrator: Ria\Bundle\UserBundle\Query\Hydrator\UserHydrator
+                    tag_hydrator: Ria\Bundle\PostBundle\Query\Hydrator\TagHydrator
+                    widget_hydrator: Ria\Bundle\PostBundle\Query\Hydrator\WidgetHydrator
+                    vote_hydrator: Ria\Bundle\VoteBundle\Query\Hydrator\VoteHydrator
+            old:
+                connection: old

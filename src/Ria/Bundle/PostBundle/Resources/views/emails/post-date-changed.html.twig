@@ -1,0 +1,11 @@
+<div class="date-changed">
+    <p>Уведомление!</p>
+
+    <p>Дата новости <b>"{{ post.getTitle() }}"</b> была изменена на
+        <b>"{{ post.getPublishedAt().format('Y-m-d H:i:s') }}"</b>
+    </p>
+
+    {% if cause %}
+        <p>Причина: <b>{{ cause }}</b></p>
+    {% endif %}
+</div>

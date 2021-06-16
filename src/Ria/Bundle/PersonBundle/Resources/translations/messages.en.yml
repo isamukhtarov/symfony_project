@@ -1,0 +1,10 @@
+form:
+  first_name: 'Name'
+  last_name:  'Surname'
+  slug: 'Slug'
+  position: 'Position'
+  text: 'Description'
+
+first_name: 'Name'
+last_name: 'Surname'
+position: 'Position'

@@ -1,0 +1,57 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ 'archive'|trans({}, 'common') }} | Report.ge{% endblock %}
+
+{% block content %}
+
+<section class="category-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="page-title">{{ 'archive'|trans({}, 'common') }}</h1>
+
+                {% if posts is empty %}
+                    <p class="text-center">{{ 'posts_not_found_by_request'|trans({}, 'common') }}</p>
+                {% endif %}
+
+                <div class="news-list">
+                    <div class="row load-container" data-url="{{ path('archive_ajax', {'date': date}) }}">
+                        {% include '@RiaWeb/index/partials/_category-post-item.html.twig' with {'posts': posts} %}
+                        <!-- Col-->
+                    </div>
+                </div>
+                <!-- News list-->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Category page-->
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('index') }}",
+                        "name": "{{ 'main_page'|trans({}, 'common') }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "name": "{{ 'archive'|trans({}, 'common') }}"
+                    }
+                }
+            ]
+        }
+
+    </script>
+
+    {{ registerScripts('site/js/load-posts.js') }}
+
+{% endblock %}

@@ -1,0 +1,93 @@
+Order: 'Sıralama'
+Title: 'Başlıq'
+Region: 'Bölgə'
+City: 'Şəhər'
+Busy: 'Məşğul'
+Translations: 'Tərcümələr'
+Audio: 'Səs'
+Datetime: 'Tarix & Vaxt'
+Choose translator: 'Tərcüməçi seçin'
+
+form:
+  sort: Sıra
+  template: Şablon
+  parent: Valideyn
+  markedWords: Qeyd olunmuş sözlər
+  tags: Teqlər
+  persons: Personalar
+  photos: Şəkillər
+  content: Mətn
+  icon: İşarə
+  source: Mənbə
+  relatedPosts: Bərkidilmiş
+  note: Qeydlər
+  description: Təsvir
+  attachCurrentTime: Vaxtı avtomatik quraşdır
+  option: Əlavə
+  youtube: YouTube Video
+  story: Süjet
+  author: Müəllif
+  expert: Ekspert
+  type: Növ
+  translator: Tərcüməçi
+  city: Şəhər
+  category: Bölmə
+  isMain: Əsas
+  isActual: Aktual
+  isImportant: Vacib
+  isExclusive: Eksklüziv
+  isBreaking: Təcili
+  linksNoIndex: Noindex for links
+  submitAndExit: Yadda saxla və Çıx
+  preview: Öncədən baxış
+
+  selectCategory: Bölməni seçin
+
+  enterMarkedWords: Xüsusi sözlər (yenilənib, rəsmi və s.)
+  enterPersons: Personanın adı soyadını daxil edin
+  enterTags: Teqləri daxil edin
+  enterRelatedPost: Xəbərin başlığını əlavə edin
+
+  exports: Eksport
+
+stories: Sujetlər
+story:
+  form:
+    showOnSite: Saytda göstər
+  settings: Ayarlar
+  create: Yeni süjet
+  update: Redaktə et
+
+id: Id
+translations.title: Başlıq
+status: Status
+show_on_site: Saytda göstər
+slug: 'Slug'
+
+
+city:
+  form:
+    region_title: 'Bölgə'
+    city_title: 'Şəhər'
+region:
+  translations:
+    title: 'Bölgə'
+
+
+created: Created
+on_moderation: On Moderation
+waiting_for_correction: Correction
+read: Active
+archived: Archived
+private: Private
+deleted: Deleted
+
+speech:
+  Upload: Yüklə
+  Delete: Sil
+  Speech: Xəbərin səsləndirmə faylı
+  Uploading: Uploading...
+
+without photo: ფოტოს გარეშე
+for future: მომავლისთვის
+and: და

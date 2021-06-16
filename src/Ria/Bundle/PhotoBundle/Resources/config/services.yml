@@ -1,0 +1,45 @@
+parameters:
+  app.photos_upload_directory: '%kernel.project_dir%/uploads/photo'
+  app.watermarks_directory: '%kernel.project_dir%/uploads/watermarks'
+
+services:
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  Ria\Bundle\PhotoBundle\:
+    resource: '../../'
+    exclude:
+      - '../../DependencyInjection/'
+      - '../../Entity/'
+      - '../../Command/'
+      - '../../Form/Type/'
+      - '../../Tests/'
+
+  Ria\Bundle\PhotoBundle\Controller\:
+    resource: "../../Controller"
+    tags: [ 'controller.service_arguments' ]
+
+  Ria\Bundle\PhotoBundle\Handler\:
+    resource: "../../Handler"
+    tags:
+      - { name: tactician.handler, typehints: true }
+
+  Ria\Bundle\PhotoBundle\Form\Type\:
+    resource: "../../Form/Type/"
+    tags: ['form.type']
+
+  image.manipulator:
+    class: Ria\Bundle\PhotoBundle\Service\ImageManipulator
+    arguments:
+      $uploadDirectory: '%app.photos_upload_directory%'
+
+  Ria\Bundle\PhotoBundle\Service\ImageManipulatorInterface: '@image.manipulator'
+
+  Ria\Bundle\PhotoBundle\Service\ImagePackage:
+    arguments:
+      - '%ria_photo.default_image%'
+
+  Ria\Bundle\PhotoBundle\Service\WatermarkLoader:
+    arguments:
+      - '%app.watermarks_directory%'

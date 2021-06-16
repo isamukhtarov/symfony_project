@@ -1,0 +1,86 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ category.meta.getTitle() ?: category.title ~ ' | Report.ge' }}{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="{{ category.meta.getDescription() }}">
+    {% if category.meta.getKeywords() is not empty %}
+        <meta name="keywords" content="{{ category.meta.getKeywords() }}">
+    {% endif %}
+
+    <meta property="og:title" content="{{ category.title }}">
+    <meta property="og:description" content="{{ category.meta.getDescription() }}">
+{% endblock %}
+
+{% block content %}
+
+    <section class="category-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="page-title">{{ category.title }}</h1>
+
+                    {% if (subCategories) %}
+                        <div class="filter-links ps">
+                            <ul>
+                                {% for sub in subCategories %}
+                                    <li>
+                                        <a href="{{ path('category_view', {slug: sub.slug}) }}">{{ sub.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    <div class="news-list">
+                        <div class="row load-container" data-url="{{ path('category_ajax', {'categoryId': category.id}) }}">
+
+                            {% include '@RiaWeb/index/partials/_category-post-item.html.twig' with {'posts': category.posts} %}
+
+                        </div>
+                    </div>
+                    <!-- News list-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('index') }}",
+                        "name": "{{ 'main_page'|trans({}, 'common') }}"
+                    }
+                },
+                {% if (category.parent_id) %}
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "item":
+                             {
+                                 "@id":"{{ path('category_view', {slug: category.parent_slug}) }}",
+                                 "name":"{{ category.parent_title|addcslashes('"')|raw }}"
+                             }
+                    },
+                {% endif %}
+                {
+                    "@type": "ListItem",
+                    "position": "2",
+                    "item": {
+                        "name": "{{ category.title|addcslashes('"')|raw }}"
+                    }
+                }
+            ]
+        }
+
+    </script>
+
+    {{ registerScripts('site/js/load-posts.js') }}
+
+{% endblock %}

@@ -1,0 +1,71 @@
+services:
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  Ria\Bundle\WebBundle\:
+      resource: '../../'
+      exclude:
+          - '../src/DependencyInjection/'
+          - '../src/Entity/'
+          - '../src/Tests/'
+
+  Ria\Bundle\WebBundle\Controller\:
+      resource: "../../Controller"
+      tags: ['controller.service_arguments']
+
+  widget.story:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\StoryWidget
+
+  widget.menu:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\MenuWidget
+
+  widget.calendar:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\CalendarWidget
+
+  widget.post:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\PostWidget
+
+  widget.category:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\CategoryWidget
+
+  widget.region:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\RegionWidget
+
+  widget.shareIcons:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\ShareIconsWidget
+
+  widget.socialTabs:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\SocialTabsWidget
+
+  widget.weather:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\WeatherWidget
+
+  widget.currency:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\CurrencyWidget
+
+  widget.youtube:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\YoutubeWidget
+
+  widget.postGallery:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\PostGalleryWidget
+
+  widget.youtubeVideos:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\YoutubeVideosWidget
+
+  widget.vote:
+    public: true
+    class: Ria\Bundle\WebBundle\Widget\VoteWidget

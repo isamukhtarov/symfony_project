@@ -1,0 +1,22 @@
+.log-updated .log-content table tr {
+    display: none;
+}
+
+.log-created th,
+.log-updated th {
+    width: 20%;
+}
+
+#log .log-content {
+    max-height: none;
+    overflow: hidden;
+}
+
+#log table tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#log table th,
+#log table td {
+    padding: 8px 0;
+}

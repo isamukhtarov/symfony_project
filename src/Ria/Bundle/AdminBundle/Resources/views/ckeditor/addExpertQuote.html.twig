@@ -1,0 +1,42 @@
+<!-- Modal AddExpertQuote -->
+{{ registerStyles(
+    'admin/ckeditor/plugins/addExpertQuote/css/style.css',
+) }}
+<div class="modal fade" id="addExpertQuoteModal" role="dialog">
+    <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'quote.Add Expert quote' | trans }}</h4>
+
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="icon md-close"></i>
+                </button>
+            </div>
+
+            {{ form_start(quoteForm()) }}
+            {{ form_row(quoteForm()._token) }}
+
+            {{ form_row(quoteForm().id)  }}
+            {{ form_row(quoteForm().language)  }}
+            {{ form_row(quoteForm().postId)  }}
+            <div class="modal-body">
+                {{ form_row(quoteForm().expertId, {'attr' : {'data-placeholder': 'quote.select_expert' | trans}}) }}
+            </div>
+
+            <div class="modal-body">
+                {{ form_row(quoteForm().text) }}
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-info" id="btnSaveQuote" data-url="{{ path('quote.create') }}">{{ 'Save' | trans }}</button>
+                <button class="btn btn-secondary" data-dismiss="modal">{{ 'Cancel' | trans }}</button>
+            </div>
+
+            {{ form_end(quoteForm(), {'render_rest': false}) }}
+        </div>
+    </div>
+</div>
+<!-- End AddExpertQuote -->
+{{ registerScripts(
+    'admin/ckeditor/plugins/addExpertQuote/js/addExpertQuote.js',
+) }}

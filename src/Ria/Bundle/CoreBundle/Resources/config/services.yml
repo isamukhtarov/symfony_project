@@ -1,0 +1,74 @@
+parameters:
+  es_config: { 'hosts': [ 'http://elasticsearch:9200' ] }
+
+services:
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  # lots of service definitions in between
+  Elasticsearch\ClientBuilder: ~
+
+  Elasticsearch\Client:
+    public: true
+    factory: [ '@Elasticsearch\ClientBuilder', 'fromConfig' ]
+    arguments: [ '%es_config%' ]
+
+  Ria\Bundle\CoreBundle\:
+    resource: '../../'
+    exclude:
+      - '../../DependencyInjection/'
+      - '../../Entity/'
+      - '../../Query/'
+      - '../../Repository/'
+      - '../../Form/Type/'
+      - '../../Web/'
+      - '../../Tests/'
+
+  Ria\Bundle\CoreBundle\Component\ViewsCounter\Collector\BaseCollector:
+    public: true
+
+  Ria\Bundle\CoreBundle\Console\Command\SitemapGenerateCommand:
+    tags:
+      - { name: 'console.command', command: 'app:sitemap-generate' }
+
+  Ria\Bundle\CoreBundle\Console\Command\ViewsCounterCommand:
+    tags:
+      - { name: 'console.command', command: 'app:views-counter' }
+
+  Ria\Bundle\CoreBundle\Console\Command\CreateElasticIndexCommand:
+    tags:
+      - { name: 'console.command', command: 'app:create-elastic-index' }
+
+  Ria\Bundle\CoreBundle\Console\Command\MigrateElasticPostsCommand:
+    tags:
+      - { name: 'console.command', command: 'app:migrate-elastic-posts' }
+
+  Ria\Bundle\CoreBundle\Console\Command\PostSetPublishedCommand:
+    tags:
+      - { name: 'console.command', command: 'app:posts-set-published' }
+
+  Ria\Bundle\CoreBundle\Console\Command\OldDataMigrationCommand:
+    tags:
+      - { name: 'console.command', command: 'app:old-migration' }
+
+  Ria\Bundle\CoreBundle\Console\Command\MigrateCategoriesCommand:
+    tags:
+      - { name: 'console.command', command: 'app:migrate-categories' }
+
+  Ria\Bundle\CoreBundle\Console\Command\MigrateUsersCommand:
+    tags:
+      - { name: 'console.command', command: 'app:migrate-users' }
+
+  Ria\Bundle\CoreBundle\Console\Command\MigratePostsCommand:
+    tags:
+      - { name: 'console.command', command: 'app:migrate-posts' }
+
+  # Registering components
+  Ria\Bundle\CoreBundle\Component\CommandValidator\CommandValidatorInterface:
+    class: Ria\Bundle\CoreBundle\Component\CommandValidator\CommandValidator
+    autowire: true
+
+  Ria\Bundle\CoreBundle\Component\Pipeline\PipelineInterface:
+    class: Ria\Bundle\CoreBundle\Component\Pipeline\Pipeline
+    arguments: ["@service_container"]

@@ -1,0 +1,45 @@
+
+<div class="currencies-converter">
+    <h3 class="page-title">{{ 'currency_converter'|trans({}, 'currency') }}</h3>
+
+    <div class="converter flex">
+        <div class="swap-currencies">
+            <img src="{{ asset('site/images/icons/swap.png') }}">
+        </div>
+
+        <div class="currency-field" id="currency-from">
+            <div class="form-group">
+                <input class="form-control" type="text" name="in-value" placeholder="0">
+            </div>
+
+            <div class="form-group select">
+                <select class="form-control" name="in-currency">
+                    <option value="1">{{ 'lari'|trans({}, 'currency') }}</option>
+                    {% for item in items %}
+                        {% if item['code'] != 'BRENT' %}
+                            <option value="{{ item['value'] }}">{{ item['code'] }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="currency-field" id="currency-to">
+            <div class="form-group">
+                <input class="form-control" type="text" name="out-value" placeholder="0">
+            </div>
+
+            <div class="form-group select">
+                <select class="form-control" name="out-currency">
+                    <option value="1">GEL</option>
+                    {% for item in items %}
+                        {% if item['code'] != 'BRENT' %}
+                            <option value="{{ item['value'] }}" {{ item['code'] == 'USD' ? 'selected' : '' }}>{{ item['code'] }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Currencies converter-->

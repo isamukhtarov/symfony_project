@@ -1,0 +1,40 @@
+{{ form_start(form, {'action': path('photos.update', {'id': photo.id}), 'attr': {'id': 'update-photo-form', 'class': 'update-photo-form'}}) }}
+    {{ form_row(form._token) }}
+
+    <div class="modal-header">
+        <h4 class="modal-title">{{ 'Update photo'|trans }}</h4>
+
+        <button type="button" class="close" data-dismiss="modal">
+            <i class="icon md-close"></i>
+        </button>
+    </div>
+
+<div class="modal-body">
+    <ul class="nav nav-tabs nav-tabs-line">
+            {% for locale in supported_locales %}
+                <li class="nav-item">
+                    <a class="nav-link{{ locale == default_locale ? ' active' : '' }}" href="#pm-{{ locale }}" data-toggle="tab">
+                        {{ flagIcon(locale) }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    <div class="tab-content pt-15">
+        {% for translation in form.translations %}
+            {{ form_row(translation.locale) }}
+
+            <div class="tab-pane{{ translation.locale.vars.value == default_locale ? ' active' : '' }}" id="pm-{{ translation.locale.vars.value }}">
+                {{ form_row(translation.author) }}
+                {{ form_row(translation.information) }}
+                {{ form_row(translation.source) }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="modal-footer">
+    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-info update-photo-form-submit'}}) }}
+    <button class="btn btn-secondary" data-dismiss="modal">{{ 'Cancel'|trans }}</button>
+</div>
+
+{{ form_end(form, {'render_rest': false}) }}

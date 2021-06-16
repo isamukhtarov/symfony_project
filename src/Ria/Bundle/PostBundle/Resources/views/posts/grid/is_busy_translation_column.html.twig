@@ -1,0 +1,9 @@
+<span class="badge badge-lg badge-info">
+   {{ flagIcon(language) }}
+   {{ bussierName }}
+
+    {% if is_granted_to('unblockPost') %}
+       <a class="unblock-post" href="{{ path('posts.unblock.translation-create', {'parentId': postParentId, 'language': language}) }}"
+          data-method="post" data-confirm="Confirm post unblocking">x</a>
+   {% endif %}
+</span>

@@ -1,0 +1,18 @@
+{% if vote is not empty %}
+    <div class="filter-links stories-links">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul>
+                        <li>
+                            <a href="{{ path('post_view', {
+                                'categorySlug': vote.post_category_url,
+                                'slug': vote.post_url,
+                            }) }}">{{ vote.title }} — {{ 'vote'| trans({}, 'votes') }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

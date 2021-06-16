@@ -1,0 +1,28 @@
+{% for post in posts %}
+    <div class="news-item flex infinity-item" data-timestamp="{{ post.publishedAt.format('Y-m-d H:i:s') }}">
+        <div class="image">
+            <a href="{{ path('post_view', {
+                'categorySlug': post.category_slug,
+                'slug': post.slug,
+            }) }}">
+                <img src="{{ image(post.image, {'thumb': 290}) }}"
+                     alt="{{ post.getTitleWithoutQuotes() }}"
+                     title="{{ post.getTitleWithoutQuotes() }}">
+            </a>
+        </div>
+        <div class="info">
+            <a class="title" href="{{ path('post_view', {
+                'categorySlug': post.category_slug,
+                'slug': post.slug,
+            }) }}">
+                {{ post.title|raw }}
+            </a>
+            <p class="description">{{ post.description|raw }}</p>
+            <div class="news-date">
+                <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                <span>{{ post.publishedAt.format('H:i') }}</span>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}

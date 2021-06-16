@@ -1,0 +1,61 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ queryLabel }} | Report.ge{% endblock %}
+
+{% block content %}
+
+    <section class="news-feed-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="page-title">{{ 'search_keyword'|trans({}, 'common') }}: {{ queryLabel }}</h1>
+
+                    <div class="news-list latest-news load-container" data-url="{{ path('search_ajax', {'query': queryLabel}) }}">
+                        {% include '@RiaWeb/index/partials/_search-post-item.html.twig' with {'posts': posts} %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- News feed page-->
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement":
+        [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item":
+                {
+                    "@id":"{{ url('index') }}" ,
+                    "name":"{{ 'main_page'|trans({}, 'common') }}"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item":
+                {
+                    "@id":"{{ url('search', {'query': query}) }}",
+                    "name":"{{ 'search_results'|trans({}, 'common') }}"
+                }
+            },
+
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "item":
+                {
+                    "name":"{{ queryLabel }}"
+                }
+            }
+        ]
+    }
+</script>
+
+    {{ registerScripts('site/js/load-posts.js') }}
+
+{% endblock %}

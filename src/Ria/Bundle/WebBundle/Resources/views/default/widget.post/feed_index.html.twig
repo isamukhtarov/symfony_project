@@ -1,0 +1,22 @@
+
+<h2 class="section-title">
+    <p>
+        <a href="{{ path('feed') }}">{{ 'last_news'|trans({}, 'common') }}</a>
+        <span id="new-posts-count" class="counter" data-url="{{ path('newsFeed') }}" data-count="8" style="display:none">0</span>
+    </p>
+</h2>
+
+<div class="custom-scrollbar">
+    <div class="latest-news news-container" data-url="{{ path('newsFeed') }}">
+
+    </div>
+</div>
+
+<div class="show-all">
+    <a href="{{ path('feed') }}">{{ 'all_news_feed'|trans({}, 'common') }}</a>
+</div>
+
+{{ registerScripts(
+    'site/js/index-feed.js',
+    'site/js/feed-refresh-main.js',
+) }}

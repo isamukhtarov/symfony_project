@@ -1,0 +1,37 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_row(form._token) }}
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel">
+                <div class="panel-body">
+                    {{ form_row(form.value) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ 'Settings' | trans }}</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_row(form.label) }}
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="form-group">
+                        {{ form_row(form.submit, {'attr': {'class': 'btn btn-lg btn-primary btn-block'}}) }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

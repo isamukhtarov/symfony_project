@@ -1,0 +1,80 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ 'page_title'|trans({}, 'currency') }} | Report.ge{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="{{ 'currency_description'|trans({}, 'common') }}">
+    <meta property="og:title" content="{{ 'page_title'|trans({}, 'currency') }} | Report.ge">
+    <meta property="og:description" content="{{ 'currency_description'|trans({}, 'common') }}">
+    <meta property="og:image" content="{{ app.request.getSchemeAndHttpHost() ~ asset('site/images/currency/currency-share.jpg') }}">
+{% endblock %}
+
+{% block content %}
+
+    {{ registerScripts('site/js/mobile/currency.js') }}
+
+    <section class="currencies-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    {{ widget('widget.currency', {
+                        'type': 'converter',
+                        'items': items
+                    }) }}
+
+                    {{ widget('widget.currency', {
+                        'type': 'list',
+                        'items': items
+                    }) }}
+
+                    <h3 class="section-title">{{ 'economic_news'|trans({}, 'currency') }}</h3>
+
+                    {{ widget('widget.post', {
+                        'template': 'currency_posts_feed.html.twig',
+                        'filters': [
+                            {'select': ['id', 'type.type', 'title', 'slug', 'publishedAt', 'markedWords',
+                                'isImportant', 'isMain']},
+                            'latest',
+                            {'limit': 10},
+                            {'lang': app.request.getLocale()},
+                            'published',
+                            'withCategory',
+                            'withPhoto',
+                            {'category': economicsCategoriesIds},
+                            'hasAudio'
+                        ]
+                    }) }}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Currencies page-->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement":
+        [
+            {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('index') }}",
+                        "name": "{{ 'main_page'|trans({}, 'common') }}"
+                    }
+                },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item":
+                {
+                    "name":"{{ 'currency'|trans({}, 'currency') }}"
+                }
+            }
+        ]
+    }
+
+    </script>
+
+{% endblock %}

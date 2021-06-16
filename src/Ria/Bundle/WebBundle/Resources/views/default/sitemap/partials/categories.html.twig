@@ -1,0 +1,17 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    {% for item in categoryItems %}
+    <url>
+        <loc>{{ item.location }}</loc>
+
+        {% if(item.lastModified) %}
+            <lastmod>{{ item.lastModified|format_datetime(pattern='c') }}</lastmod>
+        {% endif %}
+        {% if(item.changeFrequency) %}
+            <changefreq>{{ item.changeFrequency }}</changefreq>
+        {% endif %}
+        {% if(item.priority) %}
+            <priority>{{ item.priority|number_format(1, '.', ',') }}</priority>
+        {% endif %}
+    </url>
+    {% endfor %}
+</urlset>

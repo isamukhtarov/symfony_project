@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Ria\Bundle\UserBundle\:
+    resource: '../../'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Entity/'
+      - '../src/Tests/'
+
+  Ria\Bundle\UserBundle\Controller\:
+    resource: "../../Controller"
+    tags: [ 'controller.service_arguments' ]
+
+  # Registering Handlers automatically.
+  Ria\Bundle\UserBundle\Handler\:
+    resource: '../../Handler/'
+    tags:
+      - { name: tactician.handler, typehints: true }

@@ -1,0 +1,24 @@
+{% for vote in votes %}
+    <div class="col-md-6 infinity-item" data-id="{{ vote.id }}">
+        <div class="quiz-block">
+            <h3 class="title">{{ vote.title }}</h3>
+            <div class="quiz-info flex">
+                <span>{{ 'start_date' | trans({}, 'votes') }} {{ vote.startDate|format_datetime(pattern='d MMMM, y') }}</span>
+                <span>{{ 'users_count'|trans({'%count%': vote.totalScore}, 'votes')|raw }}</span>
+            </div>
+
+            <div class="quiz-block__content">
+                <div class="quiz-results">
+                    {% for option in vote.options %}
+                        <div class="quiz-option">
+                            <div class="percentage-indicator" style="width: {{ vote.optionPercentage(option) }}%;"></div>
+                            <p class="label">{{ option.title }}</p>
+                            <p class="percent">{{ vote.optionPercentage(option) }}%</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Col-->
+{% endfor %}

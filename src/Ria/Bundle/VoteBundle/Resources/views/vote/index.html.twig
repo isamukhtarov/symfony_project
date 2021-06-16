@@ -1,0 +1,52 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block content %}
+    <div class="panel">
+        <div class="panel-body">
+            {% embed data_grid.grid.default_twig with {'grid': grid} %}
+
+                {% block kit_grid_selector %}
+                    <div class="col-lg-4 col-6">
+                        <select id="language" class="outer-select form-control" name="filter_v.language">
+                            {% for localeCode in supported_locales %}
+                                {% set filterValue = grid.filterValue('v.language') %}
+
+                                {% if (filterValue) %}
+                                    <option value="{{ localeCode }}" {{ filterValue == localeCode ? 'selected' }}>{{ localeCode | trans }}</option>
+                                {% else %}
+                                    <option value="{{ localeCode }}" {{ app.request.locale == localeCode ? 'selected' }}>{{ localeCode | trans }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-lg-4 col-12">
+                        <div class="create-news-langs float-right">
+                            <a href="" class="btn btn-info">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                            <div class="btn-group" role="group">
+                                {% for locale in supported_locales %}
+                                    <a href="{{ path('votes.create', {'lang': locale})  }}" class="btn btn-info">
+                                        <i class="flag-icon flag-icon-{{ (locale == 'en') ? 'us' : locale }}"></i> +
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+
+                {% block kit_grid_tbody_column %}
+                    <td class="d-flex">
+                        <a class="table_action" href="{{ path('votes.update', {id: item['v.id']}) }}">
+                            <span class="md-edit"></span>
+                        </a>
+                        <a class="table_action ml-1" href="{{ path('votes.delete', {id: item['v.id']}) }}" onclick="return confirm('Are you sure you want to delete this item?')">
+                            <span class="md-delete"></span>
+                        </a>
+                    </td>
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+Order: 'Порядок'
+Title: 'Заголовок'
+Region: 'Регион'
+City: 'Город'
+Busy: 'Занятость'
+Translations: 'Переводы'
+Audio: 'Аудио'
+Datetime: 'Дата & Время'
+Choose translator: 'Выберите переводчика'
+
+form:
+  markedWords: Ключевые слова
+  tags: Теги
+  persons: Персоны
+  photos: Фотографии
+  content: Контент
+  icon: Иконка
+  source: Источник
+  relatedPosts: Прикрепленные
+  note: Заметки
+  description: Описание
+  attachCurrentTime: Задать время автоматически
+  option: Дополнительная опция
+  youtube: YouTube Видео
+  story: Сюжет
+  author: Автор
+  expert: Эксперт
+  type: Тип
+  translator: Переводчик
+  city: Город
+  category: Категория
+  isMain: Главная
+  isActual: Актуальная
+  isImportant: Важная
+  isExclusive: Эксклюзивная
+  isBreaking: Срочная
+  linksNoIndex: Noindex для ссылок
+  submitAndExit: Сохранить и выйти
+  preview: Предпросмотр
+  sort: Порядок
+  template: Шаблон
+  parent: Родитель
+
+  type_post: Новость
+  type_article: Статья
+  type_photo: Фото
+  type_video: Видео
+  type_opinion: Мнение
+  type_infographic: Инфографика
+  type_partners: Партнеры
+
+  selectCategory: Выберите категорию
+
+  enterMarkedWords: Введите ключевые слова
+  enterPersons: Введите Фио персоны
+  enterTags: Введите тэги
+  enterRelatedPost: Введите заголовок новости
+
+  exports: Экспорт
+
+speech:
+  Upload: Загрузить
+  Delete: Удалить
+  Speech: Файл озвучки поста
+  Uploading: Загружается
+
+created: Создана
+on_moderation: Ждет модерации
+waiting_for_correction: На корректуре
+read: Вычитана
+archived: Архивирована
+private: Приватная
+deleted: Удалена
+
+without photo: без фото
+for future: на будущее
+and: и

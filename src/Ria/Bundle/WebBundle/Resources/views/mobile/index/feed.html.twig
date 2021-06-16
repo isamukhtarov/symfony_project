@@ -1,0 +1,76 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ 'feed_page_title'|trans({}, 'common') }} | Report.az{% endblock %}
+
+{% block meta %}
+    {% if app.request.getLocale() in ['az', 'ru'] %}
+        <meta name="description" content="{{ 'feed_page_description'|trans({}, 'common') }}">
+    {% endif %}
+    {% if app.request.getLocale() == 'az' %}
+        <meta name="keywords" content="{{ 'feed_page_keywords'|trans({}, 'common') }}">
+    {% endif %}
+{% endblock meta %}
+
+{% block content %}
+
+<section class="news-feed-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="page-title">{{ 'feed_page'|trans({}, 'common') }}</h1>
+                <div class="select-filter">
+                    <div class="form-group select">
+                        <select class="custom-select" onchange="location = this.value;">
+                            <option value="{{ path('feed') }}">{{ 'all_news'|trans({}, 'common') }}</option>
+                            {% for range in ranges %}
+                                {% set isOptionSelect = (range == app.request.get('range')) ? 'selected' : '' %}
+                                <option value="{{ path('feed_with_range', {'range': range}) }}" {{ isOptionSelect }}>
+                                    {{ range|trans({}, 'common') }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <!-- Select filter-->
+
+                <div class="news-list latest-news load-container" data-url="{{ path('feed_ajax', {'range': app.request.get('range')}) }}">
+                    {% include '@RiaWeb/index/partials/_feed-post-item.html.twig' with {'posts': posts} %}
+                </div>
+                <!-- News list-->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- News feed page-->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement":
+        [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item":
+                {
+                    "@id":"{{ url('index') }}" ,
+                    "name":"{{ 'main_page'|trans({}, 'common') }}"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item":
+                {
+                    "name":"{{ 'feed_page'|trans({}, 'common') }}"
+                }
+            }
+        ]
+    }
+
+</script>
+
+    {{ registerScripts('site/js/load-posts.js') }}
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% set date = lastDate ?? (posts[0] is defined ? posts[0].publishedAt.format('d.m.Y') : null) %}
+
+{% for i, post in posts %}
+
+    {% if (
+        (i > 0 and post.publishedAt.format('d.m.Y') != date and (date is not empty)) or
+        (i == 0 and (date is not empty) and post.publishedAt.format('d.m.Y') != date)
+        ) %}
+
+        {% set date = post.publishedAt.format('d.m.Y') %}
+
+        <div class="time-divider"><span>{{ date }}</span></div>
+
+    {% endif %}
+
+    <div class="news-item flex infinity-item {{ (post.isMain or post.isImportant) ? 'highlighted' : '' }}"
+         data-timestamp="{{ post.publishedAt.format('Y-m-d H:i:s') }}">
+        <div class="time">
+            <span>{{ post.publishedAt.format('H:i') }}</span>
+            <span>{{ post.publishedAt|format_datetime(pattern='dd.MM.YYY') }}</span>
+        </div>
+        <div class="info">
+            <a class="title" href="{{ path('post_view', {
+                'categorySlug': post.category_slug,
+                'slug': post.slug,
+            }) }}">
+                {{ post.getPreparedTitle()|raw }}
+            </a>
+            <a class="category"
+               href="{{ path('category_view', {'slug': post.category_slug }) }}">{{ post.category_title }}</a>
+        </div>
+    </div>
+{% endfor %}

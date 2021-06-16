@@ -1,0 +1,19 @@
+{
+  "name": "mamedos/ria-user-bundle",
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=7.4",
+    "doctrine/annotations": "^1.0",
+    "doctrine/orm": "^2.7",
+    "symfony/framework-bundle": "5.1.*",
+    "symfony/translation": "5.1.*",
+    "symfony/twig-bundle": "^5.1",
+    "symfony/validator": "5.1.*",
+    "symfony/security-bundle": "5.1.*"
+  },
+  "autoload" : {
+    "psr-4" : {
+      "Ria\\Bundle\\UserBundle\\" : ""
+    }
+  }
+}

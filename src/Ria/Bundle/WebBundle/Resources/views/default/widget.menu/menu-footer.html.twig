@@ -1,0 +1,6 @@
+<ul>
+    {% for item in items %}
+        <li><a href="{{ path('category_view', {slug: item.slug}) }}" itemprop="url"><span
+                        itemprop="name">{{ item.title }}</span></a></li>
+    {% endfor %}
+</ul>

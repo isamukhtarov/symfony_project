@@ -1,0 +1,248 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ 'home_page_title'|trans({}, 'common') }} | Report.az{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="{{ 'index_page_description'|trans({}, 'common') }}">
+    <meta itemprop="description" content="{{ 'index_page_description'|trans({}, 'common') }}">
+    {% if app.request.getLocale() == 'az' %}
+        <meta name="keywords" content="{{ 'index_page_keywords'|trans({}, 'common') }}">
+    {% endif %}
+
+    <meta property="og:title" content="{{ 'report_information_agency'|trans({}, 'common') }}">
+    <meta property="og:description" content="{{ 'index_page_description'|trans({}, 'common') }}">
+    <meta property="og:url" content="{{ url('index') }}">
+    <meta property="og:site_name" content="{{ 'report_information_agency'|trans({}, 'common') }}">
+    <meta property="og:image" content="{{ image('thunk.jpg') }}">
+{% endblock %}
+
+
+{% block content %}
+
+    {{
+        widget('widget.post', {
+            'template': 'intro_slider.html.twig',
+            'filters': [
+                'select',
+                'latest',
+                'isMain',
+                {'limit': 8},
+                {'lang': app.request.getLocale()},
+                'published',
+                'withPhoto',
+                'withCategory',
+            ]
+        })
+    }}
+
+    {{ widget('widget.youtubeVideos') }}
+
+    {% set storyWidget = widget('widget.story', {
+        'template': 'stories.html.twig',
+        'filters': [
+            'select', 'latest', {'limit': 4}, {'withTranslation': app.request.getLocale()},
+            'onlyAllowedOnSite'
+        ]}) %}
+
+    {% set voteWidget = widget('widget.vote', {
+        'template': 'title.html.twig',
+    }) %}
+
+    {{ random([storyWidget, voteWidget]) | raw }}
+
+    {{
+        widget('widget.post', {
+            'template': 'breaking.html.twig',
+            'filters': [
+                'select',
+                'latest',
+                'isBreaking',
+                'last24hour',
+                'withCategory',
+                'withPhoto',
+                'published',
+                {'limit': 10},
+                {'lang': app.request.getLocale()}
+            ]
+        })
+    }}
+
+    <section class="hot-news-container pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    {{
+                        widget('widget.post', {
+                            'template': 'actual.html.twig',
+                            'filters': [
+                                'select',
+                                'latest', {'lang': app.request.getLocale()}, 'isActual', {'limit': 6}, 'withCategory',
+                                'withPhoto',
+                                'published'
+                            ]
+                        })
+                    }}
+                </div>
+                <!-- Hot news -->
+
+                <div class="col-md-6">
+                    <div class="latest-news-container">
+                        {{
+                            widget('widget.post', {
+                                'template': 'feed_index.html.twig'
+                            })
+                        }}
+                    </div>
+                    <!-- Latest news container-->
+                </div>
+                <!-- Latest news-->
+            </div>
+        </div>
+    </section>
+
+    <!-- Hot news / latest news container-->
+
+    {{
+        widget('widget.post', {
+            'template': 'most_important.html.twig',
+            'filters': [
+                {'select': ['id', 'type.type', 'title', 'slug', 'publishedAt']},
+                'isImportant',
+                'latest',
+                'published',
+                'lastWeek',
+                'withCategory',
+                'withPhoto',
+                {'lang': app.request.getLocale()},
+                {'limit': 9}
+            ]
+        })
+    }}
+
+    {{
+        widget('widget.post', {
+            'template': 'audio.html.twig',
+            'filters': [
+                {'select': ['id', 'type.type', 'title', 'slug', 'publishedAt']},
+                'latest',
+                'published',
+                'withCategory',
+                'withPhoto',
+                {'withSpeech' : {'language' : app.request.getLocale()}},
+                {'lang': app.request.getLocale()},
+                {'limit': 9}
+            ]
+        })
+    }}
+
+    {{
+        widget('widget.category', {
+            'template': 'index_categories.html.twig',
+            'categoriesCount': 9,
+            'categoryPostsCount': 4
+        })
+    }}
+
+    {{
+        widget('widget.post', {
+            'template': 'most_read.html.twig',
+            'filters': [
+                {'select': ['id', 'type.type', 'title', 'slug', 'publishedAt']},
+                'latest',
+                'published',
+                'withCategory',
+                'withPhoto',
+                {'mostRead': app.environment == 'dev' ? 200 : 3},
+                {'lang': app.request.getLocale()},
+                {'limit': 9}
+            ]
+        })
+    }}
+
+    {{
+        widget('widget.post', {
+            'template': 'videos.html.twig',
+            'filters': [
+                {'select': ['id', 'type.type', 'title', 'slug', 'publishedAt']},
+                'latest',
+                'published',
+                'withCategory',
+                'withPhoto',
+                'isVideo',
+                {'lang': app.request.getLocale()},
+                {'limit': 10}
+            ]
+        })
+    }}
+
+    {{
+        widget('widget.region', {
+            'template': 'regions.html.twig'
+        })
+    }}
+
+    {{
+        widget('widget.post', {
+            'template': 'exclusive.html.twig',
+            'filters': [
+                {'select': ['id', 'type.type', 'title', 'slug', 'publishedAt']},
+                'latest',
+                'published',
+                'isExclusive',
+                'withCategory',
+                'withPhoto',
+                {'lang': app.request.getLocale()},
+                {'limit': 9}
+            ]
+        })
+    }}
+
+    {{
+        widget('widget.post', {
+            'template': 'photos.html.twig',
+            'filters': [
+                {'select': ['id', 'type.type', 'title', 'slug', 'publishedAt']},
+                'latest',
+                'published',
+                'withCategory',
+                'withPhoto',
+                'isPhoto',
+                {'lang': app.request.getLocale()},
+                {'limit': 10}
+            ]
+        })
+    }}
+
+    {{
+        widget('widget.post', {
+            'template': 'articles.html.twig',
+            'method': {
+                'name': 'getArticlesAndOpinions',
+                'params': {
+                    'limit': 10,
+                    'lang': app.request.getLocale()
+                },
+            }
+        })
+    }}
+
+    <section class="quiz-section ptb-4">
+        <div class="container">
+            <div class="row">
+                {{ widget('widget.vote', {
+                    'template': 'photo.html.twig',
+                }) }}
+
+                {{ widget('widget.calendar', {
+                    'template': 'calendar.html.twig'
+                }) }}
+            </div>
+        </div>
+    </section>
+    <!-- Quiz / calendar section-->
+
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+{% endblock %}

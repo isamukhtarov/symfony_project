@@ -1,0 +1,128 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ 'weather_forecast_title'|trans({'%region%': cityLabel}, 'common') }} | Report.ge{% endblock %}
+
+{% set language = app.request.getLocale() %}
+{% if (language == 'ge') %}
+    {% set language = 'ka' %}
+{% endif %}
+{% set currentWeather = weather[date().format('Y-m-d')] %}
+
+{% set weatherInformation = 'weather_information'|trans({
+    '%date%'      : date()|format_datetime(pattern='d MMMM, y'),
+    '%weekday%'   : (date()|format_datetime(pattern='EEEE'))|capitalize,
+    '%degrees%'   : currentWeather['temperature']['low']|round ~ ' / ' ~ currentWeather['temperature']['high']|round,
+    '%condition%' : currentWeather['summary'][language]
+}, 'common') %}
+
+{% block meta %}
+    {% if language == 'ru' %}
+        <meta property="description" content="{{ 'weather_page_description'|trans({'%region%': cityLabel}, 'common') }}">
+    {% endif %}
+
+    <meta property="og:description" content="{{ weatherInformation }}">
+{% endblock %}
+
+{% block content %}
+
+    <section class="weather-page pt-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="page-title">{{ cityLabel ~ ' ' ~ 'weather'|trans({}, 'weather') }}</h1>
+
+                    <div class="weather-content flex">
+                        <div class="regions">
+                            <div class="toggle-regions"><i class="icon-filter"></i></div>
+
+                            <ul class="text-uppercase">
+                                {% for region in regionsList %}
+                                    <li>
+                                        <a {{ region == city ? 'class="active"' : '' }}
+                                                href="{{ path('weather_with_city', {'city': region}) }}">
+                                            {{ region|trans({}, 'weather') }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- Regions-->
+
+                        <div class="weather-table">
+                            <table>
+                                <tbody>
+
+
+                                {% for date,item in weather %}
+
+                                    <tr>
+                                        <td>
+                                            <p>{{ date|format_datetime(pattern='d MMMM, y') }}</p>
+                                            <span>{{ date|format_datetime(pattern='EEEE') }}</span>
+                                        </td>
+                                        <td>
+                                            <div class="icon-desc">
+                                                <div class="icon">
+                                                    <img src="{{ asset('site/images/icons/weather/' ~ item['icon'] ~ '.png') }}" alt="{{ item['summary'][language] }}">
+                                                </div>
+                                                <div class="desc">
+                                                    <p>{{ item['summary'][language] }}</p>
+                                                    <span>{{ 'atmosphere_events'|trans({}, 'weather') }}</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p>{{ item['temperature']['low']|round }}° C  / {{ item['temperature']['high']|round }}° C</p>
+                                            <span>{{ 'temperature'|trans({}, 'weather') }}</span>
+                                        </td>
+                                        <td>
+                                            <p>{{ item['windSpeed']|round  }} <?= Yii::t('weather', 'wind_speed_short') ?></p>
+                                            <span>{{ 'wind'|trans({}, 'weather') }}</span>
+                                        </td>
+                                        <td>
+                                            <p>{{ item['humidity'] }}</p>
+                                            <span>{{ 'humidity'|trans({}, 'weather') }}</span>
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Weather table-->
+                    </div>
+                    <!-- Weather content-->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Weather page-->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                        "@id": "{{ url('index') }}",
+                        "name": "{{ 'main_page'|trans({}, 'common') }}"
+                    }
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                    "name": "{{ 'weather'|trans({}, 'weather') }}"
+                }
+            }
+        ]
+    }
+
+
+    </script>
+
+{% endblock %}

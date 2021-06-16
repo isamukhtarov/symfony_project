@@ -1,0 +1,56 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ 'contact'|trans({}, 'common') }} | Report.ge{% endblock %}
+
+{% block content %}
+
+    <section class="static-page pt-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="page-title">{{ 'contact'|trans({}, 'common') }}</h1>
+                    <div class="pb-3" style="margin-bottom:15px">
+                        <p>{{ 'phone'|trans({}, 'common') }}: <b>(012) 404 76 75, (012) 404 76 76, (012) 404 76 77</b></p>
+                        <p>{{ 'mob'|trans({}, 'common') }}: <b>(+994) 77 447 47 47</b></p>
+                        <p>{{ 'email'|trans({}, 'common') }}: <a href="mailto:news@report.az"><b>news@report.az</b></a></p>
+                    </div>
+                    <div id="map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.168518021041!2d49.86925041570551!3d40.382957565616074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d4d1e056aef%3A0xaf4d0c1f7aad60b7!2sDemirchi%20Tower!5e0!3m2!1sru!2s!4v1597405441185!5m2!1sru!2s" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                    <!-- Map-->
+
+                    <div class="contact-info">
+                        {% include '@RiaWeb/index/partials/contact/contact-' ~ app.request.getLocale() ~ '.html.twig' %}
+                    </div>
+                    <!-- Contact info-->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Static page-->
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('index') }}",
+                        "name": "{{ 'main_page'|trans({}, 'common') }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "name": "{{ 'contact'|trans({}, 'common') }}"
+                    }
+                }
+            ]
+        }
+    </script>
+
+{% endblock %}

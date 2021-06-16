@@ -1,0 +1,35 @@
+<div class="col-lg-6">
+    {% if vote is not empty %}
+        <div class="quiz-wrapper">
+            <h4 class="section-title">
+                <a href="{{ path('vote.archive') }}">{{ 'vote'| trans({}, 'votes') }}</a>
+            </h4>
+
+            <div class="quiz-news">
+                <div class="image">
+                    <img src="{{ image(vote.image, {'thumb': 610}) }}" alt="vote">
+                </div>
+                <div class="info text-center">
+                    <a class="title" href="{{ path('post_view', {
+                        'categorySlug': vote.post_category_url,
+                        'slug': vote.post_url,
+                    }) }}">{{ vote.title }}</a>
+                    <div class="quiz-info">
+                        {% if vote.endDate is not empty %}
+                        <span>
+                            {{ 'end_time'| trans({}, 'votes') }}
+                            {{ vote.endDate|format_datetime(pattern='d MMMM, y') }}
+                        </span>
+                        {% endif %}
+
+                        <span>{{ 'users_count'|trans({'%count%': vote.totalScore}, 'votes')|raw }}</span>
+                    </div>
+                    <a class="read-more" href="{{ path('post_view', {
+                        'categorySlug': vote.post_category_url,
+                        'slug': vote.post_url,
+                    }) }}">{{ 'go_to_vote'| trans({}, 'votes') }}</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,33 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block header_actions %}
+    <a href="{{ path('users.create') }}" type="button"
+       class="btn btn-lg btn-icon btn-primary btn-round waves-effect waves-classic"
+       data-toggle="tooltip" data-original-title="{{ 'Create' | trans }}">
+        <i class="icon md-plus" aria-hidden="true"></i>
+    </a>
+{% endblock %}
+
+{% block content %}
+
+    <div class="panel">
+        <div class="panel-body">
+            {% embed data_grid.grid.default_twig with {'grid': grid} %}
+                {% block kit_grid_tbody_column %}
+                    <td class="d-flex">
+                        <a class="table_action" href="{{ path('users.update', {id: item['u.id']}) }}">
+                            <span class="md-edit"></span>
+                        </a> &nbsp;
+                        <a class="table_action" href="{{ path('users.change-password', {id: item['u.id']}) }}">
+                            <span class="md-lock"></span>
+                        </a>
+                        <a class="table_action ml-1" href="{{ path('users.delete', {id: item['u.id']}) }}" onclick="return confirm('Are you sure you want to delete this item?')">
+                            <span class="md-delete"></span>
+                        </a>
+                    </td>
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+
+{% endblock %}

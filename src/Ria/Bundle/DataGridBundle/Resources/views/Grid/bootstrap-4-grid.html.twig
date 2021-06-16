@@ -1,0 +1,168 @@
+{% block kit_grid_main %}
+    <div class="kit-grid {{ grid.getGridCssName }}">
+        <form class="grid-filter form-inline" action="{{ grid.requestUri }}" id="{{grid.filterFormName}}_form" method="GET">
+        {% block kit_grid_selector %}
+            {% if grid.gridConfig.selectorList != null %}
+                <div class="kit-grid-selector w-p100">
+                    <ul class="nav nav-pills">
+                    {% for selector in grid.gridConfig.selectorList %}
+                        <li class="{% if grid.isSelectorSelected(selector.field, selector.value) %}active{% endif %}">
+                            <a href="{{ grid.getSelectorUrl(selector.field, selector.value) }}">{{ selector.label }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endblock %}
+
+                {% block grid_summary %}
+                    <div class="summary w-p100">{{ 'kitpages_data_grid.Total-items-count' | trans }}:
+                        <b>
+                            {% if grid.paginator %}
+                                {{ grid.paginator.totalItemCount }}
+                            {% else %}
+                                {{ grid.itemList|length }}
+                            {% endif %}
+                        </b>
+                    </div>
+                {% endblock %}
+
+        {% block kit_grid_debug %}
+            {% if grid.debugMode %}
+                {{ grid.dump() | raw }}
+            {% endif %}
+        {% endblock %}
+        {% block kit_grid_before_table %}{% endblock %}
+        {% block kit_grid_items %}
+            <table class="{% block kit_grid_table_class %}table table-striped table-responsive{% endblock %}">
+            {% block kit_grid_thead %}
+                <thead>
+                <tr>
+                    {% block kit_grid_thead_before_column %}{% endblock %}
+                    {% for field in grid.gridConfig.fieldList %}
+                        {% if field.visible %}
+                            {% set fieldNameSlugDashed = field.fieldName|replace({'.': '-'}) %}
+                            <th class="{{ grid.getSortCssClass(field.fieldName) }} kit-grid-header-{{ field.uniqueId is not null ? field.uniqueId : fieldNameSlugDashed }} font-weight-bold" {% for attrName, attrVal in field.attr %} {{ attrName }}="{{ attrVal }}" {% endfor %}>
+                                {% if field.sortable %}
+                                    <a href="{{ grid.getSortUrl(field.fieldName) }}">{{ field.label | trans }}</a>
+                                {% else %}
+                                    {{ field.label | trans }}
+                                {% endif %}
+                            </th>
+                        {% endif %}
+                    {% endfor %}
+                    {% block kit_grid_thead_column %}{% endblock %}
+                </tr>
+                <tr class="filters">
+                    {% for field in grid.gridConfig.fieldList %}
+                        {% if field.visible %}
+                            {% set fieldNameSlugDashed = field.fieldName|replace({'.': '-'}) %}
+                            <th class="{{ grid.getSortCssClass(field.fieldName) }} kit-grid-header-{{ field.uniqueId is not null ? field.uniqueId : fieldNameSlugDashed }}" >
+                                {% if field.filterable %}
+                                    {% set fieldId = field.uniqueId is not null ? field.uniqueId : fieldNameSlugDashed %}
+
+                                    {% if fieldId == 'status' %}
+                                        <select class="form-control w100" name="filter_{{ field.fieldName }}" {% for attrName, attrVal in field.filterAttr %} {{ attrName }}="{{ attrVal }}" {% endfor %}>
+                                            <option value=""> - </option>
+                                            <option value="0" {% if grid.filterValue(field.fieldName) == '0' %}selected{% endif %}>Inactive</option>
+                                            <option value="1" {% if grid.filterValue(field.fieldName) == '1' %}selected{% endif %}>Active</option>
+                                        </select>
+                                    {% elseif field.hasFilterData %}
+                                        <select class="form-control w100" name="filter_{{ field.fieldName }}" {% for attrName, attrVal in field.filterAttr %} {{ attrName }}="{{ attrVal }}" {% endfor %}>
+                                            <option value=""> - </option>
+                                            {% for key, value in field.filterData %}
+                                                <option value="{{ key }}" {% if grid.filterValue(field.fieldName) == key %}selected{% endif %}>{{ value }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    {% else %}
+                                        <input class="form-control w100" type="text" name="filter_{{ field.fieldName }}" value="{{ grid.filterValue(field.fieldName) }}" {% for attrName, attrVal in field.filterAttr %} {{ attrName }}="{{ attrVal }}" {% endfor %}/>
+                                    {% endif %}
+                                {% endif %}
+                            </th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </thead>
+            {% endblock %}
+            {% block kit_grid_tbody %}
+                <tbody>
+                    {% for item in grid.itemList %}
+                        <tr class="{% if loop.index % 2 == 0 %}kit-grid-even {% else %}kit-grid-odd {% endif %} {% block kit_grid_row_class %}{% endblock %}">
+                            {% block kit_grid_tbody_before_column %}{% endblock %}
+                                {% for field in grid.gridConfig.fieldList %}
+                                    {% set value = grid.displayGridValue(item, field) %}
+                                    {% set fieldNameSlugDashed = field.fieldName|replace({'.': '-'}) %}
+                                    {% set fieldNameSlugUnderscored = field.fieldName|replace({'.': '_'}) %}
+                                    {% set cellNameBlock = 'kit_grid_cell_name_' ~ fieldNameSlugUnderscored %}
+                                    {% set cellIdBlock = 'kit_grid_cell_id_' %}
+                                    {% set cellIdBlock = 'kit_grid_cell_id_' ~ field.uniqueId %}
+                                    {% set fieldId = field.uniqueId is not null ? field.uniqueId : fieldNameSlugDashed %}
+                                    {% set cellClassBlock = 'kit_grid_cell_class_' ~ fieldId %}
+
+                                    {% if field.visible %}
+                                        <td
+                                            class="
+                                                {%- if block(cellClassBlock) is defined -%}
+                                                    {{ block(cellClassBlock) }}
+                                                {%- else -%}
+                                                    kit-grid-cell-{{ fieldId }}
+                                                {%- endif -%}
+                                            "
+                                        >
+                                            {% if block(cellNameBlock) is defined %}
+                                                {{ block(cellNameBlock) }}
+                                            {% elseif field.uniqueId is not null and block(cellIdBlock) is defined %}
+                                                {{ block(cellIdBlock) }}
+                                            {% else %}
+                                                {% if field.translatable %}
+                                                    {{ grid.displayGridValue(item, field) | raw | trans }}
+                                                {% else %}
+                                                    {{ grid.displayGridValue( item, field) | raw }}
+                                                {% endif %}
+                                            {% endif %}
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            {% block kit_grid_tbody_column %}{% endblock %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="{{ grid.gridConfig.fieldList | length }}" class="kit-grid-no-data">
+                                {% block kit_grid_no_data %}
+                                    {{ "kitpages_data_grid.No-data-found" | trans }}
+                                {% endblock %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            {% endblock %}
+            </table>
+        {% endblock %}
+        {% block kit_grid_after_table %}{% endblock %}
+            {% if grid.paginator %}
+                {% block kit_grid_paginator %}
+                    {% embed data_grid.paginator.default_twig with {'paginator':grid.paginator} %}
+                    {% endembed %}
+                {% endblock %}
+                {% block kit_grid_after_paginator %}{% endblock %}
+            {% endif %}
+        </form>
+    </div>
+    {% block kit_grid_javascript %}
+        {% include "@DataGrid/Grid/javascript.html.twig" %}
+    {% endblock kit_grid_javascript %}
+{% endblock kit_grid_main %}
+
+{% block kit_grid_cell_id_status %}
+    {% if value is defined %}
+        {% if value is same as(true) %}
+            <label class="badge badge-lg badge-success">Active</label>
+        {% elseif value is same as(false) %}
+            <label class="badge badge-lg badge-danger">Inactive</label>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{{ registerScripts(
+    'admin/data_grid/js/index.js',
+) }}

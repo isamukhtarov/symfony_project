@@ -1,0 +1,19 @@
+
+{% for post in posts %}
+    <div class="news-block">
+        <div class="image">
+            <a href="{{ path('post_amp', {'categorySlug': post.category_slug, 'slug': post.slug}) }}">
+                <amp-img
+                    src="{{ image(post.image, {'thumb': 180}) }}"
+                    alt="{{ post.getTitleWithoutQuotes() }}" width="180"
+                    height="106"
+                    layout="responsive"></amp-img>
+            </a>
+        </div>
+        <div class="info">
+            <a href="{{ path('post_amp', {'categorySlug': post.category_slug, 'slug': post.slug}) }}"
+               class="title">{{ post.title }}</a>
+            <span class="date">{{ post.publishedAt|format_datetime(pattern='d MMMM, YYY / HH:mm') }}</span>
+        </div>
+    </div>
+{% endfor %}

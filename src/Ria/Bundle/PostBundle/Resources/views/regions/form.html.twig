@@ -1,0 +1,57 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block content %}
+
+    {{ registerScripts('admin/js/regions.js') }}
+
+    {{ form_start(form) }}
+    {{ form_row(form._token) }}
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="panel">
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        {% for locale in supported_locales %}
+                            <li class="nav-item">
+                                <a class="nav-link{{ locale == default_locale ? ' active' : '' }}" href="#{{ locale }}" data-toggle="tab">
+                                    {{ flagIcon(locale) }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="tab-content mt-4">
+                        {% for translation in form.translations %}
+                            {{ form_row(translation.locale) }}
+                            <div class="tab-pane{{ translation.locale.vars.value == default_locale ? ' active' : '' }}" id="{{ translation.locale.vars.value }}">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{ form_row(translation.title) }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_row(translation.slug) }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% trans %}Settings{% endtrans %}</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_row(form.sort) }}
+                </div>
+            </div>
+
+            <div class="float-right">
+                {{ form_row(form.submit) }}
+            </div>
+        </div>
+    </div>
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

@@ -1,0 +1,12 @@
+<sitemapindex xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    {% for data in indexGenerateData %}
+        <sitemap>
+            <loc>{{ data.location }}</loc>
+
+            {% if(data.lastModified) %}
+                <lastmod>{{ data.lastModified|format_datetime(pattern='c') }}</lastmod>
+            {% endif %}
+        </sitemap>
+    {% endfor %}
+</sitemapindex>
+

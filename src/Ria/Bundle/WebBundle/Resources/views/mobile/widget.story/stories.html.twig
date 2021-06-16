@@ -1,0 +1,19 @@
+<div class="filter-links stories-links">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul>
+                    {% for story in stories %}
+
+                        <li>
+                            <a href="{{ path('story_view', {slug: story.slug}) }}">{{ story.title }}</a>
+                        </li>
+
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Stories links-->
+<!-- Stories -->

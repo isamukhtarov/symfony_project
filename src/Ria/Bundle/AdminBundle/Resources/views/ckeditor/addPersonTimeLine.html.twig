@@ -1,0 +1,30 @@
+<!-- Modal AddMediaToPost -->
+<div class="modal fade" id="addTimelineModal" role="dialog">
+    <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'person-timeline.Insert timeline' | trans }}</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="icon md-close"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="timelineYear" placeholder="{{ 'person-timeline.Insert timeline year' | trans }}">
+                </div>
+
+                <textarea id="timelineText" class="form-control" rows="12" placeholder="{{ 'person-timeline.Insert timeline description' | trans }}"></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-info" id="btnInsertTimeline">{{ 'Save' | trans }}</button>
+                <button class="btn btn-secondary" data-dismiss="modal">{{ 'Cancel' | trans }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End AddMediaToPost -->
+{{ registerScripts(
+    'admin/ckeditor/plugins/addPersonTimeLine/js/addTimeline.js',
+) }}

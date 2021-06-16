@@ -1,0 +1,9 @@
+tbilisi:       'Tbilisi'
+
+wind_speed_short:             'm/s'
+weather:                      'Weather forecast'
+atmosphere_events:            'Atmosphere events'
+temperature:                  'Temperature'
+wind:                         'Wind'
+humidity:                     'Humidity'
+weather_for_region_no_found:  'No weather found for this region.'

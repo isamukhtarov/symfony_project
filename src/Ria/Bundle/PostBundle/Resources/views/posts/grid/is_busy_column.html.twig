@@ -1,0 +1,8 @@
+<span class="badge badge-lg badge-warning">
+   {{ bussierName }}
+
+    {% if is_granted_to('unblockPost') %}
+       <a class="unblock-post" href="{{ path('posts.unblock', {'id': postId}) }}"
+          data-method="post" data-confirm="Confirm post unblocking">x</a>
+   {% endif %}
+</span>

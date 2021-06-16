@@ -1,0 +1,17 @@
+<div class="live-stream-container">
+    <div class="live-stream">
+        <div class="remove-stream">
+            <i class="icon-times"></i>
+        </div>
+
+        <div class="video-container">
+            <iframe width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/{{ youtubeId }}?rel=0&color=white&modestbranding=0&hl={{ app.request.getLocale() }}&autplay=1"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen=""
+            ></iframe>
+        </div>
+    </div>
+</div>

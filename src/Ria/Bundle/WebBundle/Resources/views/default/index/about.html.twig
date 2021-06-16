@@ -1,0 +1,52 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ 'about'|trans({}, 'common') }} | Report.ge{% endblock %}
+
+{% block content %}
+
+    <section class="static-page pt-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="page-title">{{ 'about'|trans({}, 'common') }}</h1>
+
+                    <div class="editor-body">
+                        <p>
+
+                        </p>
+                        <p>
+                            {% include '@RiaWeb/index/partials/about/about-' ~ app.request.getLocale() ~ '.html.twig' %}
+                        </p>
+                    </div>
+                    <!-- Editor body-->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Static page-->
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('index') }}",
+                        "name": "{{ 'main_page'|trans({}, 'common') }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "name": "{{ 'about'|trans({}, 'common') }}"
+                    }
+                }
+            ]
+        }
+    </script>
+
+{% endblock %}

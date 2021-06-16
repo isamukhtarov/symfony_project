@@ -1,0 +1,46 @@
+<div class="breaking-news-container flex">
+    <div class="label flex">
+        <i class="icon-flash"></i>{{ 'breaking_news'|trans({}, 'common') }}
+    </div>
+    <!-- Label-->
+    <div class="breaking-news-slider">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+
+                {% for post in posts %}
+
+                    <div class="swiper-slide">
+                        <div class="news-item flex">
+                            <a class="title ga-event-link"
+                               href="{{ path('post_view', {
+'categorySlug': post.category_slug,
+'slug': post.slug,
+}) }}"
+                               data-event="{{ 'breaking_news'|trans({}, 'common') }} | {{ 'main_page'|trans({}, 'common') }}"
+                            >{{ post.getPreparedTitle()|raw }}</a>
+                            <div class="news-date">
+                                <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                <span>{{ post.publishedAt.format('H:i') }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+        <!-- Slider-->
+
+        <div class="slider-controls">
+            <div class="prev-slide flex-center">
+                <i class="icon-angle-left"></i>
+            </div>
+            <div class="next-slide flex-center">
+                <i class="icon-angle-right"></i>
+            </div>
+        </div>
+        <!-- Controls-->
+    </div>
+    <!-- Breaking news slider -->
+</div>
+<!-- Breaking news container-->

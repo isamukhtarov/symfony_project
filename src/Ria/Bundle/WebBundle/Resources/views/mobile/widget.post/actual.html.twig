@@ -1,0 +1,44 @@
+<div class="hot-news">
+    <div class="row">
+
+        {% for post in posts %}
+
+            {% set titleWithoutQuotes = post.getTitleWithoutQuotes() %}
+
+            <div class="col-6">
+                <div class="news-block">
+                    <div class="image">
+                        <a href="{{ path('post_view', {
+                            'categorySlug': post.category_slug,
+                            'slug': post.slug,
+                        }) }}"
+                           title="{{ titleWithoutQuotes }}"
+                        >
+                            <img src="{{ image(post.image, {'thumb': 235}) }}"
+                                 alt="{{ titleWithoutQuotes }}"
+                                 title="{{ titleWithoutQuotes }}"
+                            >
+                        </a>
+                    </div>
+                    <div class="info">
+                        <a class="title" href="{{ path('post_view', {
+                            'categorySlug': post.category_slug,
+                            'slug': post.slug,
+                        }) }}"
+                           title="{{ titleWithoutQuotes }}"
+                        >{{ post.getPreparedTitle()|raw }}</a>
+                        <div class="news-date">
+                            <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                            <span>{{ post.publishedAt.format('H:i') }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Col-->
+
+        {% endfor %}
+
+
+    </div>
+</div>
+<!-- Hot news-->

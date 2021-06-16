@@ -1,0 +1,73 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block content %}
+
+    {{ registerScripts('admin/js/persons.js') }}
+
+    {{ form_start(form) }}
+    {{ form_row(form._token) }}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel">
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        {% for locale in supported_locales %}
+                            <li class="nav-item">
+                                <a class="nav-link{{ locale == default_locale ? ' active' : '' }}" href="#{{ locale }}" data-toggle="tab">
+                                    {{ flagIcon(locale) }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="tab-content mt-4">
+                        {% for translation in form.translations %}
+                            {{ form_row(translation.locale) }}
+                            <div class="tab-pane{{ translation.locale.vars.value == default_locale ? ' active' : '' }}"
+                                 id="{{ translation.locale.vars.value }}"
+                            >
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        {{ form_row(translation.first_name) }}
+                                        {{ form_row(translation.last_name) }}
+                                        {{ form_row(translation.slug) }}
+                                        {{ form_row(translation.position) }}
+                                        {{ form_row(translation.text) }}
+
+                                        <fieldset>
+                                            <legend>{% trans %}Meta tags{% endtrans %}</legend>
+                                            {{ form_row(translation.meta.title) }}
+                                            {{ form_row(translation.meta.keywords) }}
+                                            {{ form_row(translation.meta.description) }}
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ 'Settings' | trans }}</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_row(form.photo) }}
+                    {{ form_row(form.status) }}
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="form-group">
+                        {{ form_row(form.submit) }}
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

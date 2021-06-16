@@ -1,0 +1,12 @@
+form:
+  startDate: 'Başlama vaxtı'
+  endDate: 'Bitmə vaxtı'
+  showRecaptcha: 'Captçanı göstər'
+  showOnMainPage: 'Əsas səhifədə göstər'
+  options:
+    Options: 'Cavablar'
+    title: 'Başlıq'
+    addOptions: 'Yeni cavab'
+  errors:
+    photo_required: 'Hədiyyə növlü sorğularda, şəkil vacibdir'
+title: 'Başlıq'

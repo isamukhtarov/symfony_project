@@ -1,0 +1,17 @@
+{% for locale in supported_locales %}
+    {% if locale != post.language %}
+        {% set translation = (post.id == post.getParent().getId())
+            ? post.getTranslation(locale)
+            : post.getParent().getTranslation(locale) %}
+
+        <a
+            href="{{ translation ? path('posts.update', {'id': translation.id}) : path('posts.create-translation', {'parent': postParentId, 'lang': locale}) }}"
+            class="{{ not translation ? 'empty-translate' }}">
+                {{ flagIcon(locale) }}
+        </a>
+
+        {% if (column.isBusy(postParentId, locale)) %}
+            <span class="badge badge-pill up badge-danger">Busy</span>
+        {% endif %}
+    {% endif %}
+{% endfor %}

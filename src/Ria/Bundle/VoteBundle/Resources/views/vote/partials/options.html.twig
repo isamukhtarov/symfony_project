@@ -1,0 +1,25 @@
+{% if options is defined %}
+    {% for key, option in options %}
+        <div class="item panel"><!-- widgetBody -->
+            <div class="panel-body p-10">
+                <div class="row">
+                    <div class="col-md-1 d-flex align-items-center justify-content-center">
+                        <i class="icon wb-list sortable-handle font-size-16" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-9" id="vote_options_{{ key }}">
+                        <input type="hidden" id="vote_options_{{ key }}_id" name="vote[options][{{ key }}][id]" value="{{ option.getId() }}">
+                        <div class="form-group">
+                            <label for="vote_options_{{ key }}_title" class="required">{{ 'form.options.title'|trans({}) }}</label>
+                            <input type="text" id="vote_options_{{ key }}_title" name="vote[options][{{ key }}][title]" required="required" class="form-control"
+                                   value="{{ option.getTitle() }}"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-center">
+                        <button type="button" class="pull-right remove-item btn btn-danger"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

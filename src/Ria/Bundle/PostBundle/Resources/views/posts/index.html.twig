@@ -1,0 +1,111 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ asset('bundles/riapost/css/logs.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="panel">
+        <div class="panel-body">
+            {% embed data_grid.grid.default_twig with {'grid': grid} %}
+
+                {% block kit_grid_selector %}
+                    <div class="col-lg-4 col-6">
+                        <select id="language" class="outer-select form-control" name="filter_p.language">
+                            {% for localeCode in supported_locales %}
+                                {% set filterValue = (grid.filterValue('p.language') ?? app.request.cookies.get('postFilterLanguage')) %}
+                                <option value="{{ localeCode }}" {{ filterValue == localeCode ? 'selected' }}>{{ localeCode | trans }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-lg-4 col-6">
+                        <select id="translator_id" class="outer-select form-control" name="filter_ptr.id">
+                            <option value="">{{ 'Choose translator' | trans }}</option>
+                            {% for id, translator in translators %}
+                                {% set filterValue = grid.filterValue('ptr.id') %}
+
+                                <option value="{{ id }}" {{ filterValue and filterValue == id ? 'selected' }}>{{ translator }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-lg-4 col-12">
+                        <div class="create-news-langs float-right">
+                            <a href="" class="btn btn-info">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                            <div class="btn-group" role="group">
+                                {% for locale in supported_locales %}
+                                    <a href="{{ path('posts.create', {'lang': locale})  }}" class="btn btn-info">
+                                        <i class="flag-icon flag-icon-{{ (locale == 'en') ? 'us' : locale }}"></i> +
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+
+                {% block kit_grid_cell_id_author %}
+                    <span class="badge badge-outline badge-info">{{ value }}</span>
+                {% endblock %}
+
+                {% block kit_grid_cell_id_translations %}
+                    <span class="badge badge-outline badge-info">{{ value }}</span>
+                {% endblock %}
+
+                {% block kit_grid_tbody_column %}
+                    <td class="d-flex">
+                        <a class="table_action" href="{{ path('posts.preview', {id: item['p.id']}) }}" target="_blank">
+                            <span class="md-eye"></span>
+                        </a>
+
+                        <a class="table_action ml-1"
+                           href="{{ path('posts.logs', {id: item['p.id']}) }}"
+                           id="post-view-logs"
+                           data-target="#log">
+                            <span class="md-hourglass-alt"></span>
+                        </a>
+
+                        <a class="table_action ml-1" href="{{ path('posts.change-date', {id: item['p.id']}) }}">
+                            <span class="md-calendar"></span>
+                        </a>
+
+                        {% if item['p.type.type'] == 'photo' %}
+                            <a class="table_action ml-1" href="{{ path('posts.archive-photos', {id: item['p.id']}) }}">
+                                <span class="md-archive"></span>
+                            </a>
+                        {% endif %}
+
+                        <a class="table_action ml-1" href="{{ path('posts.update', {id: item['p.id']}) }}">
+                            <span class="md-edit"></span>
+                        </a>
+
+                        <a class="table_action ml-1 delete-post" href="{{ path('posts.delete', {id: item['p.id']}) }}">
+                            <span class="md-delete"></span>
+                        </a>
+                    </td>
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+
+
+<!-- Modal Log -->
+<div class="modal fade" id="log" role="dialog">
+    <div class="modal-dialog modal-simple modal-lg">
+        <div class="modal-content">
+            <button type="button" class="close pt-2" data-dismiss="modal" style="outline: none">
+                <i class="icon md-close"></i>
+            </button>
+
+            <div class="modal-body"></div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Log -->
+{% endblock %}

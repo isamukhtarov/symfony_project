@@ -1,0 +1,35 @@
+ria_admin:
+  resource: "@RiaAdminBundle/Controller/"
+  type: annotation
+
+ria_posts:
+  resource: "@RiaPostBundle/Controller/"
+  type: annotation
+
+ria_users:
+  resource: "@RiaUserBundle/Controller/"
+  type: annotation
+
+ria_persons:
+  resource: "@RiaPersonBundle/Controller/"
+  type: annotation
+
+ria_photo:
+  resource: "@RiaPhotoBundle/Controller/"
+  type: annotation
+
+ria_vote:
+  resource: "@RiaVoteBundle/Controller/"
+  type: annotation
+
+ria_youtube:
+  resource: "@RiaYoutubeBundle/Controller/"
+  type: annotation
+
+ria_config:
+  resource: "@RiaConfigBundle/Controller/"
+  type: annotation
+
+ria_statistic:
+  resource: "@RiaStatisticBundle/Controller/"
+  type: annotation

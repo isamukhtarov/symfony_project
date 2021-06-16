@@ -1,0 +1,56 @@
+<script src="{{ asset('admin/remark/global/vendor/babel-external-helpers/babel-external-helpers.js') }}"></script>
+<script src="{{ asset('admin/remark/global/vendor/popper-js/umd/popper.min.js') }}"></script>
+<script src="{{ asset('admin/remark/global/vendor/bootstrap/bootstrap.js') }}"></script>
+<script src="{{ asset('admin/remark/global/vendor/animsition/animsition.js') }}"></script>
+<script src="{{ asset('admin/remark/global/vendor/mousewheel/jquery.mousewheel.js') }}"></script>
+<script src="{{ asset('admin/remark/global/vendor/asscrollbar/jquery-asScrollbar.js') }}"></script>
+<script src="{{ asset('admin/remark/global/vendor/asscrollable/jquery-asScrollable.js') }}"></script>
+<script src="{{ asset('admin/remark/global/vendor/ashoverscroll/jquery-asHoverScroll.js') }}"></script>
+
+<!-- Plugins  -->
+<script src="{{ asset('admin/remark/global/vendor/select2/select2.full.js')  }}"></script>
+<script src="{{ asset('admin/remark/global/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+<script src="{{ asset('admin/remark/global/vendor/multi-select/jquery.multi-select.js') }}"></script>
+
+<script src="{{ asset('admin/remark/global/js/Component.js') }}"></script>
+<script src="{{ asset('admin/remark/global/js/Plugin.js') }}"></script>
+<script src="{{ asset('admin/remark/global/js/Base.js') }}"></script>
+<script src="{{ asset('admin/remark/global/js/Config.js') }}"></script>
+<script src="{{ asset('admin/remark/assets/js/Section/Menubar.js') }}"></script>
+<script src="{{ asset('admin/remark/assets/js/Section/GridMenu.js') }}"></script>
+<script src="{{ asset('admin/remark/assets/js/Section/Sidebar.js') }}"></script>
+<script src="{{ asset('admin/remark/assets/js/Section/PageAside.js') }}"></script>
+<script src="{{ asset('admin/remark/assets/js/Plugin/menu.js') }}"></script>
+<script src="{{ asset('admin/remark/global/js/config/colors.js') }}"></script>
+<script>Config.set('assets', '../assets');</script>
+<script src="{{ asset('admin/remark/assets/js/Site.js') }}"></script>
+<script src="{{ asset('admin/js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('admin/js/common.js?v=1.2') }}"></script>
+<script src="{{ asset('admin/js/youtube.js') }}"></script>
+
+<!-- Bundles  -->
+<script src="{{ asset('bundles/riapost/js/posts.js') }}"></script>
+<script src="{{ asset('bundles/riapost/js/speech.js') }}"></script>
+<script src="{{ asset('bundles/riavote/js/votes.js') }}"></script>
+<script src="{{ asset('bundles/riastatistic/js/statistic.js') }}"></script>
+
+
+<script>
+    (function (document, window, $) {
+        'use strict';
+        const Site = window.Site;
+        $(document).ready(function () {
+            Site.run();
+        });
+    })(document, window, jQuery);
+
+    $('.change-lang').on('click', function () {
+        $.ajax({
+            url: '/change-language',
+            data: {language: $(this).data('lang')},
+            success: function (response) {
+                location.reload()
+            }
+        })
+    })
+</script>

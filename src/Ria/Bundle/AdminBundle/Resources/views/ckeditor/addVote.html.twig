@@ -1,0 +1,30 @@
+<!-- Modal AddVote -->
+<div class="modal fade" id="addVoteModal" role="dialog">
+    <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Insert Vote</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="icon md-close"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <select name="vote-id" id="voteId" class="form-control">
+                    {% for vote in votes %}
+                        <option value="{{ vote.id }}">{{ vote.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" id="btnInsertVote">Insert</button>
+                <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End AddVote -->
+
+{{ registerScripts(
+    'admin/ckeditor/plugins/addVote/js/addVote.js',
+) }}

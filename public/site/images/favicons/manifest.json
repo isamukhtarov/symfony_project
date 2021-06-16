@@ -1,0 +1,16 @@
+{
+  "short_name": "Report.az",
+  "name": "Report.az",
+  "start_url": "/",
+  "background_color": "#FFFFFF",
+  "theme-color" : "#797979",
+  "display": "standalone",
+  "gcm_sender_id": "482941778795",
+  "icons" : [
+      {
+        "src": "/public/images/favicons/apple-touch-icon-144x144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      }
+  ]
+}

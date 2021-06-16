@@ -1,0 +1,12 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    form_themes:
+        - 'bootstrap_4_layout.html.twig'
+        - '@RiaPhoto/form/photo_manager_form_blocks.html.twig'
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+    globals:
+        supported_locales: '%app.supported_locales%'
+        default_locale: '%app.locale%'
+        admin_locale: '%admin.locale%'
+        socialTabs: '%socialTabs%'
+        recaptcha3Key: '%env(RECAPTCHA3_KEY)%'

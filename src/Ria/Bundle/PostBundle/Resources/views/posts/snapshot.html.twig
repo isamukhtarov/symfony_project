@@ -1,0 +1,120 @@
+<table class="{{ (isNewRecord) ? 'log-created' : 'log-updated' }}">
+<tbody>
+        <tr>
+            <th><span class="log-translation-label">Title</span></th>
+            <td>{{ post.getTitle() }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Marked Words</span></th>
+            <td>{{ post.getMarkedWords()|join(', ')  }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Icon</span></th>
+            <td><span class="badge badge-outline badge-primary">{{ post.getIcon() }}</span></td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Slug</span></th>
+            <td>{{ post.getSlug() }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Type</span></th>
+            <td><span class="badge badge-outline badge-info">{{ post.getType() }}</span></td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Status</span></th>
+            <td>{{ post.getStatus() }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Photo</span></th>
+            <td><img src="{{ image(post.getPhoto(), {'thumb': 180})  }}" alt=""></td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Category</span></th>
+            <td>{{ post.getCategoryTitle() }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">City</span></th>
+            <td>{{ post.getCity() ?? '-' }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Author</span></th>
+            <td>{{ post.getAuthor() ?? '-' }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Story</span></th>
+            <td>{{ post.getStory() ?? '-' }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Description</span></th>
+            <td>{{ post.getDescription() }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Content</span></th>
+            <td>{{ post.getContent() | raw }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Source</span></th>
+            <td>{{ post.getSource() ?? '-' }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Main</span></th>
+            <td>{{ post.isMain() ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Actual</span></th>
+            <td>{{ post.isActual() ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Breaking</span></th>
+            <td>{{ post.isBreaking() ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Important</span></th>
+            <td>{{ post.isImportant() ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Exclusive</span></th>
+            <td>{{ post.isExclusive() ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Published at</span></th>
+            <td>{{ post.getPublishedAt() }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Tags</span></th>
+            <td>{{ post.getTags()|join(', ')  }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Photos</span></th>
+            <td>
+                {% for photo in post.getPhotos() %}
+                    <img src="{{ image(photo, {'thumb': 180}) }}" alt="">
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Export</span></th>
+            <td>{{ post.getExports()|join(', ')  }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Persons</span></th>
+            <td>{{ post.getPersons()|join(', ')  }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Related</span></th>
+            <td>{{ post.getRelatedPosts()|join(', ')  }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Meta title</span></th>
+            <td>{{ post.getMeta()['title'] ?? '' }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Meta description</span></th>
+            <td>{{ post.getMeta()['description'] ?? '' }}</td>
+        </tr>
+        <tr>
+            <th><span class="log-translation-label">Meta keywords</span></th>
+            <td>{{ post.getMeta()['keywords'] ?? '' }}</td>
+        </tr>
+    </tbody>
+</table>

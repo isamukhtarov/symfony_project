@@ -1,0 +1,21 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+
+        <div class="row">
+            <div class="col-lg-8 offset-2">
+                <div class="panel">
+                    <div class="panel-body">
+                        {{ form_row(form.cause) }}
+                        <div class="row">
+                            <div class="col-lg-6">{{ form_row(form.date) }}</div>
+                            <div class="col-lg-6">{{ form_widget(form.submit) }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {{ form_end(form) }}
+{% endblock %}

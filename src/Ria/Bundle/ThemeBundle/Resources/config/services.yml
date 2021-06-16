@@ -1,0 +1,18 @@
+services:
+  ria_theme.active_theme:
+    class: Ria\Bundle\ThemeBundle\ActiveTheme
+    arguments: ['%ria_theme.themes%']
+
+  ria_theme.theme_detect:
+    class: '%ria_theme.theme_detector%'
+
+  Ria\Bundle\ThemeBundle\ThemeDetection\ThemeDetectionInterface:
+    alias: '@ria_theme.theme_detect'
+
+  ria_theme.theme_request_listener:
+    class: Ria\Bundle\ThemeBundle\EventListener\ThemeRequestListener
+    arguments:
+      ['@ria_theme.active_theme', '@ria_theme.theme_detect', '%ria_theme.cookie%']
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }

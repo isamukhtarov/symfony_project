@@ -1,0 +1,26 @@
+<div class="youtube-videos-container">
+    <h2 class="section-title">{{ 'video_news'|trans({}, 'common') }}</h2>
+
+    <div class="youtube-videos-slider">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for i,video in videos %}
+                    <div class="swiper-slide no-swipe">
+                        <div class="video-container">
+                            <iframe id="video-{{ i }}"
+                                    src="https://www.youtube.com/embed/{{ video['youtubeId'] }}?enablejsapi=1"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    frameborder="0"
+                            ></iframe>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <!-- Youtube videos slider-->
+</div>
+<!-- Youtube videos container-->

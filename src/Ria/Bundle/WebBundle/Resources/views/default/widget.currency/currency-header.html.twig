@@ -1,0 +1,14 @@
+<div class="currency">
+    <ul>
+        {% for i,item in items %}
+            <li>
+                <a href="{{ path('currency') }}">
+                    {% if i == 0 %}
+                        <img src="{{ asset('site/images/icons/currency.png') }}">
+                    {% endif %}
+                    {{ item['code'] ~ ' - ' ~ item['value'] }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

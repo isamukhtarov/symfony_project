@@ -1,0 +1,5 @@
+{% if app.environment() == 'dev' %}
+    {% include '@RiaWeb/../mobile/index/ssi/last_news_amp.html.twig' with {'posts': posts} %}
+{% else %}
+    <!--#include virtual="<?= Url::toRoute(['site/get-last-news', 'type' => 'amp']) ?>" -->
+{% endif %}

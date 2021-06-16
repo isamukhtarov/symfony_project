@@ -1,0 +1,10 @@
+<script type="text/javascript">
+    let gRecaptchaOptions = {
+        siteKey: '{{ recaptcha3Key }}',
+        action: 'homepage'
+    };
+</script>
+
+{{ registerScripts('bundles/riaweb/js/votes.js') }}
+
+<div class="quiz-section quiz-wrapper" data-url="{{ path('vote.show', {'id': voteId}) }}" style="display:none;"></div>

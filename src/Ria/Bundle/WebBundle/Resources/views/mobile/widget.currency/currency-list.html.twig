@@ -1,0 +1,41 @@
+<div class="currencies-table">
+    <h1 class="page-title">{{ 'currency_list_title'|trans({}, 'currency') }}</h1>
+
+    <table>
+        <tbody>
+        {% for item in items %}
+
+            {% if (item['difference'] > 0) %}
+                {% set iconClassName = 'icon-angle-up' %}
+            {% elseif (item['difference'] < 0) %}
+                {% set iconClassName = 'icon-angle-down' %}
+            {% else %}
+                {% set iconClassName = 'icon-dot' %}
+            {% endif %}
+
+            <tr>
+                <td>
+                    <div class="with-flag">
+                        <div class="flag">
+                            {% if item['code'] not in ['SDR', 'BRENT'] %}
+                                <img src="{{ asset('site/images/currency/' ~ item['code'] ~ '.png') }}" alt="{{ item['code'] }}">
+                            {% endif %}
+                        </div>
+                        <div>{{ (item['code'] == 'BRENT' ? '' : (item['nominal'] ~ ' ')) ~ item['code']|trans({}, 'currency') }}</div>
+                    </div>
+                </td>
+                <td>{{ item['code'] }}</td>
+                <td>{{ item['value']|number_format(4) }}</td>
+                <td>
+                    <i class="{{ iconClassName }}"></i>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!-- Currencies table-->
+
+<div class="show-all expand-currencies">
+    <a href="javascript:void(0)">{{ 'show_full_list'|trans({}, 'currency') }}</a>
+</div>

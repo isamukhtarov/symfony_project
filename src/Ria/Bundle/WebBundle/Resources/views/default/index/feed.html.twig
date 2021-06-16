@@ -1,0 +1,84 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ 'feed_page_title'|trans({}, 'common') }} | Report.ge{% endblock %}
+
+{% block meta %}
+    {% if app.request.getLocale() in ['az', 'ru'] %}
+        <meta name="description" content="{{ 'feed_page_description'|trans({}, 'common') }}">
+    {% endif %}
+    {% if app.request.getLocale() == 'az' %}
+        <meta name="keywords" content="{{ 'feed_page_keywords'|trans({}, 'common') }}">
+    {% endif %}
+{% endblock meta %}
+
+{% block content %}
+
+    {{ registerScripts('site/js/load-posts.js') }}
+
+    {% if app.request.get('range') is empty %}
+        {{ registerScripts('site/js/feed-refresh.js') }}
+    {% endif %}
+
+    <section class="news-feed-page pt-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="page-title">
+                        <p>
+                            {{ 'feed_page'|trans({}, 'common') }}
+                            <span id="new-posts-count" class="counter" data-url="{{ path('newsFeed') }}" data-count="20"
+                                  style="display:none">0</span>
+                        </p>
+                    </h1>
+
+                    <div class="filter-links ps">
+                        <ul>
+                            {% for range in ranges %}
+                                <li>
+                                    <a href="{{ path('feed_with_range', {'range': range}) }}">{{ range|trans({}, 'common') }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="news-list load-container news-container"
+                         data-url="{{ path('feed_ajax', {'range': app.request.get('range')}) }}">
+                        {% include '@RiaWeb/index/partials/_feed-post-item.html.twig' with {'posts': posts} %}
+                    </div>
+                    <!-- News list-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement":
+        [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item":
+                {
+                    "@id":"{{ url('index') }}" ,
+                    "name":"{{ 'main_page'|trans({}, 'common') }}"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item":
+                {
+                    "name":"{{ 'feed_page'|trans({}, 'common') }}"
+                }
+            }
+        ]
+    }
+
+
+
+    </script>
+
+{% endblock %}

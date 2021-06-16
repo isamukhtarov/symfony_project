@@ -1,0 +1,10 @@
+form:
+  first_name: 'Имя'
+  last_name:  'Фамилия'
+  slug: 'Slug'
+  position: 'Должность'
+  text: 'Описание'
+
+first_name: 'Имя'
+last_name: 'Фамилия'
+position: 'Должность'

@@ -1,0 +1,430 @@
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.logo {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+.w100 {
+    width: 100% !important;
+}
+.page.vertical-align.text-center {
+    margin-left: 0;
+}
+[class*=" md-"], [class^=md-]{
+    font-size: 17px;
+}
+.hamburger {
+    font-size: 20px;
+    vertical-align: middle;
+}
+.nav-tabs-custom .tab-content{
+    padding-top: 15px;
+}
+.hidden{
+    display: none!important;
+}
+.image-preview.image-loaded {
+    height: 150px;
+    background-size: cover;
+}
+.image-preview.image-loaded span{
+    display: none;
+}
+
+.page-login-v2 {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.page-login-v2:before {
+    background-image: url("../remark/assets/examples/images/lockscreen.jpg");
+}
+
+.page-login-v2.page-dark.layout-full:after {
+    background-color: rgba(33, 33, 33, .6);
+}
+
+.page-login-v2 .page-brand-info {
+    margin: 220px 100px 0 90px;
+}
+
+.page-login-v2 .page-brand-info .brand-img {
+    vertical-align: middle;
+}
+
+.page-login-v2 .page-brand-info .brand-text {
+    display: inline-block;
+    margin: 11px 0 11px 20px;
+    vertical-align: middle;
+}
+
+.page-login-v2 .page-brand-info p {
+    max-width: 650px;
+    opacity: .6;
+}
+
+.page-login-v2 .page-login-main {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: auto;
+    min-height: 100%;
+    padding: 150px 60px 180px;
+    color: #757575;
+    background: #fff;
+}
+
+.page-login-v2 .page-login-main .brand {
+    margin-bottom: 60px;
+}
+
+.page-login-v2 .page-login-main .brand-img {
+    vertical-align: middle;
+}
+
+.page-login-v2 .page-login-main .brand-text {
+    display: inline-block;
+    margin: 11px 0 11px 20px;
+    color: #3f51b5;
+    vertical-align: middle;
+}
+
+.page-login-v2 form {
+    width: 350px;
+    margin: 45px 0 20px;
+}
+
+.page-login-v2 form > button {
+    margin-top: 38px;
+}
+
+.page-login-v2 form a {
+    margin-left: 20px;
+}
+
+.page-login-v2 footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 50px 60px;
+    text-align: center;
+}
+
+.page-login-v2 .social .icon, .page-login-v2 .social .icon:hover, .page-login-v2 .social .icon:active {
+    color: #fff;
+}
+
+.table .table-actions {
+    white-space: nowrap;
+}
+
+/* -- user info */
+.user-info {
+    padding: 0 1.25rem;
+}
+
+.user-info .thumb {
+    width: 50px;
+}
+
+.user-info .info {
+    width: calc(100% - 50px);
+    padding: 0 0 0 15px;
+}
+
+.user-info .profile-username {
+    margin: 0 0 2px 0;
+}
+
+@media (min-width: 992px) {
+    .page-login-v2 .page-content {
+        padding-right: 500px;
+    }
+}
+
+@media (max-width: 991px) {
+    .page-login-v2 .page-login-main {
+        padding-top: 60px;
+    }
+}
+
+#nav-icon4{
+    display: none;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .page-login-v2 .page-login-main {
+        padding-top: 80px;
+    }
+
+    .page-login-v2 .page-brand-info {
+        margin: 160px 0 0 35px;
+    }
+
+    .page-login-v2 .page-brand-info > p {
+        color: transparent;
+        opacity: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .page-login-v2 .page-login-main {
+        width: 100%;
+        padding-top: 60px;
+    }
+
+    .page-login-v2 form {
+        width: auto;
+    }
+
+    .site-navbar{
+        height: 66px;
+        z-index: 9999;
+        width: 100%;
+        position: relative;
+    }
+    .page{
+        margin-top: 15px;
+    }
+
+    /** Burger **/
+    #nav-icon4 {
+        display: block;
+        width: 30px;
+        height: 25px;
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        margin-top: -12px;
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transition: .5s ease-in-out;
+        -moz-transition: .5s ease-in-out;
+        -o-transition: .5s ease-in-out;
+        transition: .5s ease-in-out;
+        cursor: pointer;
+    }
+    #nav-icon4 span {
+        display: block;
+        position: absolute;
+        height: 5px;
+        width: 100%;
+        background: #ffffffed;
+        border-radius: 9px;
+        opacity: 1;
+        left: 0;
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transition: .25s ease-in-out;
+        -moz-transition: .25s ease-in-out;
+        -o-transition: .25s ease-in-out;
+        transition: .25s ease-in-out;
+    }
+    #nav-icon4 span:nth-child(1) {
+        top: 0px;
+        -webkit-transform-origin: left center;
+        -moz-transform-origin: left center;
+        -o-transform-origin: left center;
+        transform-origin: left center;
+    }
+    #nav-icon4 span:nth-child(2) {
+        top: 10px;
+        -webkit-transform-origin: left center;
+        -moz-transform-origin: left center;
+        -o-transform-origin: left center;
+        transform-origin: left center;
+    }
+    #nav-icon4 span:nth-child(3) {
+        top: 20px;
+        -webkit-transform-origin: left center;
+        -moz-transform-origin: left center;
+        -o-transform-origin: left center;
+        transform-origin: left center;
+    }
+    #nav-icon4.open span:nth-child(1) {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+        top: 0px;
+        left: 3px;
+    }
+    #nav-icon4.open span:nth-child(2) {
+        width: 0%;
+        opacity: 0;
+    }
+    #nav-icon4.open span:nth-child(3) {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        top: 21px;
+        left: 3px;
+    }
+}
+
+@media (max-width: 479px) {
+    .page-login-v2 .page-brand-info {
+        margin: 220px 0 0;
+    }
+
+    .page-login-v2 .page-login-main {
+        padding: 50px 30px 180px;
+    }
+
+    .page-login-v2 form {
+        width: auto;
+    }
+
+    .page-login-v2 footer {
+        margin: 50px 30px;
+    }
+}
+
+body {
+    padding-top: 0;
+}
+
+.site-navbar {
+    width: 260px;
+}
+
+.navbar-brand a > .navbar-brand-text {
+    font-family: Roboto, sans-serif;
+    color: #fff;
+    cursor: pointer;
+}
+
+.gridview table th {
+    font-weight: bold;
+}
+
+.gridview table th > a {
+    text-decoration: none;
+}
+
+.form-group .help-block.help-block-error {
+    color: #d62b2b;
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+.char-counter {
+    margin-top: -18px;
+    font-size: 12px;
+}
+
+.char-counter .__counter.has-error {
+    color: red;
+}
+
+.toggle-view {
+    height: 0;
+    overflow: hidden;
+}
+
+.toggle-view.active {
+    height: auto;
+}
+
+.video-preview {
+    height: 252px;
+    background-color: #cccccc;
+}
+
+.checkbox-custom .custom-checkbox {
+    margin-bottom: 10px;
+}
+
+/* ***** -- logs ***** */
+#log .nav-tabs {
+    border: none;
+}
+
+#log del {
+    display: inline-block;
+    padding: 3px;
+    color: #fff;
+    background-color: #e47878;
+}
+
+#log ins {
+    display: inline-block;
+    padding: 3px;
+    color: #fff;
+    background-color: #78cc78;
+}
+
+.footer-actions {
+    display: flex;
+}
+
+.footer-actions > li {
+    width: 33.333333%;
+    height: 76px;
+}
+
+.footer-actions > li > a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    width: 100%;
+    height: inherit;
+    background: #e0e0e0;
+}
+
+.footer-actions a:hover {
+    background: #d3d3d3;
+}
+
+@media (max-width: 1200px) {
+    .site-navbar {
+        width: 90px;
+    }
+}
+
+@media (max-width: 767px) {
+    .site-navbar {
+        width: 100%;
+    }
+
+    .page {
+        padding-top: 66px;
+    }
+}
+
+.table .table_action {
+    text-decoration: none;
+}
+
+.custom-file-input {
+    opacity: 1;
+}
+
+.table a {
+    text-decoration: none;
+}
+
+.empty-translate {
+    opacity: 0.4;
+}
+
+.modal-backdrop {
+    z-index: 9999;
+}
+
+.modal {
+    z-index: 99999;
+}
+
+.select2-container--open {
+    z-index: 999999 !important;
+}

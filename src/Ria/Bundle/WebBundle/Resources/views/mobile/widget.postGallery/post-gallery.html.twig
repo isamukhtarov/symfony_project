@@ -1,0 +1,28 @@
+<div class="news-gallery">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+
+            {% for photo in photos %}
+
+                <div class="swiper-slide">
+                    <div class="gallery-item">
+                        <div class="image">
+                            <img class="swiper-lazy" data-src="{{ image(photo['filename'], {'thumb': 321}) }}">
+                            {% if photo['author'] is not empty %}
+                                <span class="origin">{{ 'photo'|trans({}, 'common') }}: {{ photo.author }}</span>
+                            {% endif %}
+                        </div>
+                        <span class="description">{{ photo['information']|replace(['"'], '') }}</span>
+                    </div>
+                </div>
+                <!-- Slide-->
+
+            {% endfor %}
+
+        </div>
+
+        <div class="swiper-pagination"></div>
+    </div>
+    <!-- Slider container-->
+</div>
+<!-- News gallery-->

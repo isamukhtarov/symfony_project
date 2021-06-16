@@ -1,0 +1,12 @@
+<div class="select-filter">
+    <div class="form-group select">
+        <select class="custom-select" onchange="location = this.value;">
+            {% for char in chars %}
+                <option value="{{ path('persons_with_filter', {'filter': char}) }}" {{ (char == chosenFilter) ? 'selected' : '' }}>
+                    {{ char }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+<!-- Select filter-->

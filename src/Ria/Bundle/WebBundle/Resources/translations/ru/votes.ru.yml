@@ -1,0 +1,7 @@
+vote:         'Опрос'
+start_date:   'Дата начала:'
+end_time:     'Дата окончания:'
+users_count:  'Кол-во проголосовавших: <b class="voted_count">%count%</b>'
+do vote:      'Проголосовать'
+go_to_vote:   'ПЕРЕХОД К ГОЛОСОВАНИЮ'
+votes_archive: 'Архив голосований'

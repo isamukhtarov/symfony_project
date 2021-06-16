@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./docker/nginx
+    volumes:
+      - .:/app:delegated
+    ports:
+      - 8888:80
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    container_name: php-fpm
+    build: ./docker/php-fpm
+    volumes:
+      - .:/app:delegated
+    depends_on:
+      - mysql
+      - elasticsearch
+
+  php-cli:
+    container_name: php-cli
+    build: ./docker/php-cli
+    volumes:
+      - .:/app:delegated
+      - composer_cache:/home/appuser/.composer/cache:delegated
+    depends_on:
+      - mysql
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms750m -Xmx750m
+    ports:
+      - 9201:9200
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  mysql:
+    container_name: mysql
+    build: ./docker/mysql
+    volumes:
+      - mysql_data:/var/lib/mysql:delegated
+    command: --sql_mode=""
+    environment:
+      MYSQL_USER: ria
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: ria
+      MYSQL_DATABASE: ria
+      SERVICE_NAME: mysql
+      TZ: Asia/Baku
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 3308:3306
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - 127.0.0.1:6379:6379
+
+  redis-commander:
+    image: rediscommander/redis-commander
+    container_name: redis-commander
+    environment:
+      - REDIS_HOSTS=redis
+    ports:
+      - 8081:8081
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8020:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - UPLOAD_LIMIT=1G
+    depends_on:
+      - mysql
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+    - 1025:1025
+    - 8025:8025
+
+volumes:
+  mysql_data:
+  composer_cache:
+  redis_data:
+  elastic_data:

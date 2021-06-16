@@ -1,0 +1,75 @@
+parameters:
+  app.locale: 'ge'
+  app.supported_locales: [ 'ge', 'ru', 'en' ]
+  admin.locale: 'en'
+  admin.languages: ["ge", "ru", "en"]
+  domain: '%env(resolve:DOMAIN)%'
+  domain.admin: '%env(resolve:DOMAIN_ADMIN)%'
+  domain.static: '%env(resolve:DOMAIN_STATIC)%'
+  enabled_analytics_codes: true
+  app.mailer:
+    from: '%env(resolve:MAILER_FROM)%'
+    admin_emails: ['vagif@rufullazada.me'] # ['i80586@mail.ru', 'mamedos@gmail.com', 'rahim@ria.az', 'work@celerons.ru', 'chinara@ria.az']
+  app.onesignal:
+    app_id: '%env(resolve:ONESIGNAL_APP_ID)%'
+    rest_api_key: '%env(resolve:ONESIGNAL_REST_KEY)%'
+  app.elastic_search:
+    host: '%env(ELASTICSEARCH_TRANSPORT)%'
+    index: 'reportge'
+    type: 'posts'
+  app.cache_keys:
+    menu: 'menu-reportge'
+    weather: 'weather-reportge'
+    currency: 'currency-reportge'
+
+  socialTabs:
+    facebookPages:
+      ge: https://www.facebook.com/report.ge
+      ru: https://www.facebook.com/report.ge
+      en: https://www.facebook.com/report.ge
+    instagram:
+      ge: https://www.instagram.com/report.ge.news
+      ru: https://www.instagram.com/report.ge.news
+      en: https://www.instagram.com/report.ge.news
+    twitter:
+      ge: https://twitter.com/report_ge
+      ru: https://twitter.com/report_ge
+      en: https://twitter.com/report_ge
+
+  darkSkyApiKey: 89f40d6174ebabb574e0c4343a953edf
+
+  regions:
+    tbilisi:
+      lat: 41.7151
+      long: 44.8271
+
+  alphabet:
+    ge: ['A', 'B', 'C', 'D', 'E', 'Ə','F', 'G', 'H', 'X', 'İ', 'K','Q', 'L', 'M', 'N', 'O',
+         'P','R', 'S', 'Ş', 'T', 'U', 'V', 'Z']
+    ru: [
+        'А', 'Б', 'В', 'Г', 'Д', 'Е','Ё', 'Ж', 'З', 'И', 'Й', 'К','Л', 'М', 'Н', 'О', 'П', 'Р','С', 'Т', 'У', 'Ф', 'Х',
+        'Ц','Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я']
+    en: [
+      'A', 'B', 'C', 'D', 'E', 'F',
+      'G', 'H', 'I', 'J', 'K', 'L',
+      'M', 'N', 'O', 'P', 'Q', 'R',
+      'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    ]
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  # Importing seeders
+  Ria\DataFixtures\:
+    resource: '../src/Ria/DataFixtures/'
+    tags:
+      - { name: doctrine.fixture.orm }
+
+  Elasticsearch\ClientBuilder: ~
+
+  Elasticsearch\Client:
+    factory: [ '@Elasticsearch\ClientBuilder', fromConfig ]
+    arguments: [ {'hosts': ['%env(ELASTICSEARCH_TRANSPORT)%']} ]

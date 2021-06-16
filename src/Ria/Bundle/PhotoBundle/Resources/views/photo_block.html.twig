@@ -1,0 +1,18 @@
+<div class="files-list-item"
+     data-id="{{ photo.id }}"
+     data-filename="{{ photo.filename }}"
+     data-src="{{ image(photo.filename) }}"
+     data-datetime="{{ photo.createdAt.format('Y-m-d H:i:s') }}"
+>
+    <div class="file-actions">
+        <div class="trigger-crop" data-url="{{ path('photos.crop', {'id': photo.id}) }}">
+            <i class="icon md-crop"></i>
+        </div>
+        <div class="trigger-update" data-url="{{ path('photos.update', {'id': photo.id}) }}">
+            <i class="icon md-edit"></i>
+        </div>
+    </div>
+    <div class="file">
+        <img class="img-default" height="100" data-filename="{{ photo.filename }}" src="{{ image(photo.filename, {'thumb': '194'}) }}" alt="">
+    </div>
+</div>

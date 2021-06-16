@@ -1,0 +1,130 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ person.getFullName() }} | Report.ge{% endblock %}
+
+    {% set mainPhoto = image(person.thumb, {'thumb': 824}) %}
+
+{% block content %}
+
+    {{ registerScripts(
+        'site/js/mobile/person.js',
+    ) }}
+
+    <section class="person-inner-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="person-name">{{ person.getFullName() }}</h2>
+                    <p class="he-is">{{ person.position }}</p>
+                    <div class="person-gallery">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                {% for photo in person.photos %}
+                                    <div class="swiper-slide">
+                                        <img class="swiper-lazy"
+                                             data-src="{{ image(photo.filename, {'thumb': 824}) }}"
+                                             alt="{{ person.getFullName() }} - {{ person.position }}">
+                                    </div>
+                                    <!-- Slide-->
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <!-- Slider container-->
+                        </div>
+                        <!-- Person gallery-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container-->
+
+        <div class="person-bio expanded">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="bio-items">
+                            {{ person.timeline }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Person bio-->
+
+        <div class="person-related-news">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="section-title">{{ 'related_news'|trans({}, 'common') }}</h3>
+                        <div class="news-list">
+                            <div class="row">
+                                {% for post in person.posts %}
+                                    <div class="col-md-3 col-6">
+                                        <div class="news-block">
+                                            <div class="image">
+                                                <a href="{{ path('post_view', {
+                                                    'categorySlug': post.category_slug,
+                                                    'slug': post.slug,
+                                                }) }}">
+                                                    <img src="{{ image(post.image, {'thumb': 824}) }}"
+                                                         alt="{{ post.getTitleWithoutQuotes() }}">
+                                                </a>
+                                            </div>
+                                            <div class="info">
+                                                <a class="title" href="{{ path('post_view', {
+                                                    'categorySlug': post.category_slug,
+                                                    'slug': post.slug,
+                                                }) }}">{{ post.getPreparedTitle()|raw }}</a>
+                                                <div class="news-date">
+                                                    <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                                    <span>{{ post.publishedAt.format('H:i') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Col-->
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- News list-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Person related news-->
+    </section>
+    <!-- Person inner page-->
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('index') }}",
+                        "name": "{{ 'main_page'|trans({}, 'common') }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "name": "{{ 'persons'|trans({}, 'common') }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "name":"{{ person.getFullName()|addcslashes('"')|raw }}"
+                    }
+                }
+            ]
+        }
+    </script>
+
+{% endblock %}

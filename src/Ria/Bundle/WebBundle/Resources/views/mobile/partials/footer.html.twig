@@ -1,0 +1,100 @@
+<footer>
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="logo">
+                        <a class="logo-dark" href="/">
+                            <img src="{{ asset('site/images/mobile/logo-dark-az.svg') }}">
+                        </a>
+                        <a class="logo-light" href="/">
+                            <img src="{{ asset('site/images/mobile/logo-light-az.svg') }}">
+                        </a>
+                    </div>
+                    <!-- Logo-->
+
+                    <div class="footer-nav">
+                        <ul>
+                            <li>
+                                <a href="{{ path('persons') }}">{{ 'persons'|trans({}, 'common') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('about') }}">{{ 'about'|trans({}, 'common') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('contact') }}">{{ 'contact'|trans({}, 'common') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('vacancies') }}">{{ 'vacancies'|trans({}, 'common') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('currency') }}">{{ 'currency'|trans({}, 'currency') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('weather') }}">{{ 'weather'|trans({}, 'weather') }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Footer nav-->
+
+                    <div class="divider"></div>
+
+                    <div class="copyrights-wrapper flex">
+                        <div class="copyrights">{{ 'copyright_text'|trans({}, 'common') }}</div>
+
+                        <ul class="socials">
+                            <li>
+                                <a href="#" id="switch-device" data-device="default">
+                                    <i class="icon-desktop"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/report.ge/"
+                                   target="_blank">
+                                    <i class="icon-facebook"></i></a>
+                            </li>
+
+                            <li>
+                                <a href="https://www.youtube.com/channel/UCN5FfubkfZzy-MnXq_DIoOA"
+                                   target="_blank">
+                                    <i class="icon-youtube"></i></a>
+                            </li>
+
+                            <li>
+                                <a href="https://twitter.com/report_ge/"
+                                   target="_blank">
+                                    <i class="icon-twitter"></i></a>
+                            </li>
+
+                            <li>
+                                <a href="https://www.instagram.com/report.ge.news/"
+                                   target="_blank">
+                                    <i class="icon-instagram"></i></a>
+                            </li>
+
+                            <li>
+                                <a href="/rss/">
+                                    <i class="icon-rss"></i></a>
+                            </li>
+                        </ul>
+                        <!-- Socials-->
+                    </div>
+                    <!-- Copyrights wrapper-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer top-->
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>{{ 'footer_info_text'|trans({}, 'common') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer bottom-->
+</footer>
+<!-- Footer-->

@@ -1,0 +1,9 @@
+<div class="post-archived">
+    <p>Уведомление!</p>
+
+    <p>Новость <b>{{ post.getTitle() }}</b> была архивирована !</p>
+
+    {% if redirectUrl %}
+        <p>Новость перенаправляется по ссылке: <b>{{ redirectUrl }}</b></p>
+    {% endif %}
+</div>

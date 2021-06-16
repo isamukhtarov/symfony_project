@@ -1,0 +1,55 @@
+{% if value.photos is not empty %}
+    {% for photo in value.photos %}
+        <div class="photo-thumb-wrapper">
+            <div class="card bg-grey-100 photo-thumb">
+                <input name="{{ full_name ~ '[photos][]' }}" type="hidden" value="{{ photo.id }}">
+                <div class="card-block is-main-block">
+                    <div class="radio-custom radio-primary">
+                        <input type="radio"
+                               class="main-radio"
+                               id="main-radio{{ loop.index }}"
+                               name="{{ full_name ~ '[main]' }}"
+                               value="{{ photo.id }}"
+                               {% if value.main is not empty and value.main.id == photo.id %} checked {% endif %}
+                        >
+                        <label for="main-radio{{ loop.index }}">{{ 'Main image'|trans }}</label>
+                    </div>
+                </div>
+                <img class="card-img-top img-fluid sort" src="{{ image(photo.filename, {'thumb': '194'}) }}" alt="Card image cap">
+                <div class="btn-group btn-group-justified">
+                    <div class="btn-group" role="group">
+                        <button type="button"
+                                class="btn btn-primary btn-insert"
+                                data-id="{{ photo.id }}"
+                                title="Insert"
+                        >
+                            <i class="icon wb-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <div class="btn-group" role="group">
+                        <button type="button"
+                                class="btn btn-info trigger-update"
+                                data-url="{{ path('photos.update', {'id': photo.id}) }}"
+                                title="Update"
+                        >
+                            <i class="icon wb-edit" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-success" title="Refresh">
+                            <i class="icon wb-refresh" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-danger btn-remove-card" title="Remove">
+                            <i class="icon wb-trash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,28 @@
+<!-- Modal AddMediaToPost -->
+<div class="modal fade" id="addMediaModal" role="dialog">
+    <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Insert media to post</h4>
+
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="icon md-close"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <textarea id="mediaText" class="form-control" rows="12" placeholder="Insert Code Here"></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-info" id="btnInsertMedia" data-url="{{ path('widget.create') }}">Create</button>
+                <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End AddMediaToPost -->
+
+{{ registerScripts(
+    'admin/ckeditor/plugins/addMediaPost/js/addMedia.js',
+) }}

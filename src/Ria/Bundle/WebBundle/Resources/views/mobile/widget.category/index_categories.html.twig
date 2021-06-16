@@ -1,0 +1,80 @@
+<section class="other-category-news ptb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+
+                        {% for category in categories %}
+
+                            <div class="swiper-slide">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h3 class="section-title">
+                                            <a class="ga-event-link"
+                                               href="{{ path('category_view', {'slug': category.slug}) }}"
+                                               title="{{ category.title|addcslashes('"')|raw }}"
+                                               data-event="{{ category.title }} | {{ 'main_page'|trans({}, 'common') }}">
+                                                {{ category.title }}
+                                            </a>
+                                        </h3>
+                                    </div>
+
+                                    {% for post in category.posts %}
+
+                                        {% set titleWithoutQuotes = post.getTitleWithoutQuotes() %}
+
+                                        <div class="col-6">
+                                            <div class="news-block">
+                                                <div class="image">
+                                                    <a href="{{ path('post_view', {
+                                                        'categorySlug': post.category_slug,
+                                                        'slug': post.slug,
+                                                    }) }}"
+                                                       class="ga-event-link"
+                                                       data-event="{{ category.title }} | {{ 'main_page'|trans({}, 'common') }}"
+                                                    >
+                                                        <img src="{{ image('thunk.jpg', {'thumb': 235}) }}"
+                                                             data-src="{{ image(post.image, {'thumb': 235}) }}"
+                                                             class="swiper-lazy"
+                                                             alt="{{ titleWithoutQuotes }}"
+                                                             title="{{ titleWithoutQuotes }}"
+                                                        >
+                                                    </a>
+                                                </div>
+                                                <div class="info">
+                                                    <a class="title ga-event-link" href="{{ path('post_view', {
+                                                        'categorySlug': post.category_slug,
+                                                        'slug': post.slug,
+                                                    }) }}"
+                                                       data-event="{{ category.title }} | {{ 'main_page'|trans({}, 'common') }}">
+                                                        {{ post.getPreparedTitle()|raw }}
+                                                    </a>
+                                                    <div class="news-date">
+                                                        <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                                        <span>{{ post.publishedAt.format('H:i') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Col-->
+
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                            <!-- Slide-->
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="swiper-pagination"></div>
+                </div>
+                <!-- Slider container-->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Other category news-->
+<!-- Category news -->

@@ -1,0 +1,1 @@
+# ria-users-bundle (UserBundle)

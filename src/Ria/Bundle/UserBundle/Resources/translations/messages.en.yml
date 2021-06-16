@@ -1,0 +1,15 @@
+form:
+  permissions: 'Permissions'
+  email: 'Email'
+  emailAdditional: 'Additional email'
+  gender: 'Gender'
+  phone: 'Phone'
+  roles: 'Roles'
+  password: 'Password'
+  passwordConfirmation: 'Confirm password'
+  birthDate: 'Birthday'
+  year: 'Year'
+  month: 'Month'
+  day: 'Day'
+
+role: 'Role'

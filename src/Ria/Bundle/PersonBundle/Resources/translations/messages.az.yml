@@ -1,0 +1,10 @@
+form:
+  first_name: 'Ad'
+  last_name:  'Soyad'
+  slug: 'Slug'
+  position: 'Vəzifə'
+  text: 'Təsvir'
+
+translations.first_name: 'Ad'
+translations.last_name: 'Soyad'
+translations.position: 'Vəzifə'

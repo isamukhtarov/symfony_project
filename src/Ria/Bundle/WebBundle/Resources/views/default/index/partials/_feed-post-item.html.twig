@@ -1,0 +1,44 @@
+{% set date = lastDate ?? (posts[0] is defined ? posts[0].publishedAt.format('d.m.Y') : null) %}
+
+{% for i,post in posts %}
+
+    {% set titleWithoutQuotes = post.getTitleWithoutQuotes() %}
+
+    {% if (
+        (i > 0 and post.publishedAt.format('d.m.Y') != date and (date is not empty)) or
+        (i == 0 and (date is not empty) and post.publishedAt.format('d.m.Y') != date)
+        ) %}
+
+        {% set date = post.publishedAt.format('d.m.Y') %}
+
+        <div class="time-divider"><span>{{ date }}</span></div>
+
+    {% endif %}
+
+    <div class="news-item flex infinity-item {{ (post.isMain or post.isImportant) ? 'highlighted' : '' }}"
+         data-timestamp="{{ post.publishedAt.format('Y-m-d H:i:s') }}" data-id="{{ post.id }}">
+        <div class="image">
+            <a href="{{ path('post_view', {
+                'categorySlug': post.category_slug,
+                'slug': post.slug,
+            }) }}"
+               target="_blank">
+                <img src="{{ image(post.image, {'thumb': 180}) }}"
+                     title="{{ titleWithoutQuotes }}"
+                     alt="{{ titleWithoutQuotes }}">
+            </a>
+        </div>
+        <div class="info">
+            <a class="title" href="{{ path('post_view', {
+                'categorySlug': post.category_slug,
+                'slug': post.slug,
+            }) }}" target="_blank">{{ post.getPreparedTitle()|raw }}</a>
+            <p class="description">{{ post.description }}</p>
+            <div class="news-date">
+                <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                <span>{{ post.publishedAt.format('H:i') }}</span>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}

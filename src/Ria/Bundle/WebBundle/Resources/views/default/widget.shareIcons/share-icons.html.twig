@@ -1,0 +1,20 @@
+{{ registerScripts('site/js/shareDialog.js') }}
+
+<ul class="share-icons">
+
+    {% for button in data['buttons'] %}
+
+        <li>
+            <a
+               class="btn-{{ button }}"
+               href="{{ allButtons[button]['url'] ~ data['link'] }}"
+               data-dialog="{{ allButtons[button]['dialog'] ? 1 : 0 }}"
+               target="{{ allButtons[button]['dialog'] ? '_self' : '_blank' }}"
+            >
+                <i class="icon-{{ button }}"></i>
+            </a>
+        </li>
+
+    {% endfor %}
+
+</ul>

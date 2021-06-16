@@ -1,0 +1,65 @@
+<section class="video-news ptb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header flex">
+                    <h2 class="section-title">{{ 'video_news'|trans({}, 'common') }}</h2>
+                    <div class="actions hidden-575">
+                        <div class="slider-controls flex">
+                            <div class="prev-slide flex-center">
+                                <i class="icon-angle-left"></i>
+                            </div>
+                            <div class="next-slide flex-center">
+                                <i class="icon-angle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section header-->
+
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+
+                        {% for post in posts %}
+
+                            {% set titleWithoutQuotes = post.getTitleWithoutQuotes() %}
+
+                            <div class="swiper-slide">
+                                <div class="news-block">
+                                    <div class="image">
+                                        <a href="{{ path('post_view', {
+                                            'categorySlug': post.category_slug,
+                                            'slug': post.slug,
+                                        }) }}">
+                                            <img class="swiper-lazy"
+                                                 src="https://static.report.az/photo/thunk_490.jpg"
+                                                 data-src="{{ image(post.image, {'thumb': 490}) }}"
+                                                 alt="{{ titleWithoutQuotes }}"
+                                                 title="{{ titleWithoutQuotes }}"
+                                            >
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <a class="news-category"
+                                           href="{{ path('category_view', {'slug': post.category_slug}) }}">{{ post.category_title }}</a>
+                                        <a class="title" href="{{ path('post_view', {
+                                            'categorySlug': post.category_slug,
+                                            'slug': post.slug,
+                                        }) }}">{{ post.getPreparedTitle()|raw }}</a>
+                                        <div class="news-date">
+                                            <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                            <span>{{ post.publishedAt.format('H:i') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <!-- Slider container-->
+            </div>
+        </div>
+    </div>
+</section><!-- Video news-->

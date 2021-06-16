@@ -1,0 +1,66 @@
+form:
+  title: Заголовок
+  slug: Ссылка
+  description: Описание
+  status: Статус
+  submit: Сохранить
+  cancel: Отмена
+  meta:
+    title: Мета заголовок
+    description: Мета описание
+    keywords: Мета ключевые слова
+
+Meta tags: Мета теги
+
+menu:
+  Menu:    'Меню'
+  Main:    'Главная'
+  Youtube: 'Youtube-видео'
+  News:    'Новости'
+  Categories: 'Категории'
+  Stories: 'Сюжеты'
+  Cities:  'Города'
+  Regions: 'Регионы'
+  Users:   'Пользователи'
+  Roles:   'Роли'
+  Permissions: 'Правила'
+  Statistics: 'Статистика'
+  Author Statistics: 'Статистика авторов'
+  Translators statistics: 'Статистика переводчиков'
+  Persons:  'Персоны'
+  Experts:  'Эксперты'
+  Votes:    'Голосования'
+  Configuration: 'Kонфигурация'
+
+Save: 'Сохранить'
+Cancel: 'Отмена'
+Create: 'Добавить'
+Status: 'Статус'
+Name: 'Название'
+
+quote:
+  Add Expert quote: 'Добавить мнение эксперта'
+  Expert: 'Эксперт'
+  Select expert: 'Выбрать эксперта'
+  text: 'Текст'
+
+person-timeline:
+  Insert timeline: 'Заполните историю'
+  Insert timeline year: 'Год истории'
+  Insert timeline description: 'Описание истории'
+
+kitpages_data_grid:
+  No-data-found: 'Данные не найдены'
+  Total-items-count: 'Кол-во элементов:'
+  сharacters_сount: 'Кол-во символов'
+  delete_item: 'Вы уверены, что хотите удалить этот элемент?'
+
+az: Azərbaycan
+ru: Русский
+en: English
+ge: ქართველი
+
+Inactive: Деактивный
+Active: Активный
+
+show_on_site: 'Поаказать на сайте'

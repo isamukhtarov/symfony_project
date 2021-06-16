@@ -1,0 +1,10 @@
+{% for post in posts %}
+    <div class="inline-news {{ post.isImportant or post.isMain ? 'highlighted' : '' }}">
+        <div class="time">{{ post.publishedAt.format('H:i') }}</div>
+        <a class="title" href="{{ path('post_view', {'categorySlug': post.category_slug, 'slug': post.slug}) }}">
+            {{ post.getPreparedTitle()|raw }}
+        </a>
+        <a class="category"
+           href="{{ path('category_view', {'slug': post.category_slug}) }}">{{ post.category_title }}</a>
+    </div>
+{% endfor %}

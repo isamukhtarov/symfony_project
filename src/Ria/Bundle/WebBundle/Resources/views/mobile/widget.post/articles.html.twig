@@ -1,0 +1,94 @@
+<section class="interviews ptb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title">{{ 'opinion'|trans({}, 'common') }}</h2>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+
+                        {% for post in posts %}
+
+                            {% set titleWithoutQuotes = post.getTitleWithoutQuotes() %}
+
+                            <div class="swiper-slide">
+                                <div class="person-card flex">
+                                    {% if (post.isOpinion() and post.expert_slug) %}
+
+                                        <div class="image">
+                                            <a href="{{ path('post_view', {
+                                                'categorySlug': post.category_slug,
+                                                'slug': post.slug,
+                                            }) }}">
+                                                <img src="{{ image('thunk.jpg', {'thumb': 226}) }}"
+                                                     data-src="{{ image(post.image, {'thumb': 226}) }}"
+                                                     class="swiper-lazy"
+                                                     alt="{{ titleWithoutQuotes }}"
+                                                     title="{{ titleWithoutQuotes }}"
+                                                >
+                                            </a>
+                                        </div>
+                                        <div class="info flex">
+                                            <a class="name text-uppercase"
+                                               href="{{ path('expert_view', {'slug': post.expert_slug}) }}">
+                                                {{ post.getExpertName() }}
+                                            </a>
+                                            <p class="he-is text-uppercase">{{ post.expert_position }}</p>
+                                            <a class="title"
+                                               href="{{ path('post_view', {
+                                                   'categorySlug': post.category_slug,
+                                                   'slug': post.slug,
+                                               }) }}">{{ post.getPreparedTitle()|raw }}</a>
+                                            <div class="news-date">
+                                                <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                                <span>{{ post.publishedAt.format('H:i') }}</span>
+                                            </div>
+                                        </div>
+
+                                    {% else %}
+
+                                        <div class="image">
+                                            <a href="{{ path('post_view', {
+                                                'categorySlug': post.category_slug,
+                                                'slug': post.slug,
+                                            }) }}">
+                                                <img src="https://static.report.az/photo/thunk_226.jpg"
+                                                     data-src="https://static.report.az/photo/thunk_226.jpg"
+                                                     class="swiper-lazy"
+                                                     alt="{{ titleWithoutQuotes }}"
+                                                     title="{{ titleWithoutQuotes }}"
+                                                >
+                                            </a>
+                                        </div>
+                                        <div class="info flex">
+                                            <a class="name text-uppercase" href="{{ path('author_view', {'slug': post.author_slug}) }}">
+                                                {{ post.getAuthorName() }}
+                                            </a>
+                                            <p class="he-is text-uppercase">{{ post.author_position }}</p>
+                                            <a class="title"
+                                               href="{{ path('post_view', {
+                                                   'categorySlug': post.category_slug,
+                                                   'slug': post.slug,
+                                               }) }}">{{ post.getPreparedTitle()|raw }}</a>
+                                            <div class="news-date">
+                                                <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                                <span>{{ post.publishedAt.format('H:i') }}</span>
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <!-- Slider container-->
+            </div>
+            <!-- Col-->
+        </div>
+    </div>
+</section>
+<!-- Interviews-->
+
+<!-- Article news -->

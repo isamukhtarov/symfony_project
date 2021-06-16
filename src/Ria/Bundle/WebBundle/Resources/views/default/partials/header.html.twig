@@ -1,0 +1,132 @@
+<header>
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 flex">
+                    <div class="left flex">
+
+                        {{
+                            widget('widget.weather', {
+                                'template': 'weather-today.html.twig'
+                            })
+                        }}
+
+                        {{
+                            widget('widget.currency', {
+                                'type': 'header'
+                            })
+                        }}
+                    </div>
+                    <!-- Left-->
+
+                    <div class="right flex">
+                        <div class="static-links">
+                            <a href="{{ path('about') }}">{{ 'about'|trans({}, 'common') }}</a>
+                        </div>
+
+                        <div class="dropdown">
+                            <button class="dropdown-toggle" data-toggle="dropdown">Report Global</button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item"
+                                   href="https://report.az/"
+                                   target="_blank">Report Azerbaijan</a>
+                            </div>
+                        </div>
+
+                        <ul class="socials">
+                            <li>
+                                <a href="https://www.facebook.com/report.ge/"
+                                   target="_blank">
+                                    <i class="icon-facebook"></i></a>
+                            </li>
+
+                            <li>
+                                <a href="https://www.youtube.com/channel/UCN5FfubkfZzy-MnXq_DIoOA/"
+                                   target="_blank">
+                                    <i class="icon-youtube"></i></a>
+                            </li>
+
+                            <li>
+                                <a href="https://twitter.com/report_ge/"
+                                   target="_blank">
+                                    <i class="icon-twitter"></i></a>
+                            </li>
+
+                            <li>
+                                <a href="https://www.instagram.com/report.ge.news/"
+                                   target="_blank">
+                                    <i class="icon-instagram"></i></a>
+                            </li>
+                        </ul>
+
+                        <div class="toggle-theme">
+                            <button class="theme-dark">
+                                <i class="icon-moon"></i>
+                            </button>
+                            <button class="theme-light">
+                                <i class="icon-sun"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Right-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header top-->
+
+    <div class="header-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="logo-langs flex">
+                        <div class="menu-toggler visible-1024">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <ul class="langs">
+                            {% for lang,url in urlTranslations %}
+                                <li>
+                                    <a href="{{ url ?? path('index', {'_locale': lang}) }}" data-lang="{{ lang }}" {{ lang == app.request.locale ? 'class="active"' : '' }}>
+                                        {{ ('switch_lang_' ~ lang)|trans({}, 'common')}}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="logo">
+                            <a class="logo-dark" href="{{ path('index') }}">
+                                <img src="/site/images/logo-dark-{{ app.request.locale }}.png" alt="{{ ('report_information_agency')|trans({}, 'common')}}">
+                            </a>
+                            <a class="logo-light" href="{{ path('index') }}">
+                                <img src="/site/images/logo-light-{{ app.request.locale }}.png" alt="{{ ('report_information_agency')|trans({}, 'common')}}">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Logo / langs-->
+
+                        {{ widget('widget.menu', {'template': 'menu.html.twig'}) }}
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header bottom-->
+
+    <div class="side-menu visible-1024">
+
+        {{ widget('widget.menu', {'template': 'menu-header-mobile.html.twig'}) }}
+
+        <div class="mobile-search">
+            <form action="/search/" method="GET">
+                <div class="form-group">
+                    <input class="form-control" name="query" type="text" placeholder="Açar sözü daxil edin" required>
+                </div>
+            </form>
+        </div>
+        <!-- Mobile search-->
+    </div>
+    <!-- Side menu-->
+</header>
+<!-- Header-->

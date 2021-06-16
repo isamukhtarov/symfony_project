@@ -1,0 +1,93 @@
+{% extends '@RiaAdmin/layout.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_row(form._token) }}
+    {{ form_row(form.locale) }}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {{ form_row(form.title) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="panel-heading">
+                        <h2 class="panel-title p-0">{{ 'form.options.Options'|trans({}) }}</h2>
+                    </div>
+
+                    <div class="panel-heading bg-white">
+                        <div class="actions text-right">
+                            <button type="button" class="add-item-option btn btn-success mt-10" data-collection-holder-class="container-items"><i class="fa fa-plus"></i> {{ 'form.options.addOptions'|trans({}) }}</button>
+                        </div>
+                    </div>
+
+                    <div class="container-items sortable-with-handle" data-prototype="{{ form_widget(form.options.vars.prototype)|e('html_attr') }}">
+                        {% include '@RiaVote/vote/partials/options.html.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                {{ form_label(form.startDate) }}
+                                <div class="form-group has-default bmd-form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="icon md-calendar" aria-hidden="true"></i>
+                                        </span>
+                                        {{ form_widget(form.startDate) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                {{ form_label(form.endDate) }}
+                                <div class="form-group has-default bmd-form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="icon md-calendar" aria-hidden="true"></i>
+                                        </span>
+                                        {{ form_widget(form.endDate) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                {{ form_row(form.type) }}
+                            </div>
+                        </div>
+
+                        {{ form_row(form.photo) }}
+                        {{ form_errors(form) }}
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.status) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.showRecaptcha) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.showOnMainPage) }}
+                            </div>
+                        </div>
+
+                        {{ form_row(form.submit) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

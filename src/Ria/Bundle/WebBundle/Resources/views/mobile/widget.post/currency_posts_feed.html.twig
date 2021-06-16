@@ -1,0 +1,19 @@
+<div class="news-list latest-news">
+        {% for post in posts %}
+            <div class="news-item flex">
+                <div class="time">
+                    <span>{{ post.publishedAt.format('H:i') }}</span>
+                </div>
+                <div class="info">
+                    <a class="title" href="{{ path('post_view', {'slug': post.slug, 'categorySlug': post.category_slug}) }}">
+                        {{ post.getPreparedTitle()|raw }}
+                    </a>
+                    <a class="category" href="{{ path('category_view', {'slug': post.category_slug}) }}">
+                        {{ post.category_title }}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Latest news container-->

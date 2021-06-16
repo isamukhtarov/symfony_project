@@ -1,0 +1,56 @@
+<section class="video-news ptb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title">{{ 'video_news'|trans({}, 'common') }}</h2>
+
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+
+                        {% for post in posts %}
+
+                            {% set titleWithoutQuotes = post.getTitleWithoutQuotes() %}
+
+                            <div class="swiper-slide">
+                                <div class="news-block">
+                                    <div class="image">
+                                        <a href="{{ path('post_view', {
+                                            'categorySlug': post.category_slug,
+                                            'slug': post.slug,
+                                        }) }}">
+                                            <img class="swiper-lazy"
+                                                 src="{{ image('thunk.jpg', {'thumb': 490}) }}"
+                                                 data-src="{{ image(post.image, {'thumb': 490}) }}"
+                                                 alt="{{ titleWithoutQuotes }}"
+                                                 title="{{ titleWithoutQuotes }}"
+                                            >
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <a class="news-category"
+                                           href="{{ path('category_view', {'slug': post.category_slug}) }}">{{ post.category_title }}</a>
+                                        <a class="title" href="{{ path('post_view', {
+                                            'categorySlug': post.category_slug,
+                                            'slug': post.slug,
+                                        }) }}">{{ post.getPreparedTitle()|raw }}</a>
+                                        <div class="news-date">
+                                            <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                            <span>{{ post.publishedAt.format('H:i') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <!-- Slider container-->
+                </div>
+                <!-- Col-->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Video news-->
+<!-- Video news -->

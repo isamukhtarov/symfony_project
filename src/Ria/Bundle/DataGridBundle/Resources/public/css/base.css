@@ -1,0 +1,20 @@
+.kit-grid {
+}
+.kit-grid table {
+    border: 1px solid #DDD;
+}
+.kit-grid td, .kit-grid th  {
+    padding: 2px 5px;
+    border: 1px solid #DDD;
+}
+.kit-grid thead th {
+    background-color: #EEE;
+}
+.kit-grid th.kit-grid-sort  {
+    background-color: #ffff66;
+}
+
+.kit-grid .kit-grid-filter {
+    margin-bottom: 3px;
+    margin-left: 10px;
+}

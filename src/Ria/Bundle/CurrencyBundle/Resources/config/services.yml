@@ -1,0 +1,34 @@
+services:
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: false
+
+  Ria\Bundle\CurrencyBundle\:
+    resource: '../../'
+    exclude:
+      - '../../DependencyInjection/'
+      - '../../Command/'
+      - '../../Entity/'
+      - '../../Tests/'
+
+  Ria\Bundle\CurrencyBundle\Handler\:
+    resource: "../../Handler"
+    tags:
+      - { name: tactician.handler, typehints: true }
+
+  Ria\Bundle\CurrencyBundle\Console\Command\CurrencyParserConsoleCommand:
+    tags:
+      - { name: 'console.command', command: 'app:currency-parser' }
+
+  ria_currency.brent_parser:
+    class: Ria\Bundle\CurrencyBundle\Parsers\BrentParser
+    public: true
+
+  ria_currency.cbar_parser:
+    class: Ria\Bundle\CurrencyBundle\Parsers\CBARParser
+    public: true
+
+  ria_currency.nbg_parser:
+    class: Ria\Bundle\CurrencyBundle\Parsers\NBGParser
+    public: true

@@ -1,0 +1,131 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ person.getFullName() }} | Report.ge{% endblock %}
+
+    {% set mainPhoto = image(person.thumb, {'thumb': 824}) %}
+
+{% block content %}
+
+    {{ registerScripts(
+        'site/js/perfect-scrollbar.js',
+        'site/js/masonry.js',
+        'site/js/person.js',
+    ) }}
+
+    <section class="person-inner-page pt-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="page-title">{{ person.getFullName() }}</h2>
+                    <p class="info-text">{{ person.position }}</p>
+                    <div class="person-gallery flex">
+                        <div class="gallery-top">
+                            <img class="person-main-image"
+                                 src="{{ mainPhoto }}"
+                                 alt="{{ person.getTitleWithoutQuotes() }}"
+                                 title="{{ person.getTitleWithoutQuotes() }}">
+                        </div>
+                        <!-- Gallery top-->
+                        <div class="gallery-thumbs">
+                            <div class="custom-scrollbar">
+                                <div class="thumbs-list flex">
+                                    {% for photo in person.photos %}
+                                        <div class="thumb" data-src="{{ image(photo.filename) }}">
+                                            <img src="{{ image(photo.filename, {'thumb': 250}) }}"
+                                                 alt="{{ person.getFullName() }} - {{ person.position }}">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Gallery thumbs-->
+                    </div>
+                    <!-- Person gallery-->
+                </div>
+            </div>
+        </div>
+        <!-- Container-->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="person-bio">
+                        <h3 class="section-title">{{ 'history'|trans({}, 'common') }}</h3>
+                        {{ person.timeline }}
+                    </div>
+                    <!-- Person bio-->
+                </div>
+                <!-- Col-->
+                <div class="col-lg-6">
+                    <div class="person-related-news">
+                        <h3 class="section-title">{{ 'related_news'|trans({}, 'common') }}</h3>
+                        <div class="row">
+                            {% for post in person.posts %}
+                                <div class="col-md-6">
+                                    <div class="news-block">
+                                        <div class="image">
+                                            <a href="{{ path('post_view', {
+                                                'categorySlug': post.category_slug,
+                                                'slug': post.slug,
+                                            }) }}">
+                                                <img src="{{ image(post.image, {'thumb': 824}) }}"
+                                                     alt="{{ post.getTitleWithoutQuotes() }}">
+                                            </a>
+                                        </div>
+                                        <div class="info">
+                                            <a class="title" href="{{ path('post_view', {
+                                                'categorySlug': post.category_slug,
+                                                'slug': post.slug,
+                                            }) }}">{{ post.getPreparedTitle()|raw }}</a>
+                                            <div class="news-date">
+                                                <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                                <span>{{ post.publishedAt.format('H:i') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- Person related news-->
+                </div>
+                <!-- Col-->
+            </div>
+        </div>
+        <!-- Container-->
+    </section>
+    <!-- Person inner page-->
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('index') }}",
+                        "name": "{{ 'main_page'|trans({}, 'common') }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "name": "{{ 'persons'|trans({}, 'common') }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "name":"{{ person.getFullName()|addcslashes('"')|raw }}"
+                    }
+                }
+            ]
+        }
+    </script>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+stories: Sujetlər
+story:
+  form:
+    showOnSite: Saytda göstər
+  settings: Ayarlar
+  create: Yeni süjet
+  update: Redaktə et
+
+id: Id
+translations.title: Başlıq
+status: Status
+show_on_site: Saytda göstər
+slug: 'Slug'
+
+
+city:
+  form:
+    region_title: 'Bölgə'
+    city_title: 'Şəhər'
+region:
+  translations:
+    title: 'Bölgə'
+
+
+created: Created
+on_moderation: On Moderation
+waiting_for_correction: Correction
+read: Active
+archived: Archived
+private: Private
+deleted: Deleted
+
+speech:
+  Upload: Yüklə
+  Delete: Sil
+  Speech: Xəbərin səsləndirmə faylı
+  Uploading: Uploading...
+
+without photo: şəkilsiz
+for future: gələcəyə
+and: və

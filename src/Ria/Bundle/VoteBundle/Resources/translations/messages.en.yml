@@ -1,0 +1,14 @@
+form:
+  first_name: 'First Name'
+  type: 'Type'
+  startDate: 'Start Date'
+  endDate: 'End Date'
+  showRecaptcha: 'Show Recaptcha'
+  showOnMainPage: 'Show On Main Page'
+  options:
+    Options: 'Options'
+    title: 'Title'
+    addOptions: 'New option'
+  errors:
+    photo_required: 'With prize type, photo is required'
+title: 'Title'

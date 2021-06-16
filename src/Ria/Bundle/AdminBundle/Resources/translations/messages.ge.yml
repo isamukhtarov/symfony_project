@@ -1,0 +1,67 @@
+form:
+  title: Başlıq
+  slug: Slug
+  description: Təsvir
+  status: Aktivliyi
+  submit: Yadda saxla
+  meta:
+    title: Meta başlığı
+    description: Мета təsviri
+    keywords: Meta açar sözlər
+
+Meta tags: Meta teqlər
+Settings: Ayarlar
+
+menu:
+  Menu:    'Menyu'
+  Main:    'Əsas səhifə'
+  Youtube: 'Youtube videoları'
+  News:    'Xəbərlər'
+  Categories: 'Bölmələr'
+  Stories: 'Süjetlər'
+  Cities:  'Şəhərlər'
+  Regions: 'Bölgələr'
+  Users:   'İstifadəçilər'
+  Roles:   'Rollar'
+  Permissions: 'Qaydalar'
+  Statistics: 'Statistika'
+  Author Statistics: 'Müəlliflərin statistikası'
+  Translators statistics: 'Tərcüməçilərin statistikası'
+  Persons:  'Personlar'
+  Experts:  'Ekspertlər'
+  Votes:    'Sorğular'
+  Configuration: 'Konfigurasiya'
+
+az: Azərbaycan
+ru: Русский
+en: English
+ge: ქართველი
+
+Save: 'Yadda saxla'
+Cancel: 'Imtina'
+Create: 'Əlavə et'
+Status: 'Aktivliyi'
+Name: 'Başlıq'
+
+quote:
+  Add Expert quote: 'Ekspert rəyini əlavə et'
+  Expert: 'Ekspert'
+  Save: 'Yadda saxla'
+  select_expert: 'Eksperti seçin'
+  text: 'Mətn'
+
+person-timeline:
+  Insert timeline: 'Tarixcənı qeyd edin'
+  Insert timeline year: 'Tarixcə ili'
+  Insert timeline description: 'Tarixcə üzrə məlumat'
+
+kitpages_data_grid:
+  No-data-found: 'Məlumat tapılmadı'
+  Total-items-count: 'Ümumi məlumat sayı:'
+  сharacters_сount: 'Simvolların sayı'
+  delete_item: 'Bu elementi silmək istədiyinizə əminsiniz?'
+
+Inactive: Deaktiv
+Active: Aktiv
+
+show_on_site: 'Saytda göstər'

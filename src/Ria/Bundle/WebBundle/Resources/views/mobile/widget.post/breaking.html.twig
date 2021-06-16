@@ -1,0 +1,36 @@
+<section class="breaking-news-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 flex">
+                <div class="icon flex-center">
+                    <i class="icon-flash"></i>
+                </div>
+                <!-- Flash icon-->
+                <div class="news-tracker">
+
+                    {% for post in posts %}
+
+                        <div class="news-item flex">
+                            <a class="title ga-event-link"
+                               href="{{ path('post_view', {
+'categorySlug': post.category_slug,
+'slug': post.slug,
+}) }}"
+                               data-event="{{ 'breaking_news'|trans({}, 'common') }} | {{ 'main_page'|trans({}, 'common') }}"
+                            >{{ post.getPreparedTitle()|raw }}</a>
+                            <div class="news-date">
+                                <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                <span>{{ post.publishedAt.format('H:i') }}</span>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+                <!-- News tracker-->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breaking news-->
+<!-- Breaking news container-->

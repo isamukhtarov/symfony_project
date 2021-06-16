@@ -1,0 +1,30 @@
+services:
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: false
+
+  Ria\Bundle\WeatherBundle\:
+    resource: '../../'
+    exclude:
+        - '../../DependencyInjection/'
+        - '../../Entity/'
+        - '../../Command/'
+        - '../../Tests/'
+        - '../../Components/'
+
+  Ria\Bundle\WeatherBundle\Handler\:
+    resource: "../../Handler"
+    tags:
+      - { name: tactician.handler, typehints: true }
+
+  Ria\Bundle\WeatherBundle\Console\Command\WeatherReceiverConsoleCommand:
+    arguments: ['@ria_weather.weather_receiver']
+    tags:
+      - { name: 'console.command', command: 'app:weather-receive' }
+
+  ria_weather.weather_receiver:
+    class: Ria\Bundle\WeatherBundle\Components\WeatherReceiver
+
+  Ria\Bundle\WeatherBundle\Components\WeatherReceiverInterface:
+    alias: '@ria_weather.weather_receiver'

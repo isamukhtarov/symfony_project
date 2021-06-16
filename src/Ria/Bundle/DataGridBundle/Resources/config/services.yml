@@ -1,0 +1,30 @@
+services:
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: true
+
+  Ria\Bundle\DataGridBundle\Grid\GridManager:
+    arguments:
+      - '@data_grid.paginator_manager'
+      - '@data_grid.item_list_normalizer.standard'
+      - '%data_grid.grid.hydrator_class%'
+
+  data_grid.paginator_manager:
+    class: Ria\Bundle\DataGridBundle\Paginator\PaginatorManager
+    arguments:
+      - '@event_dispatcher'
+      - '%data_grid.paginator%'
+
+  data_grid.item_list_normalizer.legacy:
+    class: Ria\Bundle\DataGridBundle\Grid\ItemListNormalizer\LegacyNormalizer
+
+  data_grid.item_list_normalizer.standard:
+    class: Ria\Bundle\DataGridBundle\Grid\ItemListNormalizer\StandardNormalizer
+
+  data_grid.globals_twig_extension:
+    class: Ria\Bundle\DataGridBundle\Twig\GlobalsTwigExtension
+    arguments:
+      - '%data_grid.grid%'
+      - '%data_grid.paginator%'
+    tags: ['twig.extension']

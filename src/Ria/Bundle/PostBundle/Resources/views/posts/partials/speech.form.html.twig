@@ -1,0 +1,33 @@
+<fieldset>
+    <legend>{{ 'speech.Speech'|trans({}) }}</legend>
+    <div class="row">
+        <input type="hidden" id="speech-postId" name="postId" value="{{ post.getId() }}">
+        <div class="col-lg-4">
+            <div class="custom-file"><input type="file" id="speech-file" name="file" accept=".mp3" class="custom-file-input"/>
+                <label for="speech_file" class="custom-file-label"></label>
+            </div>
+        </div>
+
+        <div class="col-lg-2">
+            <button type="button" id="btnUploadSpeech" class="btn btn-sm btn-round btn-info"
+                    data-url="{% if speech %}{{ path('speech.update') }}{% else %}{{ path('speech.create') }}{% endif %}"
+                    data-id="{% if speech %}{{ speech.getId() }}{% endif %}"
+                    data-label-uploading="{{ 'speech.Uploading'|trans({}) }}" data-label-upload="{{ 'speech.Upload'|trans({}) }}">
+                    {{ 'speech.Upload'|trans({}) }}
+            </button>
+        </div>
+
+            <div class="col-lg-1" {% if speech is null %}style="display: none"{% endif %}>
+                <button type="button" id="btnDeleteSpeech" class="btn btn-sm btn-round btn-danger"
+                        data-id="{% if speech %}{{ speech.getId() }}{% endif %}"
+                        data-url="{{ path('speech.delete') }}">{{ 'speech.Delete'|trans({}) }}</button>
+            </div>
+    </div>
+
+    <div class="audioSpeech">
+        {% if speech %}
+            {% include '@RiaPost/posts/partials/audio.html.twig' %}
+        {% endif %}
+    </div>
+    <br>
+</fieldset>

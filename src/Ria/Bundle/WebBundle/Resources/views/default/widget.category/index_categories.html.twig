@@ -1,0 +1,94 @@
+<section class="other-category-news">
+    <div class="container">
+        <div class="row">
+
+            {% for category in categories %}
+
+                <div class="col-lg-4 col-md-6">
+                    <h2 class="section-title">
+                        <a class="ga-event-link"
+                           href="{{ path('category_view', {'slug': category.slug}) }}"
+                           title="{{ category.title|addcslashes('"')|raw }}"
+                           data-event="{{ category.title }} | {{ 'main_page'|trans({}, 'common') }}">
+                            {{ category.title }}
+                        </a>
+                    </h2>
+
+                    {% set first = category.posts|first %}
+                    {% set titleWithoutQuotes = first.getTitleWithoutQuotes() %}
+
+                    <div class="news-block">
+                        <div class="image">
+                            <a href="{{ path('post_view', {
+                                'categorySlug': first.category_slug,
+                                'slug': first.slug,
+                            }) }}" class="ga-event-link"
+                               data-event="{{ category.title }} | {{ 'main_page'|trans({}, 'common') }}">
+                                <img src="{{ image(first.image, {'thumb': 400}) }}"
+                                     alt="{{ titleWithoutQuotes }}"
+                                     title="{{ titleWithoutQuotes }}">
+                            </a>
+                        </div>
+                        <div class="info">
+                            <a class="title ga-event-link" href="{{ path('post_view', {
+                                'categorySlug': first.category_slug,
+                                'slug': first.slug,
+                            }) }}"
+                               data-event="{{ category.title }} | {{ 'main_page'|trans({}, 'common') }}">
+                                {{ first.getPreparedTitle()|raw }}
+                            </a>
+                            <p class="description">
+                                {{ first.description }}
+                            </p>
+                            <div class="news-date">
+                                <span>{{ first.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                <span>{{ first.publishedAt.format('H:i') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- News block-->
+                    <div class="rest-news flex">
+
+                        {% for post in category.posts|slice(1, 2) %}
+                            {% set titleWithoutQuotes = post.getTitleWithoutQuotes() %}
+
+                            <div class="news-block small">
+                                <div class="image">
+                                    <a href="{{ path('post_view', {
+                                        'categorySlug': post.category_slug,
+                                        'slug': post.slug,
+                                    }) }}" class="ga-event-link"
+                                       data-event="{{ category.title }} | {{ 'main_page'|trans({}, 'common') }}">
+                                        <img src="{{ image(post.image, {'thumb': 194}) }}"
+                                             alt="{{ titleWithoutQuotes }}"
+                                             title="{{ titleWithoutQuotes }}">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <a class="title ga-event-link" href="{{ path('post_view', {
+                                        'categorySlug': post.category_slug,
+                                        'slug': post.slug,
+                                    }) }}"
+                                       data-event="{{ category.title }} | {{ 'main_page'|trans({}, 'common') }}">
+                                        {{ post.getPreparedTitle()|raw }}
+                                    </a>
+                                    <div class="news-date">
+                                        <span>{{ first.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                        <span>{{ first.publishedAt.format('H:i') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+                    <!-- Rest news-->
+                </div>
+                <!-- Col-->
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<!-- Other category news-->

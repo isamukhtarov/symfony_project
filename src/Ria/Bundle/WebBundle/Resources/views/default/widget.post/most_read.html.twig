@@ -1,0 +1,78 @@
+<section class="most-read-news bg-white-texture ptb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-header flex">
+                    <h2 class="section-title">{{ 'most_read'|trans({}, 'common') }}</h2>
+
+                    <div class="actions hidden-575">
+                        <div class="slider-controls flex">
+                            <div class="prev-slide flex-center">
+                                <i class="icon-angle-left"></i>
+                            </div>
+                            <div class="next-slide flex-center">
+                                <i class="icon-angle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section header-->
+
+                <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
+                    <div class="swiper-wrapper">
+
+                        {% for i,post in posts %}
+
+                            {% set titleWithoutQuotes = post.getTitleWithoutQuotes() %}
+
+                            <div class="swiper-slide">
+                                <div class="counted-news">
+                                    <div class="image">
+                                        <a href="{{ path('post_view', {
+                                            'categorySlug': post.category_slug,
+                                            'slug': post.slug,
+                                        }) }}"
+                                           class="ga-event-link"
+                                           data-event="{{ 'most_read'|trans({}, 'common') }} | {{ 'main_page'|trans({}, 'common') }}"
+                                        >
+                                            <img src="https://static.report.az/photo/thunk_400.jpg" class="swiper-lazy"
+                                                 data-src="{{ image(post.image, {'thumb': 400}) }}"
+                                                 alt="{{ titleWithoutQuotes }}"
+                                                 title="{{ titleWithoutQuotes }}"
+                                            >
+                                        </a>
+                                    </div>
+                                    <div class="info flex">
+                                        <div class="num flex-center">
+                                            <span>{{ "%02.2s"|format(i + 1) }}.</span>
+                                        </div>
+                                        <a class="title ga-event-link"
+                                           href="{{ path('post_view', {
+                                               'categorySlug': post.category_slug,
+                                               'slug': post.slug,
+                                           }) }}"
+                                           data-event="{{ 'most_read'|trans({}, 'common') }} | {{ 'main_page'|trans({}, 'common') }}"
+                                        >{{ post.getPreparedTitle()|raw }}</a>
+                                        <div class="category-date flex">
+                                            <a class="category"
+                                               href="{{ path('category_view', {'slug': post.category_slug}) }}"
+                                            >{{ post.category_title }}</a>
+                                            <div class="news-date">
+                                                <span>{{ post.publishedAt|format_datetime(pattern='d MMMM, y') }}</span>
+                                                <span>{{ post.publishedAt.format('H:i') }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+                    <!-- Slider container-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Most read news-->

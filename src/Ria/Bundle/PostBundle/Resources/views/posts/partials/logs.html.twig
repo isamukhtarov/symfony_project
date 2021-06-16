@@ -1,0 +1,29 @@
+<ul class="nav nav-tabs" role="tablist">
+    {% for log in logs %}
+        {% set user = log.getUser() %}
+        <li class="nav-item" role="presentation">
+            <a class="nav-link {{ loop.index0 == 0 ? 'active' : '' }} text-center tab-link"
+               data-toggle="tab"
+               href="#log-{{ loop.index0 }}"
+               role="tab"
+            >
+                <span class="badge badge-info">{{ log.getType().toValue() }}</span>
+                <br>
+                <span class="badge badge-primary">
+                    {{ user.getFirstRole() ? user.getFirstRole().getName() : 'This user has not any role.' }}
+                </span>
+                <br>
+                    {{ user.getTranslation(default_locale).getFullName() }}
+                <br>
+                {{ log.getCreatedAt().format('Y-m-d H:i:s') }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+<div class="tab-content py-15 log-content">
+    {% for log in logs %}
+        <div class="tab-pane {{ loop.index0 == 0 ? 'active' : '' }}" id="log-{{ loop.index0 }}" role="tabpanel">
+            {{ log.getSnapshot() | raw }}
+        </div>
+    {% endfor %}
+</div>

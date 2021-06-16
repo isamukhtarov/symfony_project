@@ -1,0 +1,102 @@
+{% extends '@RiaWeb/layouts/layout.html.twig' %}
+
+{% block title %}{{ 'audio_news'|trans({}, 'common') }} | Report.ge{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    <script>
+        $('.by-category select').change(function () {
+            document.location.href = $(this).val();
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    {{ registerScripts('site/js/playlist.js', 'site/js/load-posts.js') }}
+
+    <section class="category-page pt-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="page-title">{{ 'audio_news'|trans({}, 'common') }}</h1>
+
+                    <div class="filters-group flex">
+                        <div class="by-type">
+                            {% for typeLabel in ['all', 'main'] %}
+                                <a class="text-uppercase {{ type == typeLabel ? 'active' : '' }}"
+                                   href="{{ typeLabel == 'all' ? path('playlist') : path('playlist_with_type', {'type': typeLabel}) }}">
+                                    {{ (typeLabel ~ '_news')|trans({}, 'common') }}
+                                </a>
+                            {% endfor %}
+                        </div>
+
+                        <div class="by-category">
+                            <div class="form-group select">
+                                <select class="form-control text-uppercase" name="category">
+                                    <option value="{{ path('playlist') }}">{{ 'all_categories'|trans({}, 'common') }}</option>
+                                    {% for category in categories %}
+                                        {% set url = type == 'all'
+                                            ? path('playlist_with_category', {'categorySlug': category.slug})
+                                            : path('playlist_with_type_and_category', {'type': type, 'categorySlug': category.slug}) %}
+                                        <option value="{{ url }}" {{ url == app.request.requestUri ? 'selected' : '' }}>
+                                            {{ category.title }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="autoplay">
+                            <div class="switcher">
+                                <input type="checkbox" id="autoplay" checked="" hidden="">
+                                <label class="text-uppercase" for="autoplay">Autoplay
+                                    <div class="switch">
+                                        <div class="dot"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Filters group-->
+
+                    <div class="news-list">
+                        <div class="row load-container"
+                             data-url="{{ path('playlist_ajax', {'type': type, 'categorySlug': categorySlug}) }}">
+
+                            {% include '@RiaWeb/index/partials/_audio-post-item.html.twig' with {'posts': posts} %}
+                        </div>
+                    </div>
+                    <!-- News list-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "{{ url('index') }}",
+                        "name": "{{ 'main_page'|trans({}, 'common') }}"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "name": "{{ 'audio_news'|trans({}, 'common') }}"
+                    }
+                }
+            ]
+        }
+
+    </script>
+
+{% endblock %}

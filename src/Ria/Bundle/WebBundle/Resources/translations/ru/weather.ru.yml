@@ -1,0 +1,9 @@
+tbilisi:       'Тбилиси'
+
+wind_speed_short:             'м/с'
+weather:                      'Прогноз погоды'
+atmosphere_events:            'Атмосферные явления'
+temperature:                  'Температура'
+wind:                         'Ветер'
+humidity:                     'Влажность'
+weather_for_region_no_found:  'Weather for this region is not found.'

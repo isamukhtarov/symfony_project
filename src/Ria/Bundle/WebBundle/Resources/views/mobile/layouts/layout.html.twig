@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.getLocale() }}">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    {% block meta %}{% endblock %}
+
+    <link rel="shortcut icon" href="{{ asset('site/images/favicons/favicon.ico') }}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('site/images/favicons/apple-touch-icon-144x144.png') }}">
+    <meta name="msapplication-TileColor" content="#282828">
+    <meta name="msapplication-TileImage" content="{{ asset('site/images/favicons/apple-touch-icon-140x140.png') }}">
+    <link rel="manifest" href="{{ asset('site/images/favicons/manifest.json') }}">
+
+    {% include '@RiaWeb/partials/fonts.html.twig' %}
+
+    <script async>
+        var htmlEl = document.documentElement;
+        var currentColorTheme = localStorage.getItem("colorTheme");
+        var theme = currentColorTheme;
+
+        if (currentColorTheme !== null) {
+            htmlEl.setAttribute("data-theme", currentColorTheme);
+        } else {
+            htmlEl.setAttribute("data-theme", "light");
+            localStorage.setItem("colorTheme", "light");
+            theme = "light";
+        }
+    </script>
+
+    {% for lang,url in urlTranslations %}
+        {% if lang != app.request.getLocale() %}
+            <link rel="alternate" hreflang="{{ lang }}" href="{{ url }}"/>
+        {% endif %}
+    {% endfor %}
+
+    <script>var appLanguage = "{{ app.request.getLocale() }}";</script>
+</head>
+
+<link href="{{ asset('site/css/mobile/style.css') }}" rel="stylesheet">
+{% block styles %}{% endblock %}
+<body>
+
+<div class="site-wrapper">
+
+    {% include '@RiaWeb/partials/header.html.twig' %}
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include '@RiaWeb/partials/footer.html.twig' %}
+</div>
+
+{% block scripts %}
+    <script type="text/javascript" src="{{ asset('site/js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('site/js/js.cookie.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('site/js/mobile/jquery.lazy.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('site/js/mobile/common.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('site/js/mobile/additional.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('site/js/mobile/marquee.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('site/js/mobile/swiper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('site/js/mobile/nice-select.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('site/js/perfect-scrollbar.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('site/js/mobile/main.js') }}"></script>
+    {{ importScripts() }}
+{% endblock %}
+{% block js %}f{% endblock %}
+
+{% if (enabledAnalyticsCodes is not defined or enabledAnalyticsCodes) %}
+    {% include '_analytics.html.twig' %}
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,11 @@
+<div class="status-changed">
+    <p>Уведомление!</p>
+
+    <p>Новость <b>"{{ post.getTitle() }}"</b> была деактивирована пользователем
+        <b>"{{ user.getTranslation(post.getLanguage()).getFullName() }}"</b>
+    </p>
+
+    {% if cause %}
+        <p>Причина: <b>{{ cause }}</b></p>
+    {% endif %}
+</div>

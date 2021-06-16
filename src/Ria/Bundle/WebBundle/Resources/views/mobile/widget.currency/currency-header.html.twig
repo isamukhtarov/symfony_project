@@ -1,0 +1,19 @@
+<div class="currencies flex">
+    <div class="icon">
+        <img src="{{ asset('site/images/mobile/icons/currency.svg') }}">
+    </div>
+    <ul>
+        {% set offset = 0 %}
+        {% for i in 0..2 %}
+            {% set part = items|slice(offset, 2) %}
+            {% set offset = offset + 2 %}
+            <li>
+                <a href="{{ path('currency') }}">
+                    {% for item in part %}
+                        {{ item['code'] }} - {{ item['value'] }}
+                    {% endfor %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

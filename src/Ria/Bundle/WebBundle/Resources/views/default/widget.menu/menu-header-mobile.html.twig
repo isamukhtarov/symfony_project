@@ -1,0 +1,8 @@
+<ul class="mobile-menu">
+    <li><a href="{{ path('index') }}" itemprop="url"><span itemprop="name">{{ 'main_news'|trans({}, 'common') }}</span></a></li>
+    <li><a href="{{ path('feed') }}" itemprop="url"><span itemprop="name">{{ 'feed_page'|trans({}, 'common') }}</span></a></li>
+
+    {% for item in items %}
+        <li><a href="{{ path('category_view', {slug: item.slug}) }}" itemprop="url"><span itemprop="name">{{ item.title }}</span></a></li>
+    {% endfor %}
+</ul>

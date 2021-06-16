@@ -1,0 +1,31 @@
+<!-- Modal AddTimeline -->
+<div class="modal fade" id="addTimelineModal" role="dialog">
+    <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+
+            <form id="formAddPostTimeLine" data-empty-time="Time must be filled">
+                <div class="modal-header">
+                    <h4 class="modal-title">Insert Timeline</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <i class="icon md-close"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="timeline" placeholder="21:20">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-info" id="btnInsertTimeline">Insert</button>
+                    <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End AddTimeline -->
+{{ registerScripts(
+    'admin/ckeditor/plugins/addTimeline/js/addPostTimeLine.js',
+) }}
